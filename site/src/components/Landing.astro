@@ -1,10 +1,19 @@
 ---
 import Base from "../layouts/Base.astro";
 import { ui, locales, localeName, type Locale } from "../i18n/ui";
+import { faq } from "../i18n/faq";
 const { lang } = Astro.props as { lang: Locale };
 const t = ui[lang];
+const qa = faq[lang];
 const title = `Credential Commons — ${lang === "en" ? "open interoperability layer for credential data" : t.cards[0].title}`;
 const pathFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  inLanguage: lang,
+  mainEntity: qa.map((x) => ({ "@type": "Question", name: x.q, acceptedAnswer: { "@type": "Answer", text: x.a } })),
+};
 ---
 <Base lang={lang} title={title} description={t.metaDescription}>
   <main class="wrap">
@@ -29,10 +38,30 @@ npx cc export  my-credential.jsonld --to ctdl</pre>
       <a href="https://github.com/credential-commons/credential-commons">{t.linkRepo}</a> ·
       <a href="/profiles/context/haridus.jsonld">{t.linkContext}</a> ·
       <a href="/ns/0.1/">{t.linkVocab}</a> ·
-      <a href="/llms.txt">{t.linkLlms}</a> ·
+      <a href="/llms.txt">llms.txt</a> ·
       <a href="https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md">{t.linkAgents}</a>
     </p>
 
+    <section class="faq" aria-label={t.faqHeading}>
+      <h2>{t.faqHeading}</h2>
+      {qa.map((x, i) => (
+        <details open={i === 0}>
+          <summary>{x.q}</summary>
+          <p set:html={x.a.replace(/`([^`]+)`/g, "<code>$1</code>")} />
+        </details>
+      ))}
+    </section>
+
     <footer>{t.footer}</footer>
   </main>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
 </Base>
+
+<style>
+  .faq { margin-top: 30px; }
+  .faq h2 { font-size: 1.2rem; margin: 0 0 12px; }
+  .faq details { border: 1px solid var(--line); border-radius: 10px; padding: 12px 15px; margin-bottom: 9px; }
+  .faq summary { cursor: pointer; font-weight: 600; }
+  .faq p { margin: 9px 0 2px; color: var(--muted); }
+  .faq code { font-family: ui-monospace, Menlo, monospace; background: #eef3f7; padding: 1px 5px; border-radius: 5px; }
+</style>

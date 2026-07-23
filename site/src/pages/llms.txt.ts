@@ -1,12 +1,15 @@
 import type { APIRoute } from "astro";
+import { faq } from "../i18n/faq";
+
+const qa = faq.en.map((x) => `### ${x.q}\n${x.a.replace(/`/g, "")}`).join("\n\n");
 
 const BODY = `# Credential Commons
 
 > Open tools to validate and publish credential and learning-outcome data
 > against shared education ontologies. Not a new ontology or portal — a thin
 > interoperability + conformance layer (JSON-LD profiles, a SHACL validator, and
-> crosswalks to CTDL, ELM/Europass and Open Badges 3.0). Reuses national
-> vocabularies such as schema.edu.ee rather than replacing them.
+> crosswalks to CTDL, ELM/Europass and Open Badges 3.0). Reuses and supports
+> national vocabularies such as schema.edu.ee rather than replacing them.
 
 ## Start here
 - README: https://github.com/credential-commons/credential-commons/blob/main/README.md
@@ -25,8 +28,11 @@ const BODY = `# Credential Commons
 - Export:   npx cc export <file>.jsonld --to ctdl|elm|ob3
 - CI:       uses: credential-commons/credential-commons/action@v0
 
+## Answers
+${qa}
+
 ## Languages
-Site available in: en (/), et (/et/), fi (/fi/), de (/de/).
+Site available in: en (/), et (/et/), fi (/fi/), de (/de/), fr (/fr/).
 
 ## Licence
 Code: Apache-2.0. Profiles/contexts/crosswalks/docs: CC-BY-4.0. Name/logo: TRADEMARK.md.

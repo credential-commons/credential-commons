@@ -5,9 +5,9 @@
 Credential Commons is not a new ontology and not a portal. It is a thin, open
 **interoperability + conformance layer**: machine-readable *profiles* (what a good
 record looks like), a *validator* (does your data conform?), and *crosswalks*
-(how your fields map to international standards). It is built to be an **ally** of
-national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) — it reuses
-their terms rather than replacing them.
+(how your fields map to international standards). It **reuses and supports**
+national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) rather than
+replacing them.
 
 > Status: **v0.1, early.** One profile (`micro-credential`), one reference
 > dataset (Estonian micro-qualifications). Built to grow by contribution.
@@ -132,6 +132,8 @@ means published interoperable data, not a tracked install.
 - Inbound contributions are licensed under the same terms (see `CONTRIBUTING.md`).
 
 Credential Commons is a neutral, open steward; institutions are welcome as
-contributors. A hosted validator and integration service run on top of this open
-spec at [credentialstudy.com](https://credentialstudy.com) — the spec here stays
-free and open; anyone can fork, self-host, or extend it.
+contributors. It is used in production by
+[mikrokvalifikatsioon.ee](https://mikrokvalifikatsioon.ee), which publishes its
+catalogue with these profiles. A hosted validator and integration service
+(credentialstudy.com) is planned. The spec here stays free and open; anyone can
+fork, self-host, or extend it.
