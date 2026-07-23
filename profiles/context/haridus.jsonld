@@ -20,7 +20,8 @@
     "provider": "schema:provider",
 
     "ectsCredits": { "@id": "cc:ectsCredits", "@type": "xsd:decimal" },
-    "totalHours": { "@id": "cc:totalHours", "@type": "xsd:decimal" },
+    "academicHours": { "@id": "cc:academicHours", "@type": "xsd:decimal" },
+    "clockHours": { "@id": "cc:clockHours", "@type": "xsd:decimal" },
     "learningOutcome": "cc:learningOutcome",
     "entryRequirements": "cc:entryRequirements",
     "content": "cc:content",

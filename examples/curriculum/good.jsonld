@@ -7,7 +7,8 @@
   "url": "https://beta.ettevotluskeskus.ee/oppekavad/ettevotluse-alused",
   "field": "Ärindus ja haldus",
   "language": "et",
-  "totalHours": 40,
+  "academicHours": 40,
+  "clockHours": 30,
   "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
   "learningOutcome": [
     "Koostab lihtsa äriplaani ja rahavoo prognoosi",

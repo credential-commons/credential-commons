@@ -34,10 +34,14 @@ maps:
   - cc: cc:Curriculum
     target: elm:LearningAchievementSpecification
     confidence: medium
-  - cc: cc:totalHours
+  - cc: cc:clockHours
     target: elm:volumeOfLearning
     confidence: high
-    note: "ELM volumeOfLearning is an ISO-8601 duration; hours convert directly."
+    note: "ELM volumeOfLearning is an ISO-8601 duration; clock (60-min) hours convert directly."
+  - cc: cc:academicHours
+    target: elm:volumeOfLearning
+    confidence: medium
+    note: "Estonia Töötukassa unit (45-min); convert to a duration before mapping."
   - cc: cc:entryRequirements
     target: elm:entryRequirement
     confidence: high

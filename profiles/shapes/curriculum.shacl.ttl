@@ -22,7 +22,7 @@ cc:CurriculumShape
     rdfs:label "Curriculum profile" ;
     # Fallback message — used by the sh:or volume constraint below, which has no
     # per-property message of its own.
-    sh:message "Volume is REQUIRED: give either ECTS/EAP credits (cc:ectsCredits) or academic hours (cc:totalHours)." ;
+    sh:message "Volume is REQUIRED: give ECTS/EAP credits (cc:ectsCredits), academic hours 45min (cc:academicHours) or clock hours 60min (cc:clockHours). Estonian continuing-education curricula should publish BOTH hour units — academic hours for Töötukassa funding and clock hours for HAKA quality assessment." ;
 
     # --- Required (Violation) ---
     sh:property [
@@ -51,10 +51,12 @@ cc:CurriculumShape
         sh:message "A curriculum MUST list at least one learning outcome (cc:learningOutcome)." ;
     ] ;
 
-    # Volume is REQUIRED, expressed EITHER in ECTS/EAP credits OR academic hours.
+    # Volume is REQUIRED, expressed in ECTS/EAP credits and/or hours. In Estonia
+    # publish BOTH hour units: academic (45 min, Töötukassa) and clock (60 min, HAKA).
     sh:or (
-        [ sh:property [ sh:path cc:ectsCredits ; sh:minCount 1 ] ]
-        [ sh:property [ sh:path cc:totalHours ;  sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:ectsCredits ;   sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:academicHours ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:clockHours ;    sh:minCount 1 ] ]
     ) ;
 
     # --- Recommended (Warning) ---

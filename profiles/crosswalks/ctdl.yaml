@@ -35,10 +35,10 @@ maps:
   - cc: cc:Curriculum
     target: ceterms:LearningProgram
     confidence: high
-  - cc: cc:totalHours
+  - cc: cc:clockHours
     target: ceterms:estimatedDuration
     confidence: low
-    note: "CTDL models duration as ceterms:DurationProfile; hours need conversion."
+    note: "CTDL models duration as ceterms:DurationProfile; clock (60-min) hours need conversion."
   - cc: cc:entryRequirements
     target: ceterms:requires
     confidence: medium
