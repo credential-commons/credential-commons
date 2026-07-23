@@ -1,0 +1,32 @@
+name: "Credential Commons validate"
+description: "Validate credential / learning-outcome JSON-LD against a Credential Commons profile."
+branding:
+  icon: "check-circle"
+  color: "green"
+inputs:
+  files:
+    description: "Glob of JSON-LD files to validate (space-separated)."
+    required: true
+  profile:
+    description: "Profile name (e.g. micro-credential)."
+    required: false
+    default: "micro-credential"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+    - shell: bash
+      working-directory: ${{ github.action_path }}/..
+      run: npm ci --omit=dev || npm install --omit=dev
+    - shell: bash
+      run: |
+        set -e
+        fail=0
+        for f in ${{ inputs.files }}; do
+          echo "::group::$f"
+          node "${{ github.action_path }}/../validator/cli.mjs" validate "$f" --profile "${{ inputs.profile }}" || fail=1
+          echo "::endgroup::"
+        done
+        exit $fail

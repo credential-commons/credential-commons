@@ -1,0 +1,23 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "MicroCredential",
+  "@id": "https://www.ebs.ee/taiendusope/mikrokraadid/digitaalse-toote-disain-ja-arendus",
+  "name": "Digitaalse toote disain ja arendus",
+  "summary": "Digitoote disaini mikrokraad õpetab looma ja testima prototüüpe AI abil.",
+  "url": "https://www.ebs.ee/taiendusope/mikrokraadid/digitaalse-toote-disain-ja-arendus",
+  "field": "IT ja andmed",
+  "language": "et",
+  "ectsCredits": 15,
+  "provider": {
+    "@type": "Organization",
+    "name": "EBS"
+  },
+  "learningOutcome": [
+    "Kasutajakogemuse (UX) ja teenuseloogika kujundamine",
+    "UX/UI prototüüpimine ja lahenduste valideerimine enne arendust",
+    "Delivery-protsess ja rollid ideest töötava tooteni"
+  ],
+  "price": "2590",
+  "priceCurrency": "EUR",
+  "registrationDeadline": "2026-10-08"
+}

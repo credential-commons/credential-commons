@@ -1,0 +1,7 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "MicroCredential",
+  "@id": "https://example.edu/programmes/incomplete-one",
+  "name": "Poolik mikrokraad (näidis)",
+  "summary": "Meelega puudulik kirje, et näidata valideerija raportit."
+}

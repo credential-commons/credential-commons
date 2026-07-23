@@ -1,0 +1,33 @@
+# Crosswalk: Credential Commons  ->  European Learning Model (ELM / Europass, elm:)
+# https://europa.eu/europass/elm-browser/
+# Status: starter mapping, v0.1.
+standard: ELM
+namespace: "http://data.europa.eu/snb/model/elm/"
+prefix: elm
+maps:
+  - cc: cc:MicroCredential
+    target: elm:LearningAchievementSpecification
+    confidence: medium
+    note: "ELM models a micro-credential as a LearningAchievementSpecification + awardingBody."
+  - cc: schema:name
+    target: elm:title
+    confidence: high
+  - cc: schema:description
+    target: elm:description
+    confidence: high
+  - cc: schema:url
+    target: elm:homepage
+    confidence: medium
+  - cc: schema:provider
+    target: elm:awardingBody
+    confidence: high
+  - cc: cc:ectsCredits
+    target: elm:creditPoint
+    confidence: high
+    note: "ELM creditPoint with framework=ECTS."
+  - cc: cc:learningOutcome
+    target: elm:learningOutcome
+    confidence: high
+  - cc: dcterms:language
+    target: elm:language
+    confidence: high

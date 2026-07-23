@@ -1,0 +1,34 @@
+# Crosswalk: Credential Commons  ->  CTDL (Credential Engine, ceterms:)
+# https://credreg.net/ctdl/terms
+# Status: starter mapping, v0.1. Reviewed mappings marked `confidence: high`.
+standard: CTDL
+namespace: "https://purl.org/ctdl/terms/"
+prefix: ceterms
+maps:
+  - cc: cc:MicroCredential
+    target: ceterms:MicroCredential
+    confidence: high
+  - cc: schema:name
+    target: ceterms:name
+    confidence: high
+  - cc: schema:description
+    target: ceterms:description
+    confidence: high
+  - cc: schema:url
+    target: ceterms:subjectWebpage
+    confidence: high
+  - cc: schema:provider
+    target: ceterms:ownedBy
+    confidence: medium
+    note: "ownedBy vs offeredBy — pick per data semantics."
+  - cc: cc:ectsCredits
+    target: ceterms:creditValue
+    confidence: medium
+    note: "CTDL uses schema:QuantitativeValue with creditUnitType=ECTS."
+  - cc: cc:learningOutcome
+    target: ceterms:teaches
+    confidence: medium
+    note: "teaches -> ceterms:CredentialAlignmentObject (competency)."
+  - cc: dcterms:language
+    target: ceterms:inLanguage
+    confidence: high

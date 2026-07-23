@@ -1,0 +1,28 @@
+{
+  "name": "credential-commons",
+  "version": "0.1.0",
+  "description": "Open tools to validate and publish credential and learning-outcome data against shared education ontologies.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "homepage": "https://credentialcommons.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/credential-commons/credential-commons.git"
+  },
+  "bin": {
+    "cc": "validator/cli.mjs"
+  },
+  "scripts": {
+    "validate": "node validator/cli.mjs validate",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@zazuko/env": "^2.5.0",
+    "jsonld": "^8.3.2",
+    "n3": "^1.17.4",
+    "rdf-validate-shacl": "^0.6.5"
+  }
+}

@@ -1,0 +1,32 @@
+# Crosswalk: Credential Commons  ->  Open Badges 3.0 / W3C Verifiable Credentials
+# https://www.imsglobal.org/spec/ob/v3p0
+# Status: starter mapping, v0.1. OB 3.0 Achievement is a VC credentialSubject.
+standard: OpenBadges3
+namespace: "https://purl.imsglobal.org/spec/ob/v3p0/context/"
+prefix: ob
+maps:
+  - cc: cc:MicroCredential
+    target: ob:Achievement
+    confidence: high
+    note: "achievementType = Micro-credential."
+  - cc: schema:name
+    target: ob:name
+    confidence: high
+  - cc: schema:description
+    target: ob:description
+    confidence: high
+  - cc: schema:provider
+    target: ob:creator
+    confidence: medium
+    note: "creator / issuer (Profile)."
+  - cc: cc:learningOutcome
+    target: ob:criteria
+    confidence: low
+    note: "OB3 criteria is narrative; outcomes map loosely. Prefer ob:alignment to a competency framework."
+  - cc: dcterms:language
+    target: ob:inLanguage
+    confidence: high
+  - cc: cc:ectsCredits
+    target: null
+    confidence: none
+    note: "OB3 has no native credit field; carry in ob:alignment or an extension."
