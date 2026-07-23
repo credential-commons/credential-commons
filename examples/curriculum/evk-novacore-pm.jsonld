@@ -1,0 +1,22 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Curriculum",
+  "@id": "https://beta.ettevotluskeskus.ee/koolitused/novacore-projektijuhtimine",
+  "name": "NovaCore Projektijuhtimise Mikrokvalifikatsioon",
+  "summary": "Praktiline projektijuhtimise täienduskoolituse õppekava kaasaegsete metoodikate ja digitööriistadega.",
+  "url": "https://beta.ettevotluskeskus.ee/koolitused/novacore-projektijuhtimine",
+  "field": "Juhtimine ja haldus",
+  "language": "et",
+  "ectsCredits": 5,
+  "totalHours": 130,
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "learningOutcome": [
+    "Planeerib ja struktureerib projekte — koostab projekti plaani, määratleb eesmärgid, ajakava ja ressursid",
+    "Juhib projektimeeskondi efektiivselt — rakendab meeskonnajuhtimist, suhtleb sidusrühmadega, lahendab konflikte",
+    "Kontrollib projekti progressi ja kvaliteeti — monitoorib edenemist, tuvastab riske, teeb kohandusi",
+    "Rakendab digitaalseid projektijuhtimise tööriistu projektide planeerimiseks ja jälgimiseks",
+    "Hindab ja parandab projektijuhtimise protsesse — analüüsib tulemusi ja rakendab parendusi"
+  ],
+  "content": "Projekti planeerimine ja struktureerimine, meeskonnajuhtimine, progressi ja kvaliteedi kontroll, digitaalsed PM-tööriistad, protsesside hindamine ja parendamine.",
+  "awardedCredential": "Mikrokvalifikatsiooni tunnistus (Ettevõtluskeskus OÜ)"
+}
