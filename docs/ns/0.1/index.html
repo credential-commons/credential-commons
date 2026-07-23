@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credential Commons vocabulary (cc:) — v0.1</title>
+<meta name="description" content="The cc: namespace: terms minted by Credential Commons where no existing vocabulary fits. Each term crosswalks to CTDL, ELM and Open Badges 3.0.">
+<link rel="canonical" href="https://credentialcommons.org/ns/0.1/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": "https://credentialcommons.org/ns/0.1/",
+  "name": "Credential Commons vocabulary",
+  "url": "https://credentialcommons.org/ns/0.1/",
+  "hasDefinedTerm": [
+    { "@type": "DefinedTerm", "termCode": "cc:MicroCredential", "name": "Micro-credential", "description": "A short, recognised unit of learning that awards a credential for one skill." },
+    { "@type": "DefinedTerm", "termCode": "cc:ectsCredits", "name": "ECTS/EAP credits", "description": "Credit points in the ECTS (Estonian EAP) framework." },
+    { "@type": "DefinedTerm", "termCode": "cc:learningOutcome", "name": "Learning outcome", "description": "A statement of what a learner knows or can do (≈ schema.edu.ee haridus:Opivaljund)." },
+    { "@type": "DefinedTerm", "termCode": "cc:field", "name": "Subject field", "description": "Broad subject area of the credential." }
+  ]
+}
+</script>
+<style>
+  body { margin:0; font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:#12212e; }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 20px; }
+  h1 { font-size:1.6rem; } code { font-family:ui-monospace,Menlo,monospace; background:#eef3f7; padding:1px 5px; border-radius:5px; }
+  table { border-collapse:collapse; width:100%; margin-top:18px; }
+  th,td { border:1px solid #dbe4ee; padding:8px 10px; text-align:left; vertical-align:top; font-size:.94rem; }
+  th { background:#f5f9fb; } a { color:#2f9e95; font-weight:600; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Credential Commons vocabulary — <code>cc:</code> v0.1</h1>
+  <p>Namespace <code>https://credentialcommons.org/ns/0.1/</code>. These are the few
+  terms Credential Commons mints where no existing vocabulary fits. Prefer
+  <code>schema:</code>, <code>haridus:</code> (schema.edu.ee) and <code>dcterms:</code> otherwise.
+  Each term crosswalks to CTDL, ELM/Europass and Open Badges 3.0 —
+  see <a href="https://github.com/credential-commons/credential-commons/tree/main/profiles/crosswalks">/profiles/crosswalks</a>.</p>
+  <table>
+    <tr><th>Term</th><th>Label</th><th>Meaning</th></tr>
+    <tr><td><code>cc:MicroCredential</code></td><td>Micro-credential</td><td>A short, recognised unit of learning awarding a credential for one skill.</td></tr>
+    <tr><td><code>cc:ectsCredits</code></td><td>ECTS/EAP credits</td><td>Credit points in the ECTS (Estonian EAP) framework.</td></tr>
+    <tr><td><code>cc:learningOutcome</code></td><td>Learning outcome</td><td>What a learner knows or can do (≈ <code>haridus:Opivaljund</code>).</td></tr>
+    <tr><td><code>cc:field</code></td><td>Subject field</td><td>Broad subject area of the credential.</td></tr>
+  </table>
+  <p style="margin-top:22px"><a href="/">← Credential Commons</a> · <a href="/profiles/context/haridus.jsonld">JSON-LD context</a></p>
+</main>
+</body>
+</html>

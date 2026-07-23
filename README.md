@@ -89,13 +89,49 @@ crosswalks, and reports any field it could not map (nothing is dropped silently)
     profile: micro-credential
 ```
 
-## Governance & licence
+## For AI agents
 
-- Code: **Apache-2.0**.
-- Profiles, contexts, crosswalks, docs: **CC-BY-4.0** (`profiles/LICENSE.md`).
-- Neutral, open steward; institutions welcome as contributors. See
-  [`CONTRIBUTING.md`](CONTRIBUTING.md).
+This repo is self-describing for automated adoption: see [`AGENTS.md`](AGENTS.md)
+(5-step adoption), [`docs/llms.txt`](docs/llms.txt), and the machine-readable
+entry points (JSON-LD context, SHACL profile, crosswalks). The validator has a
+programmatic API (`import { validate, exportDoc }`) returning structured objects,
+and `--json` output for shell use.
 
-A hosted validator and integration service run on top of this open spec at
-[credentialstudy.com](https://credentialstudy.com). The spec here stays free and
-open; anyone can fork, self-host, or extend it.
+## Roadmap
+
+- **v0.1 (now):** micro-credential profile, validator, CTDL/ELM/OB3 crosswalks,
+  250-record reference dataset, GitHub Action, published context + vocabulary.
+- **Next:** executable exporters (deep structural mapping, not just field maps —
+  CTDL `QuantitativeValue` for credits, `CredentialAlignmentObject` for outcomes);
+  content-negotiation so `cc:` URIs dereference to RDF; more profiles (full
+  qualification, course, competency); a hosted web validator.
+- **Later:** Verifiable Credentials / Open Badges 3.0 issuance, SPARQL endpoint,
+  competency-framework alignment (ESCO), conformance test suite & badge.
+
+Contributions and new profiles welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Who's using it
+
+See [`ADOPTERS.md`](ADOPTERS.md) and add yourself. Because adopters reference the
+public `@context` URL, conformant data is also discoverable in the wild — adoption
+means published interoperable data, not a tracked install.
+
+## Governance, licence & responsibility
+
+- **Code** (`validator/`, `action/`, `scripts/`): **Apache-2.0**. It includes an
+  explicit *no-warranty* and *limitation-of-liability* clause (§7–8): the software
+  is provided "as is" and you are responsible for how you use it. That is the
+  standard, deliberate split — maximum freedom to adopt, no liability transferred
+  to contributors.
+- **Profiles, contexts, crosswalks, docs**: **CC-BY-4.0** (`profiles/LICENSE.md`) —
+  free to use/adapt commercially with attribution.
+- **Name & logo**: project marks, see [`TRADEMARK.md`](TRADEMARK.md). Open
+  substance, protected identity — so "Credential Commons conformant" stays
+  meaningful. There is no paid gate to *being* conformant; if `cc validate`
+  passes, your data is conformant.
+- Inbound contributions are licensed under the same terms (see `CONTRIBUTING.md`).
+
+Credential Commons is a neutral, open steward; institutions are welcome as
+contributors. A hosted validator and integration service run on top of this open
+spec at [credentialstudy.com](https://credentialstudy.com) — the spec here stays
+free and open; anyone can fork, self-host, or extend it.

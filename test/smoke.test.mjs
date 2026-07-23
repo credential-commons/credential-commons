@@ -35,6 +35,12 @@ test("export to CTDL maps the type and core fields via the crosswalk", async () 
   assert.ok(Array.isArray(unmapped)); // unmapped fields are reported, never silently dropped
 });
 
+test("published context (docs/) matches the source of truth (profiles/)", async () => {
+  const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
+  const pub = await readFile(path.join(ROOT, "docs/profiles/context/haridus.jsonld"), "utf8");
+  assert.equal(pub, src, "docs/profiles/context/haridus.jsonld is stale — re-copy from profiles/");
+});
+
 test("warnings do not break conformance on their own", async () => {
   // A minimal-but-valid record: all required fields, no recommended ones.
   const report = await validate({

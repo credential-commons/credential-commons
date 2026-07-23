@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credential Commons — open interoperability layer for credential data</title>
+<meta name="description" content="Open tools to validate and publish credential and learning-outcome data against shared education ontologies. JSON-LD profiles, a SHACL validator, and crosswalks to CTDL, ELM/Europass and Open Badges 3.0.">
+<link rel="canonical" href="https://credentialcommons.org/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Credential Commons">
+<meta property="og:description" content="Open interoperability + conformance layer for credential and learning-outcome data.">
+<meta property="og:url" content="https://credentialcommons.org/">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://credentialcommons.org/#software",
+      "name": "Credential Commons",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Node.js",
+      "url": "https://credentialcommons.org/",
+      "codeRepository": "https://github.com/credential-commons/credential-commons",
+      "description": "Open tools to validate and publish credential and learning-outcome data against shared education ontologies (SHACL profiles, a JSON-LD validator, and crosswalks to CTDL, ELM/Europass and Open Badges 3.0).",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "keywords": ["credential","micro-credential","learning outcome","Linked Data","JSON-LD","SHACL","CTDL","ELM","Open Badges","interoperability"]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://credentialcommons.org/ns/0.1/",
+      "name": "Credential Commons vocabulary (cc:)",
+      "url": "https://credentialcommons.org/ns/0.1/"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://credentialcommons.org/#reference-dataset",
+      "name": "mkval micro-qualification reference dataset",
+      "description": "250 real Estonian micro-qualifications published as Credential Commons-conformant JSON-LD.",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "isAccessibleForFree": true,
+      "distribution": {
+        "@type": "DataDownload",
+        "encodingFormat": "application/ld+json",
+        "contentUrl": "https://github.com/credential-commons/credential-commons/blob/main/examples/mkval/catalog.jsonld"
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root { --ink:#12212e; --teal:#2f9e95; --muted:#5a6b80; --line:#dbe4ee; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:var(--ink); }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 20px; }
+  h1 { font-size:2rem; margin:0 0 8px; }
+  .lede { font-size:1.15rem; color:var(--muted); margin:0 0 28px; }
+  code, pre { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  pre { background:#0f1b24; color:#e6edf3; padding:14px 16px; border-radius:10px; overflow-x:auto; font-size:.9rem; }
+  a { color:var(--teal); font-weight:600; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .grid { display:grid; gap:12px; grid-template-columns:1fr 1fr; margin:22px 0; }
+  .card { border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h3 { margin:0 0 4px; font-size:1rem; }
+  .card p { margin:0; color:var(--muted); font-size:.92rem; }
+  footer { margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
+  .tag { display:inline-block; background:#eaf6f4; color:#1f6f68; border-radius:999px; padding:2px 10px; font-size:.8rem; font-weight:700; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="tag">open · Apache-2.0 / CC-BY-4.0 · v0.1</span>
+  <h1>Credential Commons</h1>
+  <p class="lede">Open tools to validate and publish credential and learning-outcome
+  data against shared education ontologies — fast. Not a new ontology or portal; a
+  thin interoperability&nbsp;+&nbsp;conformance layer, and an ally of national
+  vocabularies like <a href="https://schema.edu.ee/">schema.edu.ee</a>.</p>
+
+  <pre>npx cc validate my-credential.jsonld
+npx cc export  my-credential.jsonld --to ctdl</pre>
+
+  <div class="grid">
+    <div class="card"><h3>Profiles</h3><p>JSON-LD context + SHACL rules — required vs recommended.</p></div>
+    <div class="card"><h3>Validator</h3><p>Plain-language conformance report; CI-ready.</p></div>
+    <div class="card"><h3>Crosswalks</h3><p>CTDL · ELM/Europass · Open Badges&nbsp;3.0.</p></div>
+    <div class="card"><h3>Reference data</h3><p>250 real micro-qualifications, conformant.</p></div>
+  </div>
+
+  <p>
+    <a href="https://github.com/credential-commons/credential-commons">GitHub&nbsp;repository</a> ·
+    <a href="/profiles/context/haridus.jsonld">JSON-LD context</a> ·
+    <a href="/ns/0.1/">vocabulary</a> ·
+    <a href="/llms.txt">llms.txt</a> ·
+    <a href="https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md">guide for AI agents</a>
+  </p>
+
+  <footer>
+    A hosted validator and integration service run on this open spec at
+    credentialstudy.com. The spec here stays free and open — fork it, self-host it,
+    extend it. Name &amp; logo: see the project’s trademark policy.
+  </footer>
+</main>
+</body>
+</html>
