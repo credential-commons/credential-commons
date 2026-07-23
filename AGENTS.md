@@ -10,11 +10,11 @@ toolkit. Adopt it in five steps.
    `profiles/shapes/micro-credential.shacl.ttl` (the rules: required vs recommended).
 2. **Shape** the institution's data as JSON-LD using that context. Minimal valid
    record needs: `name`, `ectsCredits`, `language`, `provider`.
-3. **Validate**: `npx cc validate <file>.jsonld` → machine output with `--json`.
+3. **Validate**: `npx credential-commons validate <file>.jsonld` → machine output with `--json`.
    Exit 0 = conformant, 1 = has violations, 2 = error.
 4. **Fix** every `violation` in the report; `warning`s are optional but improve
    findability. Messages are plain-language and point at the field.
-5. **Export** to a standard if needed: `npx cc export <file>.jsonld --to ctdl|elm|ob3`.
+5. **Export** to a standard if needed: `npx credential-commons export <file>.jsonld --to ctdl|elm|ob3`.
 
 ## Canonical machine-readable entry points
 
@@ -38,6 +38,6 @@ toolkit. Adopt it in five steps.
 ## One-shot example
 
 ```bash
-npx cc validate examples/mkval/good.jsonld --json
+npx credential-commons validate examples/mkval/good.jsonld --json
 ```
 returns `{ "conforms": true, "violations": 0, "warnings": 0, "results": [] }`.

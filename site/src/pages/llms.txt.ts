@@ -24,8 +24,8 @@ const BODY = `# Credential Commons
 - Reference dataset (250 real records): https://github.com/credential-commons/credential-commons/blob/main/examples/mkval/catalog.jsonld
 
 ## Use
-- Validate: npx cc validate <file>.jsonld  (exit 0 conformant, 1 violations)
-- Export:   npx cc export <file>.jsonld --to ctdl|elm|ob3
+- Validate: npx credential-commons validate <file>.jsonld  (exit 0 conformant, 1 violations)
+- Export:   npx credential-commons export <file>.jsonld --to ctdl|elm|ob3
 - CI:       uses: credential-commons/credential-commons/action@v0
 
 ## Answers

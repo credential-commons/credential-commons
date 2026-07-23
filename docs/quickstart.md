@@ -33,7 +33,7 @@ conformance).
 ## 3. Validate
 
 ```bash
-npx cc validate your-credential.jsonld
+npx credential-commons validate your-credential.jsonld
 ```
 
 Fix any `VIOLATION` lines; `WARNING` lines are optional but recommended.

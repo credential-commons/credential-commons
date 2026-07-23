@@ -12,6 +12,31 @@
   "bin": {
     "cc": "validator/cli.mjs"
   },
+  "exports": {
+    "./validate": "./validator/validate.mjs",
+    "./export": "./validator/export.mjs"
+  },
+  "files": [
+    "validator",
+    "profiles",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "keywords": [
+    "credential",
+    "micro-credential",
+    "learning-outcome",
+    "curriculum",
+    "linked-data",
+    "json-ld",
+    "shacl",
+    "ctdl",
+    "europass",
+    "open-badges",
+    "interoperability",
+    "conformance"
+  ],
   "scripts": {
     "validate": "node validator/cli.mjs validate",
     "export": "node validator/cli.mjs export",

@@ -9,8 +9,9 @@ record looks like), a *validator* (does your data conform?), and *crosswalks*
 national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) rather than
 replacing them.
 
-> Status: **v0.1, early.** One profile (`micro-credential`), one reference
-> dataset (Estonian micro-qualifications). Built to grow by contribution.
+> Status: **v0.1, early.** Two profiles (`micro-credential`, `curriculum`), a
+> reference dataset (Estonian micro-qualifications) and a real curriculum example.
+> Built to grow by contribution.
 
 ## Why
 
@@ -26,7 +27,7 @@ reuse.
 
 ```bash
 npm install
-npx cc validate examples/mkval/good.jsonld
+npx credential-commons validate examples/mkval/good.jsonld
 ```
 
 ```
@@ -39,7 +40,7 @@ file: examples/mkval/good.jsonld
 Try the intentionally-incomplete record to see a report:
 
 ```bash
-npx cc validate examples/mkval/invalid.jsonld
+npx credential-commons validate examples/mkval/invalid.jsonld
 #   ✗ VIOLATION ectsCredits  — ECTS/EAP credit value is REQUIRED
 #   ✗ VIOLATION language     — Language is REQUIRED (BCP-47, e.g. "et")
 #   ...
@@ -54,7 +55,7 @@ micro-qualifications** (generated from a live feed via `scripts/from-mkval-feed.
 Validating the graph reports data-quality gaps at scale:
 
 ```bash
-npx cc validate examples/mkval/catalog.jsonld
+npx credential-commons validate examples/mkval/catalog.jsonld
 #   !   45×  Recommended: at least one learning outcome
 #   ✗   22×  ECTS/EAP credit value is REQUIRED
 #   ✗ NOT conformant — 22 violation(s), 45 warning(s) across 59 record(s).
@@ -63,7 +64,7 @@ npx cc validate examples/mkval/catalog.jsonld
 ### Export to an international standard
 
 ```bash
-npx cc export examples/mkval/good.jsonld --to ctdl   # or elm, ob3
+npx credential-commons export examples/mkval/good.jsonld --to ctdl   # or elm, ob3
 ```
 
 Emits the record mapped onto CTDL / ELM-Europass / Open Badges 3.0 via the
