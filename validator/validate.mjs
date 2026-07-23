@@ -23,6 +23,7 @@ const CONTEXT_FILE = path.join(REPO_ROOT, "profiles/context/haridus.jsonld");
 
 export const PROFILES = {
   "micro-credential": "profiles/shapes/micro-credential.shacl.ttl",
+  "curriculum": "profiles/shapes/curriculum.shacl.ttl",
 };
 
 // Resolve the canonical context (and any relative ref) to the local file, so

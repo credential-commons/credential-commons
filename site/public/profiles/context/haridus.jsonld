@@ -8,6 +8,7 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
 
     "MicroCredential": "cc:MicroCredential",
+    "Curriculum": "cc:Curriculum",
     "Organization": "schema:Organization",
 
     "name": "schema:name",
@@ -19,7 +20,12 @@
     "provider": "schema:provider",
 
     "ectsCredits": { "@id": "cc:ectsCredits", "@type": "xsd:decimal" },
+    "totalHours": { "@id": "cc:totalHours", "@type": "xsd:decimal" },
     "learningOutcome": "cc:learningOutcome",
+    "entryRequirements": "cc:entryRequirements",
+    "content": "cc:content",
+    "awardedCredential": "cc:awardedCredential",
+    "level": "cc:level",
 
     "price": "cc:price",
     "priceCurrency": "cc:priceCurrency",

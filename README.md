@@ -99,8 +99,9 @@ and `--json` output for shell use.
 
 ## Roadmap
 
-- **v0.1 (now):** micro-credential profile, validator, CTDL/ELM/OB3 crosswalks,
-  250-record reference dataset, GitHub Action, published context + vocabulary.
+- **v0.1 (now):** micro-credential **and curriculum** profiles, validator,
+  CTDL/ELM/OB3 crosswalks, 250-record reference dataset, GitHub Action, published
+  context + vocabulary.
 - **Next:** executable exporters (deep structural mapping, not just field maps —
   CTDL `QuantitativeValue` for credits, `CredentialAlignmentObject` for outcomes);
   content-negotiation so `cc:` URIs dereference to RDF; more profiles (full

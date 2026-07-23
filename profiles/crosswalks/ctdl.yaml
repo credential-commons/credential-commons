@@ -32,3 +32,16 @@ maps:
   - cc: dcterms:language
     target: ceterms:inLanguage
     confidence: high
+  - cc: cc:Curriculum
+    target: ceterms:LearningProgram
+    confidence: high
+  - cc: cc:totalHours
+    target: ceterms:estimatedDuration
+    confidence: low
+    note: "CTDL models duration as ceterms:DurationProfile; hours need conversion."
+  - cc: cc:entryRequirements
+    target: ceterms:requires
+    confidence: medium
+  - cc: cc:awardedCredential
+    target: ceterms:isPreparationFor
+    confidence: low

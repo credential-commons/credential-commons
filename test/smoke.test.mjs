@@ -35,6 +35,20 @@ test("export to CTDL maps the type and core fields via the crosswalk", async () 
   assert.ok(Array.isArray(unmapped)); // unmapped fields are reported, never silently dropped
 });
 
+test("curriculum profile: conformant example passes (volume via hours)", async () => {
+  const report = await validate(await load("examples/curriculum/good.jsonld"), { profile: "curriculum" });
+  assert.equal(report.conforms, true);
+  assert.equal(report.violations, 0);
+});
+
+test("curriculum profile: incomplete example flags outcomes + volume + core fields", async () => {
+  const report = await validate(await load("examples/curriculum/invalid.jsonld"), { profile: "curriculum" });
+  assert.equal(report.conforms, false);
+  // provider, language, learningOutcome, and the ECTS-or-hours volume constraint
+  assert.equal(report.violations, 4);
+  assert.ok(report.results.some((r) => /Volume is REQUIRED/.test(r.message)));
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

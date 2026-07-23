@@ -8,8 +8,14 @@ export type Term = { id: string; kind: "Class" | "Property"; label: string; comm
 
 export const terms: Term[] = [
   { id: "MicroCredential", kind: "Class", label: "Micro-credential", comment: "A short, recognised unit of learning that awards a credential for one skill." },
+  { id: "Curriculum", kind: "Class", label: "Curriculum", comment: "A curriculum / study programme (Estonian: õppekava) — broader than a single micro-credential." },
   { id: "ectsCredits", kind: "Property", label: "ECTS/EAP credits", comment: "Credit points in the ECTS (Estonian EAP) framework." },
+  { id: "totalHours", kind: "Property", label: "Total academic hours", comment: "Total volume of study expressed in academic hours (alternative to ECTS)." },
   { id: "learningOutcome", kind: "Property", label: "Learning outcome", comment: "A statement of what a learner knows or can do (approximately schema.edu.ee haridus:Opivaljund)." },
+  { id: "entryRequirements", kind: "Property", label: "Entry requirements", comment: "Conditions for starting the curriculum." },
+  { id: "content", kind: "Property", label: "Content", comment: "An outline of the curriculum content." },
+  { id: "awardedCredential", kind: "Property", label: "Awarded credential", comment: "What completion of the curriculum awards." },
+  { id: "level", kind: "Property", label: "Level", comment: "Qualification level (e.g. EQF/NQF)." },
   { id: "field", kind: "Property", label: "Subject field", comment: "Broad subject area of the credential." },
   { id: "price", kind: "Property", label: "Price", comment: "Price of the credential (amount)." },
   { id: "priceCurrency", kind: "Property", label: "Price currency", comment: "ISO 4217 currency code for the price." },

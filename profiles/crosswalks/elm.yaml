@@ -31,3 +31,16 @@ maps:
   - cc: dcterms:language
     target: elm:language
     confidence: high
+  - cc: cc:Curriculum
+    target: elm:LearningAchievementSpecification
+    confidence: medium
+  - cc: cc:totalHours
+    target: elm:volumeOfLearning
+    confidence: high
+    note: "ELM volumeOfLearning is an ISO-8601 duration; hours convert directly."
+  - cc: cc:entryRequirements
+    target: elm:entryRequirement
+    confidence: high
+  - cc: cc:awardedCredential
+    target: elm:awardingOpportunity
+    confidence: low

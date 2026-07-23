@@ -1,0 +1,7 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Curriculum",
+  "@id": "https://example.edu/oppekavad/poolik",
+  "name": "Poolik õppekava (näidis)",
+  "summary": "Meelega puudulik: ei õpiväljundeid, ei mahtu, ei keelt, ei pakkujat."
+}

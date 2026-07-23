@@ -1,0 +1,84 @@
+# Credential Commons — Curriculum profile (v0.1)
+#
+# A curriculum / study programme (Estonian: õppekava) — broader than a single
+# micro-credential. Shaped to match the regulated Estonian continuing-education
+# curriculum structure (Täiskasvanute koolituse seadus: name, learning outcomes,
+# total volume, entry conditions, content, completion) while staying usable for
+# any study programme internationally. This constrains STRUCTURE only — the
+# human page and its marketing copy are out of scope.
+#
+# Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:CurriculumShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Curriculum ;
+    rdfs:label "Curriculum profile" ;
+    # Fallback message — used by the sh:or volume constraint below, which has no
+    # per-property message of its own.
+    sh:message "Volume is REQUIRED: give either ECTS/EAP credits (cc:ectsCredits) or academic hours (cc:totalHours)." ;
+
+    # --- Required (Violation) ---
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:severity sh:Violation ;
+        sh:message "A curriculum MUST have a name (schema:name)." ;
+    ] ;
+    sh:property [
+        sh:path schema:provider ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A provider is REQUIRED (schema:provider -> an Organization with schema:name)." ;
+    ] ;
+    sh:property [
+        sh:path dcterms:language ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Language is REQUIRED (dcterms:language, BCP-47 e.g. \"et\")." ;
+    ] ;
+    sh:property [
+        sh:path cc:learningOutcome ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A curriculum MUST list at least one learning outcome (cc:learningOutcome)." ;
+    ] ;
+
+    # Volume is REQUIRED, expressed EITHER in ECTS/EAP credits OR academic hours.
+    sh:or (
+        [ sh:property [ sh:path cc:ectsCredits ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:totalHours ;  sh:minCount 1 ] ]
+    ) ;
+
+    # --- Recommended (Warning) ---
+    sh:property [
+        sh:path cc:field ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Recommended: a subject field / study-field group (cc:field)." ;
+    ] ;
+    sh:property [
+        sh:path cc:entryRequirements ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Recommended: entry requirements (cc:entryRequirements)." ;
+    ] ;
+    sh:property [
+        sh:path cc:content ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Recommended: an outline of the content (cc:content)." ;
+    ] ;
+    sh:property [
+        sh:path cc:awardedCredential ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Recommended: what completion awards (cc:awardedCredential)." ;
+    ] .

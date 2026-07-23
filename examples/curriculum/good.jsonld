@@ -1,0 +1,20 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Curriculum",
+  "@id": "https://beta.ettevotluskeskus.ee/oppekavad/ettevotluse-alused",
+  "name": "Ettevõtluse alused",
+  "summary": "Praktiline täienduskoolituse õppekava alustavale ettevõtjale.",
+  "url": "https://beta.ettevotluskeskus.ee/oppekavad/ettevotluse-alused",
+  "field": "Ärindus ja haldus",
+  "language": "et",
+  "totalHours": 40,
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "learningOutcome": [
+    "Koostab lihtsa äriplaani ja rahavoo prognoosi",
+    "Valib sobiva ettevõtlusvormi ja maksustamise",
+    "Kavandab toote või teenuse turuletoomise"
+  ],
+  "entryRequirements": "Puuduvad; sobib alustajale.",
+  "content": "Ärimudel, rahandus, maksundus, müük ja turundus.",
+  "awardedCredential": "Ettevõtluskeskuse täienduskoolituse tunnistus"
+}
