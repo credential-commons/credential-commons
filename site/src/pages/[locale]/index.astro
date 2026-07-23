@@ -1,0 +1,12 @@
+---
+import Landing from "../../components/Landing.astro";
+import { locales, type Locale } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  // Non-default locales get a prefixed route (/et/, /fi/, /de/).
+  return locales.filter((l) => l !== "en").map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+---
+<Landing lang={locale} />

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://credentialcommons.org/sitemap.xml

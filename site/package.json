@@ -1,0 +1,16 @@
+{
+  "name": "credential-commons-site",
+  "type": "module",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/vercel": "^8.2.8",
+    "astro": "^5.18.2"
+  }
+}

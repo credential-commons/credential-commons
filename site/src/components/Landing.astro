@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import { ui, locales, localeName, type Locale } from "../i18n/ui";
+const { lang } = Astro.props as { lang: Locale };
+const t = ui[lang];
+const title = `Credential Commons — ${lang === "en" ? "open interoperability layer for credential data" : t.cards[0].title}`;
+const pathFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
+---
+<Base lang={lang} title={title} description={t.metaDescription}>
+  <main class="wrap">
+    <nav class="langs" aria-label="Languages">
+      {locales.map((l) => (l === lang ? <strong>{localeName[l]}</strong> : <a href={pathFor(l)}>{localeName[l]}</a>))}
+    </nav>
+
+    <span class="tag">{t.tag}</span>
+    <h1>Credential Commons</h1>
+    <p class="lede" set:html={t.tagline.replace("schema.edu.ee", '<a href="https://schema.edu.ee/">schema.edu.ee</a>')} />
+
+    <pre>npx cc validate my-credential.jsonld
+npx cc export  my-credential.jsonld --to ctdl</pre>
+
+    <div class="grid">
+      {t.cards.map((c) => (
+        <div class="card"><h3>{c.title}</h3><p>{c.desc}</p></div>
+      ))}
+    </div>
+
+    <p>
+      <a href="https://github.com/credential-commons/credential-commons">{t.linkRepo}</a> ·
+      <a href="/profiles/context/haridus.jsonld">{t.linkContext}</a> ·
+      <a href="/ns/0.1/">{t.linkVocab}</a> ·
+      <a href="/llms.txt">{t.linkLlms}</a> ·
+      <a href="https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md">{t.linkAgents}</a>
+    </p>
+
+    <footer>{t.footer}</footer>
+  </main>
+</Base>
