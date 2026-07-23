@@ -27,7 +27,7 @@ export const PROFILES = {
 
 // Resolve the canonical context (and any relative ref) to the local file, so
 // published data can carry the real production URL yet still validate offline.
-async function documentLoader(url) {
+export async function documentLoader(url) {
   if (url === CONTEXT_URL || url.endsWith("/haridus.jsonld")) {
     const document = JSON.parse(await readFile(CONTEXT_FILE, "utf8"));
     return { contextUrl: null, documentUrl: url, document };

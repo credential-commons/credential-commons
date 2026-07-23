@@ -47,6 +47,28 @@ npx cc validate examples/mkval/invalid.jsonld
 
 Add `--json` for machine-readable output, e.g. in CI.
 
+### Validate a whole catalog at once
+
+The reference dataset `examples/mkval/catalog.jsonld` is **250 real Estonian
+micro-qualifications** (generated from a live feed via `scripts/from-mkval-feed.mjs`).
+Validating the graph reports data-quality gaps at scale:
+
+```bash
+npx cc validate examples/mkval/catalog.jsonld
+#   !   45×  Recommended: at least one learning outcome
+#   ✗   22×  ECTS/EAP credit value is REQUIRED
+#   ✗ NOT conformant — 22 violation(s), 45 warning(s) across 59 record(s).
+```
+
+### Export to an international standard
+
+```bash
+npx cc export examples/mkval/good.jsonld --to ctdl   # or elm, ob3
+```
+
+Emits the record mapped onto CTDL / ELM-Europass / Open Badges 3.0 via the
+crosswalks, and reports any field it could not map (nothing is dropped silently).
+
 ## What's in here
 
 | Path | What |

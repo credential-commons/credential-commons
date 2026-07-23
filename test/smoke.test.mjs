@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { validate } from "../validator/validate.mjs";
+import { exportDoc } from "../validator/export.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const load = async (rel) => JSON.parse(await readFile(path.join(ROOT, rel), "utf8"));
@@ -23,6 +24,15 @@ test("incomplete example is flagged with the expected required-field violations"
   assert.ok(paths.some((p) => p.endsWith("ectsCredits")));
   assert.ok(paths.some((p) => p.endsWith("language")));
   assert.ok(paths.some((p) => p.endsWith("provider")));
+});
+
+test("export to CTDL maps the type and core fields via the crosswalk", async () => {
+  const { output, mapped, unmapped } = await exportDoc(await load("examples/mkval/good.jsonld"), { target: "ctdl" });
+  assert.equal(output["@type"], "ceterms:MicroCredential");
+  assert.equal(output["ceterms:name"], "Digitaalse toote disain ja arendus");
+  assert.equal(output["ceterms:creditValue"], 15);
+  assert.ok(mapped.includes("ceterms:name"));
+  assert.ok(Array.isArray(unmapped)); // unmapped fields are reported, never silently dropped
 });
 
 test("warnings do not break conformance on their own", async () => {
