@@ -98,6 +98,11 @@ entry points (JSON-LD context, SHACL profile, crosswalks). The validator has a
 programmatic API (`import { validate, exportDoc }`) returning structured objects,
 and `--json` output for shell use.
 
+## Framework
+
+The full skeleton — entities, relationships, and what CC reuses vs develops per
+layer — is in [`FRAMEWORK.md`](FRAMEWORK.md).
+
 ## Roadmap
 
 - **v0.1 (now):** micro-credential, curriculum, **course and program** profiles (courses compose into programs; sessions tie to the calendar), validator,
