@@ -1,0 +1,34 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Course",
+  "@id": "https://beta.ettevotluskeskus.ee/koolitused/uap/",
+  "name": "Uue ajastu projektijuht",
+  "summary": "9-nädalane AI-toega projektijuhtimise karjäärikiirendi; õpe simulatsioonina fiktiivses firmas NovaCore Solutions.",
+  "url": "https://beta.ettevotluskeskus.ee/koolitused/uap/",
+  "field": "Juhtimine ja töökorraldus",
+  "language": "et",
+  "academicHours": 180,
+  "clockHours": 135,
+  "deliveryMode": "blended",
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "learningOutcome": [
+    "Kaardistab projekti konteksti ja sõltuvused nii, et eesmärk, töö ja vastutus muutuvad nähtavaks.",
+    "Valib olukorrale sobiva projektijuhtimise meetodi ja teeb otsused põhjendatult.",
+    "Kasutab AI-tööriistu projektijuhi töös nii, et inimene jääb otsustajaks ja töövoog kiireneb.",
+    "Koostab professionaalse portfoolio nähtavate artefaktidega järgmise rolli tõendamiseks."
+  ],
+  "entryRequirements": "Sobib karjäärimuutjale ja kasvavale projektijuhile; u 14 h nädalas peab olema realistlik. Formaalne PM-kogemus pole nõutav.",
+  "content": "9 nädalat: AI sissejuhatus → portfellijuhtimine → metoodika → sidusrühmad → probleemilahendus → meeskond → voog → kvaliteet → lõppprojekt.",
+  "awardedCredential": "Läbimise tunnistus; plaanis esitada HAKA mikrokvalifikatsiooni hindamiseks",
+  "schedule": [
+    { "@type": "Session", "name": "Nädal 0 — AI sissejuhatus ja onboarding", "startDate": "2026-09-08", "endDate": "2026-09-08" },
+    { "@type": "Session", "name": "Nädal 1 — Portfellijuhtimine ja Wardley Mapping", "startDate": "2026-09-15", "endDate": "2026-09-15" },
+    { "@type": "Session", "name": "Nädal 2 — Metoodika ja planeerimine (WBS, Agile)", "startDate": "2026-09-22", "endDate": "2026-09-22" },
+    { "@type": "Session", "name": "Nädal 3 — Sidusrühmad ja RACI", "startDate": "2026-09-29", "endDate": "2026-09-29" },
+    { "@type": "Session", "name": "Nädal 4 — Probleemilahendus (5 Miks, A3)", "startDate": "2026-10-06", "endDate": "2026-10-06" },
+    { "@type": "Session", "name": "Nädal 5 — Meeskonna tervis ja koostöö", "startDate": "2026-10-13", "endDate": "2026-10-13" },
+    { "@type": "Session", "name": "Nädal 6 — Voog, nähtavus ja Kanban", "startDate": "2026-10-20", "endDate": "2026-10-20" },
+    { "@type": "Session", "name": "Nädal 7 — Kvaliteet ja compliance", "startDate": "2026-10-27", "endDate": "2026-10-27" },
+    { "@type": "Session", "name": "Nädal 8 — Lõppprojekt ja kaitsmine", "startDate": "2026-11-03", "endDate": "2026-11-03" }
+  ]
+}
