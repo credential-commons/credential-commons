@@ -16,6 +16,16 @@ equally valid targets; naming any one of them here is an example, never a
 requirement. The crosswalks (CTDL / ELM / OB3) say "here is how to map **if** you
 use these" — not "use these". That neutrality is the whole point of a commons.
 
+**Principle — a high, airy scaffold.** CC is a **scaffold** (think a light
+molecular lattice), not a filled structure. It is deliberately **high-level and
+mostly empty**: it holds the **slots** (what a record needs) and the **edges**
+(how records relate), and leaves the filling — the actual frameworks, codes and
+content — to the adopter. Keep every profile minimal: require only what makes a
+record *interoperable*, recommend the rest, mandate no external model. The
+scaffold **enables**, and it may **guide** — offering non-binding help on which
+frameworks fit a slot (see `docs/choosing-frameworks.md`) — but it never fills
+itself. Airy by design: easy to adopt, hard to outgrow.
+
 Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 
 ## Layers
