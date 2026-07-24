@@ -46,7 +46,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 |---|---|---|---|
 | Learning outcome | `schema.edu.ee haridus:Opivaljund` | `cc:learningOutcome` | ✅ |
 | **Volume** | ECTS | `academicHours` + `clockHours` (Estonian dual-unit: Töötukassa + HAKA) | ✅ |
-| **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | 🔧 |
+| **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | ✅ |
 | **Learning resource** (Moodle materials) | `schema:LearningResource` | link resource → outcome / course | 🔧 |
 | Assessment | `schema:AssessmentAction` / CTDL | assessment profile | ⬜ |
 

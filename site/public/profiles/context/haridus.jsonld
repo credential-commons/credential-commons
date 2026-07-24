@@ -13,6 +13,7 @@
     "Program": "cc:Program",
     "Session": "cc:Session",
     "Achievement": "cc:Achievement",
+    "CompetencyAlignment": "cc:CompetencyAlignment",
     "Organization": "schema:Organization",
     "Person": "schema:Person",
 
@@ -47,6 +48,12 @@
     "awardedDate": { "@id": "cc:awardedDate", "@type": "xsd:date" },
     "issuer": "schema:issuer",
     "evidence": { "@id": "cc:evidence", "@type": "@id" },
+
+    "aligns": "cc:aligns",
+    "targetFramework": "cc:targetFramework",
+    "targetCode": "cc:targetCode",
+    "targetName": "cc:targetName",
+    "targetUrl": { "@id": "cc:targetUrl", "@type": "@id" },
 
     "price": "cc:price",
     "priceCurrency": "cc:priceCurrency",

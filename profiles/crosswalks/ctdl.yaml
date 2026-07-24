@@ -45,3 +45,10 @@ maps:
   - cc: cc:awardedCredential
     target: ceterms:isPreparationFor
     confidence: low
+  - cc: cc:CompetencyAlignment
+    target: ceterms:CredentialAlignmentObject
+    confidence: high
+    note: Framework-neutral; targetFramework maps to ceterms:framework (any framework by URI).
+  - cc: cc:aligns
+    target: ceterms:teaches
+    confidence: medium

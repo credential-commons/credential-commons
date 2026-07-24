@@ -1,0 +1,32 @@
+# Credential Commons — Competency alignment (v0.2)
+#
+# A NEUTRAL slot: align an outcome / course to a competency in ANY framework —
+# ESCO, O*NET, EQF, a national framework, or your own. Credential Commons mandates
+# NO framework; it only requires that an alignment names WHICH framework it targets
+# and identifies the competency (a code and/or a name). Attach one or more
+# `cc:aligns` -> CompetencyAlignment to any outcome/course. Crosswalk: CTDL
+# ceterms:CredentialAlignmentObject.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:CompetencyAlignmentShape
+    a sh:NodeShape ;
+    sh:targetClass cc:CompetencyAlignment ;
+    rdfs:label "Competency alignment" ;
+    sh:message "An alignment MUST identify the competency: a code (cc:targetCode) and/or a name (cc:targetName)." ;
+
+    # Which framework — REQUIRED, but any value (a URI or a name). CC names none.
+    sh:property [ sh:path cc:targetFramework ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "An alignment MUST name the framework it targets (cc:targetFramework — a URI or name; ESCO, EQF, national, own... CC mandates none)." ] ;
+
+    # Identify the competency: at least one of code or name.
+    sh:or (
+        [ sh:property [ sh:path cc:targetCode ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:targetName ; sh:minCount 1 ] ]
+    ) ;
+
+    sh:property [ sh:path cc:targetUrl ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: a resolvable URL for the competency (cc:targetUrl)." ] .

@@ -98,6 +98,19 @@ test("achievement profile: conformant example; missing learner/date/awards fails
   assert.equal(empty.violations, 3); // awards, awardedTo, awardedDate
 });
 
+test("competency alignment is framework-agnostic: two different frameworks both pass; none-named fails", async () => {
+  const plural = await validate(await load("examples/competency-alignment/good.jsonld"), { profile: "competency-alignment" });
+  assert.equal(plural.conforms, true); // ESCO + Estonian EKR, both valid — pluralism
+  const noFramework = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "CompetencyAlignment",
+    "@id": "https://x.ee/a",
+    targetName: "something",
+  }, { profile: "competency-alignment" });
+  assert.equal(noFramework.conforms, false);
+  assert.ok(noFramework.results.some((r) => /MUST name the framework/.test(r.message)));
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

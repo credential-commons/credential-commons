@@ -27,6 +27,7 @@ export const PROFILES = {
   "course": "profiles/shapes/course.shacl.ttl",
   "program": "profiles/shapes/program.shacl.ttl",
   "achievement": "profiles/shapes/achievement.shacl.ttl",
+  "competency-alignment": "profiles/shapes/competency-alignment.shacl.ttl",
 };
 
 // Resolve the canonical context (and any relative ref) to the local file, so
