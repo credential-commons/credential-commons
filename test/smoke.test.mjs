@@ -111,6 +111,21 @@ test("competency alignment is framework-agnostic: two different frameworks both 
   assert.ok(noFramework.results.some((r) => /MUST name the framework/.test(r.message)));
 });
 
+test("learning-resource profile: conformant when it teaches an outcome; a resource that teaches nothing fails", async () => {
+  const ok = await validate(await load("examples/learning-resource/good.jsonld"), { profile: "learning-resource" });
+  assert.equal(ok.conforms, true);
+  assert.equal(ok.violations, 0);
+  const noOutcome = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "LearningResource",
+    "@id": "https://x.ee/m/1",
+    name: "Orphan material",
+    url: "https://x.ee/m/1",
+  }, { profile: "learning-resource" });
+  assert.equal(noOutcome.conforms, false);
+  assert.ok(noOutcome.results.some((r) => /MUST teach at least one learning outcome/.test(r.message)));
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

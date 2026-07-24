@@ -1,0 +1,42 @@
+# Credential Commons — Learning resource profile (v0.2)
+#
+# A learning resource (Estonian: õppematerjal) — a reading, video, slide deck,
+# quiz or activity, typically living in Moodle or another LXP. Its whole reason
+# to exist in the scaffold is the SUBSTANCE LINK: a resource MUST teach at least
+# one learning outcome. That single edge is what connects Moodle materials up
+# through outcomes → course → credential into one navigable chain.
+#
+# Reuses schema.org wholesale (schema:LearningResource, schema:teaches,
+# schema:learningResourceType) — the reuse IS the crosswalk; no new silo.
+#
+# STRUCTURE only. Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:LearningResourceShape
+    a sh:NodeShape ;
+    sh:targetClass cc:LearningResource ;
+    rdfs:label "Learning resource profile" ;
+
+    # --- Required (Violation) ---
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:datatype xsd:string ; sh:severity sh:Violation ;
+        sh:message "A learning resource MUST have a name (schema:name)." ] ;
+    sh:property [ sh:path schema:url ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A learning resource MUST have a locator (schema:url) — where the material actually lives (e.g. a Moodle URL)." ] ;
+
+    # THE substance link: a resource without an outcome is untraceable material.
+    sh:property [ sh:path schema:teaches ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A learning resource MUST teach at least one learning outcome (schema:teaches) — the substance link up to the course and credential." ] ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path schema:learningResourceType ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: the resource type (schema:learningResourceType) — e.g. reading, video, quiz, assignment." ] ;
+    sh:property [ sh:path schema:isPartOf ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: the course this material belongs to (partOf -> schema:isPartOf, by @id)." ] ;
+    sh:property [ sh:path dcterms:language ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: the language of the material (dcterms:language, BCP-47)." ] .

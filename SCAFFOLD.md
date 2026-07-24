@@ -1,4 +1,4 @@
-# Credential Commons — the framework (sõrestik)
+# Credential Commons — the scaffold (sõrestik)
 
 This is the skeleton of what Credential Commons models. CC is a **thin profile +
 crosswalk layer**: for each part of the skeleton it **reuses** an existing
@@ -57,7 +57,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 | Learning outcome | `schema.edu.ee haridus:Opivaljund` | `cc:learningOutcome` | ✅ |
 | **Volume** | ECTS | `academicHours` + `clockHours` (Estonian dual-unit: Töötukassa + HAKA) | ✅ |
 | **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | ✅ |
-| **Learning resource** (Moodle materials) | `schema:LearningResource` | link resource → outcome / course | 🔧 |
+| **Learning resource** (Moodle materials) | `schema:LearningResource`, `schema:teaches` | `learning-resource` profile; **every resource MUST teach ≥1 outcome** (the substance link) | ✅ |
 | Assessment | `schema:AssessmentAction` / CTDL | assessment profile | ⬜ |
 
 ### 5. Credential — what is awarded
@@ -79,8 +79,8 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 Program --hasPart--> Course            (composition; a course is standalone too)
 Course  --hasSession--> Session        (calendar; Session MUST have a date)
 Course  --hasInstructor--> Person
-Course  --teaches--> LearningOutcome --aligns--> Competency (ESCO)
-Course  --usesResource--> LearningResource (Moodle)
+Course  --teaches--> LearningOutcome --aligns--> Competency (any framework)
+Course  <--partOf-- LearningResource --teaches--> LearningOutcome (Moodle material → outcome)
 Course/Program --awardsCredential--> MicroCredential/Qualification
 Learner --earned--> Achievement (VC/OB3) --proves--> Credential
 ```
@@ -92,13 +92,14 @@ curriculum), delivery (session + calendar guarantee), substance (outcomes +
 dual-hour volume), credential (micro-credential). Four profiles, validator, npm,
 crosswalks, a live reference (mikrokvalifikatsioon.ee) and dereferenceable data.
 
-**v0.2 (the next skeleton to develop) — in priority order:**
-1. **Achievement / Verifiable Credential** profile (layer 6) — the learner layer:
-   what a real learner earned, as OB3.0 / W3C VC. Connects Moodle + learners +
-   the credential into one verifiable chain. Biggest new value.
-2. **Qualification** profile (layer 2) — full qualifications with EQF level.
-3. **Competency alignment** (layer 4) — outcomes ↔ ESCO / a framework.
-4. **Learning resource** (layer 4) — Moodle materials linked to outcomes/courses.
+**v0.2 (shipped):** achievement / VC (layer 6), competency alignment (layer 4,
+framework-agnostic), **learning resource** (layer 4 — Moodle materials, each MUST
+teach ≥1 outcome). Seven profiles now.
+
+**Still open — in priority order:**
+1. **Qualification** profile (layer 2) — full qualifications with EQF level.
+2. **Assessment** profile (layer 4) — how an outcome is evidenced.
+3. **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
 
 Each is a small profile over a reused vocabulary — never a new silo. Contributions
 welcome (`CONTRIBUTING.md`); nothing here is locked.

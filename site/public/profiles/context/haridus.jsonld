@@ -14,6 +14,7 @@
     "Session": "cc:Session",
     "Achievement": "cc:Achievement",
     "CompetencyAlignment": "cc:CompetencyAlignment",
+    "LearningResource": "cc:LearningResource",
     "Organization": "schema:Organization",
     "Person": "schema:Person",
 
@@ -48,6 +49,9 @@
     "awardedDate": { "@id": "cc:awardedDate", "@type": "xsd:date" },
     "issuer": "schema:issuer",
     "evidence": { "@id": "cc:evidence", "@type": "@id" },
+
+    "teaches": "schema:teaches",
+    "learningResourceType": "schema:learningResourceType",
 
     "aligns": "cc:aligns",
     "targetFramework": "cc:targetFramework",

@@ -99,10 +99,13 @@ entry points (JSON-LD context, SHACL profile, crosswalks). The validator has a
 programmatic API (`import { validate, exportDoc }`) returning structured objects,
 and `--json` output for shell use.
 
-## Framework
+## The scaffold
 
-The full skeleton — entities, relationships, and what CC reuses vs develops per
-layer — is in [`FRAMEWORK.md`](FRAMEWORK.md).
+CC is a **scaffold** — a high, airy lattice of slots and edges, deliberately
+mostly empty. The full skeleton — entities, relationships, and what CC reuses vs
+develops per layer — is in [`SCAFFOLD.md`](SCAFFOLD.md). It enables, and may
+*guide* on which framework fits a slot ([`docs/choosing-frameworks.md`](docs/choosing-frameworks.md)),
+but never fills itself or mandates a framework.
 
 ## Roadmap
 

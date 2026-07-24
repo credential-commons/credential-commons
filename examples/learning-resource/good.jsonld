@@ -1,0 +1,13 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "LearningResource",
+  "@id": "https://beta.ettevotluskeskus.ee/moodle/mod/resource/view.php?id=1042",
+  "name": "Andmete puhastamine: praktiline juhend",
+  "url": "https://beta.ettevotluskeskus.ee/moodle/mod/resource/view.php?id=1042",
+  "learningResourceType": "reading",
+  "language": "et",
+  "partOf": "https://beta.ettevotluskeskus.ee/koolitused/andmeanaluutika-alused",
+  "teaches": [
+    "Loeb ja puhastab andmestikku"
+  ]
+}
