@@ -1,0 +1,10 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Achievement",
+  "@id": "https://beta.ettevotluskeskus.ee/tunnistused/uap-2026-11-naidis",
+  "awards": "https://beta.ettevotluskeskus.ee/koolitused/uap/",
+  "awardedTo": { "@type": "Person", "name": "Kadri Näidis" },
+  "awardedDate": "2026-11-10",
+  "issuer": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "evidence": "https://beta.ettevotluskeskus.ee/portfoolio/kadri-uap"
+}

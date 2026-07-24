@@ -87,6 +87,17 @@ test("program profile: conformant when it composes courses; a program with no pa
   assert.ok(noParts.results.some((r) => /compose at least one course/.test(r.message)));
 });
 
+test("achievement profile: conformant example; missing learner/date/awards fails", async () => {
+  const ok = await validate(await load("examples/achievement/good.jsonld"), { profile: "achievement" });
+  assert.equal(ok.conforms, true);
+  assert.equal(ok.violations, 0);
+  const empty = await validate(
+    { "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld", "@type": "Achievement", "@id": "https://x.ee/a" },
+    { profile: "achievement" }
+  );
+  assert.equal(empty.violations, 3); // awards, awardedTo, awardedDate
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

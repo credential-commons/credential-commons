@@ -50,7 +50,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 ### 6. Achievement — what a learner earned (issued to a person)
 | Entity | Reuse | CC develops | Status |
 |---|---|---|---|
-| **Issued credential / badge** | **Open Badges 3.0 / W3C Verifiable Credentials** | `achievement` profile (VC credentialSubject) | 🔧 |
+| **Issued credential / badge** | **Open Badges 3.0 / W3C Verifiable Credentials** | `achievement` profile (VC credentialSubject) | ✅ |
 | Enrolment | `schema:EducationEvent` | — | ⬜ |
 | Learning activity (did X) | **xAPI (Experience API)** / IMS Caliper | crosswalk only | ⬜ |
 

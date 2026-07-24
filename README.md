@@ -9,9 +9,10 @@ record looks like), a *validator* (does your data conform?), and *crosswalks*
 national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) rather than
 replacing them.
 
-> Status: **v0.1, early.** Four profiles (`micro-credential`, `curriculum`,
-> `course`, `program`) — courses compose into programs and their sessions tie to
-> the calendar — plus reference datasets. Built to grow by contribution.
+> Status: **v0.1→0.2.** Five profiles (`micro-credential`, `curriculum`,
+> `course`, `program`, `achievement`) — courses compose into programs, sessions
+> tie to the calendar, and achievements record what a learner earned. Built to
+> grow by contribution.
 
 ## Why
 

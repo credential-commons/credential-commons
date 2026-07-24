@@ -1,0 +1,35 @@
+# Credential Commons — Achievement profile (v0.2)
+#
+# What a LEARNER earned: an issued credential/badge for a person. This is the
+# learner layer — it connects a real learner + delivery (Moodle) + the credential
+# into one verifiable record. Compatible with Open Badges 3.0 / W3C Verifiable
+# Credentials (crosswalks in profiles/crosswalks/ob3.yaml).
+#
+# PII: an Achievement is ABOUT A PERSON. This profile defines STRUCTURE only;
+# where achievements are stored is a restricted/person-data zone concern for the
+# adopter, not the public-safe reference layer.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:AchievementShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Achievement ;
+    rdfs:label "Achievement profile" ;
+
+    # --- Required (Violation) ---
+    sh:property [ sh:path cc:awards ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "An achievement MUST reference what was earned (cc:awards -> a Course / Program / MicroCredential by @id)." ] ;
+    sh:property [ sh:path cc:awardedTo ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "An achievement MUST name the learner (cc:awardedTo -> a Person with a name)." ] ;
+    sh:property [ sh:path cc:awardedDate ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "An achievement MUST have an award date (cc:awardedDate, xsd:date)." ] ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path schema:issuer ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: the issuer (schema:issuer -> Organization)." ] ;
+    sh:property [ sh:path cc:evidence ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: evidence (cc:evidence -> a URL, e.g. a portfolio artifact)." ] .

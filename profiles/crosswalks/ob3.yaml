@@ -30,3 +30,19 @@ maps:
     target: null
     confidence: none
     note: "OB3 has no native credit field; carry in ob:alignment or an extension."
+  - cc: cc:Achievement
+    target: ob:AchievementCredential
+    confidence: high
+    note: OB 3.0 AchievementCredential is a W3C Verifiable Credential; awardedTo maps to credentialSubject.
+  - cc: cc:awards
+    target: ob:achievement
+    confidence: high
+  - cc: cc:awardedTo
+    target: ob:credentialSubject
+    confidence: high
+  - cc: cc:awardedDate
+    target: ob:awardedDate
+    confidence: high
+  - cc: cc:evidence
+    target: ob:evidence
+    confidence: high
