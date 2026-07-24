@@ -1,0 +1,25 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Course",
+  "@id": "https://beta.ettevotluskeskus.ee/koolitused/andmeanaluutika-alused",
+  "name": "Andmeanalüütika alused",
+  "summary": "Iseseisev koolitus, mis annab oma tunnistuse ja sobib ka suurema programmi osaks.",
+  "url": "https://beta.ettevotluskeskus.ee/koolitused/andmeanaluutika-alused",
+  "field": "IT ja andmed",
+  "language": "et",
+  "academicHours": 40,
+  "clockHours": 30,
+  "standalone": true,
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "instructor": [{ "@type": "Person", "name": "Mari Mentor" }],
+  "learningOutcome": [
+    "Loeb ja puhastab andmestikku",
+    "Koostab kokkuvõtvaid tabeleid ja graafikuid",
+    "Tõlgendab tulemusi ja teeb järeldusi"
+  ],
+  "schedule": [
+    { "@type": "Session", "name": "1. sessioon", "startDate": "2026-09-10", "endDate": "2026-09-10" },
+    { "@type": "Session", "name": "2. sessioon", "startDate": "2026-09-17", "endDate": "2026-09-17" }
+  ],
+  "awardedCredential": "Ettevõtluskeskuse täienduskoolituse tunnistus"
+}

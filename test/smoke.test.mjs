@@ -49,6 +49,44 @@ test("curriculum profile: incomplete example flags outcomes + volume + core fiel
   assert.ok(report.results.some((r) => /Volume is REQUIRED/.test(r.message)));
 });
 
+test("course profile: conformant example (schedule + trainer + dual hours)", async () => {
+  const report = await validate(await load("examples/course/good.jsonld"), { profile: "course" });
+  assert.equal(report.conforms, true);
+  assert.equal(report.violations, 0);
+});
+
+test("course profile: a Session without a start date is a violation (calendar guarantee)", async () => {
+  const report = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "Course",
+    "@id": "https://x.ee/c",
+    name: "Test",
+    language: "et",
+    ectsCredits: 3,
+    provider: { "@type": "Organization", name: "X" },
+    learningOutcome: ["a"],
+    schedule: [{ "@type": "Session", name: "no date" }],
+  }, { profile: "course" });
+  assert.equal(report.conforms, false);
+  assert.ok(report.results.some((r) => /Session MUST have a start date/.test(r.message)));
+});
+
+test("program profile: conformant when it composes courses; a program with no parts fails", async () => {
+  const ok = await validate(await load("examples/program/good.jsonld"), { profile: "program" });
+  assert.equal(ok.conforms, true);
+  const noParts = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "Program",
+    "@id": "https://x.ee/p",
+    name: "Empty program",
+    language: "et",
+    provider: { "@type": "Organization", name: "X" },
+    learningOutcome: ["a"],
+  }, { profile: "program" });
+  assert.equal(noParts.conforms, false);
+  assert.ok(noParts.results.some((r) => /compose at least one course/.test(r.message)));
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

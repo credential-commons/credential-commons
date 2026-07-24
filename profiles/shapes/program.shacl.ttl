@@ -1,0 +1,38 @@
+# Credential Commons — Program profile (v0.1)
+#
+# A program (e.g. a micro-qualification) COMPOSED of one or more courses. Each
+# part is a standalone course (cc:Course) that can also be sold and credentialed
+# on its own; a program bundles them and can award its own credential. This is
+# the composition model: programs recombine standalone courses into packages.
+#
+# STRUCTURE only. Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:ProgramShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Program ;
+    rdfs:label "Program profile" ;
+
+    # --- Required (Violation) ---
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:datatype xsd:string ; sh:severity sh:Violation ;
+        sh:message "A program MUST have a name (schema:name)." ] ;
+    sh:property [ sh:path schema:provider ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A provider is REQUIRED (schema:provider -> Organization with a name)." ] ;
+    sh:property [ sh:path dcterms:language ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "Language is REQUIRED (dcterms:language, BCP-47)." ] ;
+    sh:property [ sh:path schema:hasPart ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A program MUST compose at least one course (hasPart -> a Course, by @id or nested)." ] ;
+    sh:property [ sh:path cc:learningOutcome ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A program MUST list at least one learning outcome (cc:learningOutcome)." ] ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path cc:awardedCredential ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: what completing the program awards (cc:awardedCredential)." ] ;
+    sh:property [ sh:path cc:field ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: a subject field (cc:field)." ] .

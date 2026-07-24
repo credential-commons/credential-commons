@@ -1,0 +1,20 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Program",
+  "@id": "https://beta.ettevotluskeskus.ee/programmid/andmeanaluutiku-karjaarikiirendi",
+  "name": "Andmeanalüütiku karjäärikiirendi",
+  "summary": "Mikrokvalifikatsioon, mis koosneb iseseisvatest koolitustest — igaüks eraldi müüdav ja tunnistusega.",
+  "url": "https://beta.ettevotluskeskus.ee/programmid/andmeanaluutiku-karjaarikiirendi",
+  "field": "IT ja andmed",
+  "language": "et",
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "hasPart": [
+    "https://beta.ettevotluskeskus.ee/koolitused/andmeanaluutika-alused",
+    "https://beta.ettevotluskeskus.ee/koolitused/andmete-visualiseerimine"
+  ],
+  "learningOutcome": [
+    "Viib läbi täieliku andmeanalüüsi projekti algusest lõpuni",
+    "Esitab andmepõhiseid soovitusi otsustajatele"
+  ],
+  "awardedCredential": "Mikrokvalifikatsiooni tunnistus (Ettevõtluskeskus OÜ)"
+}

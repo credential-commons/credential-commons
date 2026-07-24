@@ -1,0 +1,54 @@
+# Credential Commons — Course profile (v0.1)
+#
+# A course / training (Estonian: koolitus) — a single standalone unit of learning.
+# A course can stand alone (be sold and give its own credential) AND be a part of
+# a larger program (see the program profile). It carries its own outcomes, volume,
+# trainer(s) and — critically — a SCHEDULE tied to the calendar.
+#
+# STRUCTURE only. Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:CourseShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Course ;
+    rdfs:label "Course profile" ;
+    sh:message "Volume is REQUIRED: ECTS/EAP (cc:ectsCredits), academic hours 45min (cc:academicHours) or clock hours 60min (cc:clockHours)." ;
+
+    # --- Required (Violation) ---
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:datatype xsd:string ; sh:severity sh:Violation ;
+        sh:message "A course MUST have a name (schema:name)." ] ;
+    sh:property [ sh:path schema:provider ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A provider is REQUIRED (schema:provider -> Organization with a name)." ] ;
+    sh:property [ sh:path dcterms:language ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "Language is REQUIRED (dcterms:language, BCP-47)." ] ;
+    sh:property [ sh:path cc:learningOutcome ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A course MUST list at least one learning outcome (cc:learningOutcome)." ] ;
+
+    # Volume — ECTS and/or hours (see Estonian dual-unit note in the curriculum profile).
+    sh:or (
+        [ sh:property [ sh:path cc:ectsCredits ;   sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:academicHours ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path cc:clockHours ;    sh:minCount 1 ] ]
+    ) ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path cc:schedule ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: a schedule (cc:schedule -> one or more Session with a start date) — ties the course to the calendar." ] ;
+    sh:property [ sh:path schema:instructor ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: the trainer(s)/mentor(s) (schema:instructor -> Person)." ] ;
+    sh:property [ sh:path cc:field ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: a subject field (cc:field)." ] .
+
+# Every scheduled Session MUST carry a start date — the calendar guarantee that
+# makes an ainekava (syllabus) schedulable.
+cc:SessionShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Session ;
+    sh:property [ sh:path schema:startDate ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A Session MUST have a start date (schema:startDate, xsd:date)." ] .

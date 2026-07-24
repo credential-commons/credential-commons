@@ -9,9 +9,9 @@ record looks like), a *validator* (does your data conform?), and *crosswalks*
 national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) rather than
 replacing them.
 
-> Status: **v0.1, early.** Two profiles (`micro-credential`, `curriculum`), a
-> reference dataset (Estonian micro-qualifications) and a real curriculum example.
-> Built to grow by contribution.
+> Status: **v0.1, early.** Four profiles (`micro-credential`, `curriculum`,
+> `course`, `program`) — courses compose into programs and their sessions tie to
+> the calendar — plus reference datasets. Built to grow by contribution.
 
 ## Why
 
@@ -100,13 +100,14 @@ and `--json` output for shell use.
 
 ## Roadmap
 
-- **v0.1 (now):** micro-credential **and curriculum** profiles, validator,
+- **v0.1 (now):** micro-credential, curriculum, **course and program** profiles (courses compose into programs; sessions tie to the calendar), validator,
   CTDL/ELM/OB3 crosswalks, 250-record reference dataset, GitHub Action, published
   context + vocabulary.
 - **Next:** executable exporters (deep structural mapping, not just field maps —
   CTDL `QuantitativeValue` for credits, `CredentialAlignmentObject` for outcomes);
-  content-negotiation so `cc:` URIs dereference to RDF; more profiles (full
-  qualification, course, competency); a hosted web validator.
+  more profiles (full qualification, competency); learner achievement (VC / Open
+  Badges 3.0); linking courses to learning materials (Moodle) and calendars; a
+  hosted web validator.
 - **Later:** Verifiable Credentials / Open Badges 3.0 issuance, SPARQL endpoint,
   competency-framework alignment (ESCO), conformance test suite & badge.
 
