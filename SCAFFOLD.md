@@ -26,6 +26,12 @@ scaffold **enables**, and it may **guide** — offering non-binding help on whic
 frameworks fit a slot (see `docs/choosing-frameworks.md`) — but it never fills
 itself. Airy by design: easy to adopt, hard to outgrow.
 
+The operational rule that keeps it airy is the **transplant test**
+(`docs/what-travels.md`): a training org is a *nursery* and CC is the standard that
+lets a learner's growth survive being transplanted to the next org. Before adding
+anything, ask "would the *next* organisation need this to continue the learner's
+growth?" — **yes → core; no → stays in the nursery.** Less is more.
+
 Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 
 ## Layers
