@@ -10,7 +10,12 @@ import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const FEED = process.argv[2] || "https://status.amos.02signal.com/mkval-catalog/catalog-feed.json";
+// Pass the catalog feed URL as the first argument, or set MKVAL_FEED_URL.
+const FEED = process.argv[2] || process.env.MKVAL_FEED_URL;
+if (!FEED) {
+  console.error("Usage: node scripts/from-mkval-feed.mjs <catalog-feed-url>  (or set MKVAL_FEED_URL)");
+  process.exit(1);
+}
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "examples/mkval/catalog.jsonld");
 
 function toCredential(p) {

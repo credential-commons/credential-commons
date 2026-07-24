@@ -87,6 +87,42 @@ Course/Program --awardsCredential--> MicroCredential/Qualification
 Learner --earned--> Achievement (VC/OB3) --proves--> Credential
 ```
 
+## Two views over the same nodes: the architecture and the living tree
+
+The roll-up (`broader` → a programme's ~5 declared outcomes) is the **architecture
+view** — a static, top-down cross-section that regulators (HAKA, Töötukassa) and
+buyers need. It is true, but it is not how knowledge *grows*. The scaffold also
+supports an **organic view** over the very same nodes: knowledge as a tree.
+
+| Tree | Scaffold slot | Role |
+|---|---|---|
+| Soil | `field` | the practice knowledge draws from |
+| **Roots** | `entryRequirements` + the learner's prior experience | andragogy: an adult arrives already deeply rooted — the roots feed the tree, not the course |
+| Seed | a root `LearningOutcome` (no `growsFrom`) | the germ a branch unfolds from |
+| **Trunk** | `Program` | compressed structural spine |
+| **Boughs** | `Course` | major structural limbs; a standalone course = a **cutting** that roots and sells on its own |
+| **Branches / tips** | `LearningOutcome` (+ `growsFrom` 🔧) | where knowledge actually lengthens and re-branches |
+| **Cambium / sap** (in every part) | `crossCutting` | *läbiv* — the living layer present throughout (e.g. an AI skill woven across a whole programme) |
+| **Leaves** | `LearningResource` | where the work happens; seasonal, replaced each intake |
+| **Fruit** | Credential / `Achievement` | harvested; carries the seed → a graduate seeds new growth |
+| Growth rings | successive cohorts / a learner's accumulated achievements | time and consolidation |
+
+Two distinct relationships, never conflated:
+- **`broader`** = *aggregation* (this narrow outcome is PART OF that broad one) — the funnel, the compliance snapshot.
+- **`growsFrom`** 🔧 = *development* (this outcome GREW FROM that earlier one) — the living lineage; roots have none, so a rootless outcome IS a seed. A DAG (a branch may be **grafted** from two roots), never cyclic.
+
+Two maturities, also distinct:
+- learner **`stage`** 🔧 (seeme → võrsik → puu, or Bloom / SOLO / your own — a *neutral* slot, CC mandates none): how deep this learner grew on a competency;
+- curriculum **lignification** (green shoot → hardened, accredited course): how consolidated the curriculum element is.
+
+Balance is not automatic — a tree balances by **pruning**. The curriculum's balance
+is the **wholeness / coverage check** (every declared outcome fed by growth, no
+orphan branch): the gardener's shears, an active governance act, not a property.
+
+Design grows **from both ends of the seed**: backward design plants the crown
+(outcomes first), the learner climbs the trunk (courses first). The scaffold holds
+both; it collapses to neither.
+
 ## Where v0.1 stands, and the v0.2 skeleton
 
 **v0.1 (built):** actors (Organization/Person), offerings (course, program,
