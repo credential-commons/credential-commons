@@ -54,7 +54,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 ### 4. Substance — the learning itself
 | Entity | Reuse | CC develops | Status |
 |---|---|---|---|
-| Learning outcome | `schema.edu.ee haridus:Opivaljund` | `cc:learningOutcome` | ✅ |
+| Learning outcome | `schema.edu.ee haridus:Opivaljund`, `skos:broader` | `cc:LearningOutcome` as an **identified node**: shared `@id` = **cross-cutting** (läbiv); `broader` = **roll-up** (course → programme). May stay a plain string for simple catalogues. | ✅ |
 | **Volume** | ECTS | `academicHours` + `clockHours` (Estonian dual-unit: Töötukassa + HAKA) | ✅ |
 | **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | ✅ |
 | **Learning resource** (Moodle materials) | `schema:LearningResource`, `schema:teaches` | `learning-resource` profile; **every resource MUST teach ≥1 outcome** (the substance link) | ✅ |
@@ -79,8 +79,10 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 Program --hasPart--> Course            (composition; a course is standalone too)
 Course  --hasSession--> Session        (calendar; Session MUST have a date)
 Course  --hasInstructor--> Person
-Course  --teaches--> LearningOutcome --aligns--> Competency (any framework)
-Course  <--partOf-- LearningResource --teaches--> LearningOutcome (Moodle material → outcome)
+Program/Course --learningOutcome--> LearningOutcome --aligns--> Competency (any framework)
+LearningOutcome --broader--> LearningOutcome   (roll-up: course outcome → programme outcome)
+(same @id in Programme + Course + Material)     (cross-cutting / läbiv — e.g. AI through the whole programme)
+LearningResource --teaches--> LearningOutcome  (Moodle material → outcome), --partOf--> Course
 Course/Program --awardsCredential--> MicroCredential/Qualification
 Learner --earned--> Achievement (VC/OB3) --proves--> Credential
 ```
@@ -94,12 +96,17 @@ crosswalks, a live reference (mikrokvalifikatsioon.ee) and dereferenceable data.
 
 **v0.2 (shipped):** achievement / VC (layer 6), competency alignment (layer 4,
 framework-agnostic), **learning resource** (layer 4 — Moodle materials, each MUST
-teach ≥1 outcome). Seven profiles now.
+teach ≥1 outcome), **learning outcome as an identified node** (layer 4 —
+cross-cutting via shared `@id`, roll-up via `broader`). Eight profiles now.
 
 **Still open — in priority order:**
-1. **Qualification** profile (layer 2) — full qualifications with EQF level.
-2. **Assessment** profile (layer 4) — how an outcome is evidenced.
-3. **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
+1. **Wholeness guarantee** (validation, not a profile) — the substance analogue of
+   the calendar guarantee: across a programme graph, every programme outcome is
+   reached by ≥1 course outcome (shared `@id` or `broader`), and every course
+   outcome is developed by ≥1 material (`teaches`). Reports the broken rung.
+2. **Qualification** profile (layer 2) — full qualifications with EQF level.
+3. **Assessment** profile (layer 4) — how an outcome is evidenced.
+4. **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
 
 Each is a small profile over a reused vocabulary — never a new silo. Contributions
 welcome (`CONTRIBUTING.md`); nothing here is locked.

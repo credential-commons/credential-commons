@@ -1,0 +1,15 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "LearningOutcome",
+  "@id": "https://beta.ettevotluskeskus.ee/uap/lo/ai",
+  "name": "Kasutab tehisaru tööriistu projektijuhtimise ülesannetes",
+  "crossCutting": true,
+  "aligns": [
+    {
+      "@type": "CompetencyAlignment",
+      "targetFramework": "https://esco.ec.europa.eu/",
+      "targetName": "kasutab tehisintellekti tööriistu",
+      "targetUrl": "https://esco.ec.europa.eu/en/classification/skill?uri=..."
+    }
+  ]
+}

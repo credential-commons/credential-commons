@@ -1,0 +1,44 @@
+# Credential Commons — Learning outcome profile (v0.2)
+#
+# A learning outcome (Estonian: õpiväljund) as a FIRST-CLASS, identified node —
+# not a leaf string. Identity (@id) is what lets the scaffold run a whole
+# programme together:
+#   * CROSS-CUTTING (läbiv): one outcome node referenced by the programme, several
+#     courses and several materials. The shared @id IS the "läbivus" — e.g. an AI
+#     skill woven through a whole micro-qualification.
+#   * ROLL-UP: a course outcome points `broader` (skos:broader) to a programme
+#     outcome, so ~5 course outcomes fold into ~5 programme outcomes.
+#   * ALIGNMENT: an outcome `aligns` to a competency in any framework (see the
+#     competency-alignment profile).
+#
+# Airy by design: outcomes MAY stay plain strings for a simple catalogue. This
+# profile only applies to outcomes you choose to model as nodes.
+#
+# STRUCTURE only. Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:LearningOutcomeShape
+    a sh:NodeShape ;
+    sh:targetClass cc:LearningOutcome ;
+    rdfs:label "Learning outcome profile" ;
+
+    # --- Required (Violation) ---
+    # An identified outcome MUST carry its statement — "what the learner can do".
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:datatype xsd:string ; sh:severity sh:Violation ;
+        sh:message "A learning-outcome node MUST state the outcome (schema:name) — what the learner knows or can do." ] ;
+
+    # --- Shape of the optional edges (only checked if present) ---
+    sh:property [ sh:path cc:crossCutting ; sh:maxCount 1 ; sh:datatype xsd:boolean ; sh:severity sh:Violation ;
+        sh:message "crossCutting (läbiv) must be a single boolean." ] ;
+    sh:property [ sh:path skos:broader ; sh:nodeKind sh:IRI ; sh:severity sh:Violation ;
+        sh:message "broader must reference the parent outcome by @id (a programme-level outcome), not a literal." ] ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path cc:aligns ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: align the outcome to a competency (cc:aligns) in a framework of your choice." ] .

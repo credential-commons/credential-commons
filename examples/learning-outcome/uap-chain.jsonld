@@ -1,0 +1,56 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@graph": [
+    {
+      "comment": "The programme (micro-qualification) — ~5 outcomes, one is cross-cutting AI.",
+      "@type": "Program",
+      "@id": "https://beta.ettevotluskeskus.ee/uap",
+      "name": "Uue aja projektijuht",
+      "language": "et",
+      "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+      "learningOutcome": [
+        {
+          "@id": "https://beta.ettevotluskeskus.ee/uap/lo/ai",
+          "@type": "LearningOutcome",
+          "name": "Kasutab tehisaru tööriistu projektijuhtimise ülesannetes",
+          "crossCutting": true
+        },
+        {
+          "@id": "https://beta.ettevotluskeskus.ee/uap/lo/eelarve",
+          "@type": "LearningOutcome",
+          "name": "Juhib projekti eelarvet ja ressursse"
+        }
+      ],
+      "hasPart": ["https://beta.ettevotluskeskus.ee/uap/kursus/eelarve"]
+    },
+    {
+      "comment": "A standalone course. Reuses the SAME AI outcome node (@id) — that shared id IS 'läbiv'. Its own outcome rolls up via broader.",
+      "@type": "Course",
+      "@id": "https://beta.ettevotluskeskus.ee/uap/kursus/eelarve",
+      "name": "Projekti eelarvestamine",
+      "language": "et",
+      "clockHours": 16,
+      "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+      "partOf": "https://beta.ettevotluskeskus.ee/uap",
+      "learningOutcome": [
+        { "@id": "https://beta.ettevotluskeskus.ee/uap/lo/ai" },
+        {
+          "@id": "https://beta.ettevotluskeskus.ee/uap/kursus/eelarve/lo/1",
+          "@type": "LearningOutcome",
+          "name": "Koostab tabelarvutuses projekti eelarve",
+          "broader": "https://beta.ettevotluskeskus.ee/uap/lo/eelarve"
+        }
+      ]
+    },
+    {
+      "comment": "A Moodle material developing the cross-cutting AI outcome — points teaches at the same shared @id.",
+      "@type": "LearningResource",
+      "@id": "https://beta.ettevotluskeskus.ee/moodle/mod/resource/view.php?id=12",
+      "name": "Tehisaru eelarvestamises: praktilised näited",
+      "url": "https://beta.ettevotluskeskus.ee/moodle/mod/resource/view.php?id=12",
+      "learningResourceType": "reading",
+      "partOf": "https://beta.ettevotluskeskus.ee/uap/kursus/eelarve",
+      "teaches": [{ "@id": "https://beta.ettevotluskeskus.ee/uap/lo/ai" }]
+    }
+  ]
+}

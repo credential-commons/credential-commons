@@ -111,6 +111,27 @@ test("competency alignment is framework-agnostic: two different frameworks both 
   assert.ok(noFramework.results.some((r) => /MUST name the framework/.test(r.message)));
 });
 
+test("learning-outcome profile: an identified cross-cutting outcome conforms; a node with no statement fails", async () => {
+  const ok = await validate(await load("examples/learning-outcome/good.jsonld"), { profile: "learning-outcome" });
+  assert.equal(ok.conforms, true);
+  assert.equal(ok.violations, 0);
+  const noName = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "LearningOutcome",
+    "@id": "https://x.ee/lo/1",
+    crossCutting: true,
+  }, { profile: "learning-outcome" });
+  assert.equal(noName.conforms, false);
+  assert.ok(noName.results.some((r) => /MUST state the outcome/.test(r.message)));
+});
+
+test("learning-outcome: the whole UAP chain resolves — every outcome node in programme+course+material is well-formed", async () => {
+  // Shared @id (.../uap/lo/ai) appears in the programme, the course and the material.
+  const report = await validate(await load("examples/learning-outcome/uap-chain.jsonld"), { profile: "learning-outcome" });
+  assert.equal(report.conforms, true); // all cc:LearningOutcome nodes across the graph carry a statement
+  assert.equal(report.violations, 0);
+});
+
 test("learning-resource profile: conformant when it teaches an outcome; a resource that teaches nothing fails", async () => {
   const ok = await validate(await load("examples/learning-resource/good.jsonld"), { profile: "learning-resource" });
   assert.equal(ok.conforms, true);

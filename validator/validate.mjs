@@ -28,6 +28,7 @@ export const PROFILES = {
   "program": "profiles/shapes/program.shacl.ttl",
   "achievement": "profiles/shapes/achievement.shacl.ttl",
   "competency-alignment": "profiles/shapes/competency-alignment.shacl.ttl",
+  "learning-outcome": "profiles/shapes/learning-outcome.shacl.ttl",
   "learning-resource": "profiles/shapes/learning-resource.shacl.ttl",
 };
 
