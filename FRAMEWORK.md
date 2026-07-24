@@ -7,6 +7,15 @@ matter (composition, dual hour units, the calendar guarantee) and the crosswalks
 It does **not** reinvent CTDL, ELM, Open Badges, Verifiable Credentials, ESCO or
 xAPI — it profiles and connects them.
 
+**Principle — a neutral commons, not a product.** CC mandates **no single vendor,
+product or framework**. Where a layer needs an external model (competency
+frameworks, credit systems, delivery), CC defines a **neutral slot** and a
+**crosswalk mechanism** — you plug in whatever you already use and CC keeps the
+*link* interoperable. ESCO, O*NET, EQF, a national framework or your own are all
+equally valid targets; naming any one of them here is an example, never a
+requirement. The crosswalks (CTDL / ELM / OB3) say "here is how to map **if** you
+use these" — not "use these". That neutrality is the whole point of a commons.
+
 Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 
 ## Layers
@@ -37,7 +46,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 |---|---|---|---|
 | Learning outcome | `schema.edu.ee haridus:Opivaljund` | `cc:learningOutcome` | ✅ |
 | **Volume** | ECTS | `academicHours` + `clockHours` (Estonian dual-unit: Töötukassa + HAKA) | ✅ |
-| **Competency** (aligns outcome) | **ESCO**, CTDL `CredentialAlignmentObject` | alignment profile | 🔧 |
+| **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | 🔧 |
 | **Learning resource** (Moodle materials) | `schema:LearningResource` | link resource → outcome / course | 🔧 |
 | Assessment | `schema:AssessmentAction` / CTDL | assessment profile | ⬜ |
 
