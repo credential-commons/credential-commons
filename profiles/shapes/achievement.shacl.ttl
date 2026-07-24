@@ -31,5 +31,7 @@ cc:AchievementShape
     # --- Recommended (Warning) ---
     sh:property [ sh:path schema:issuer ; sh:minCount 1 ; sh:severity sh:Warning ;
         sh:message "Recommended: the issuer (schema:issuer -> Organization)." ] ;
+    sh:property [ sh:path cc:cohort ; sh:minCount 1 ; sh:nodeKind sh:IRI ; sh:severity sh:Warning ;
+        sh:message "Recommended: the cohort/voor this was earned in (cc:cohort -> a Cohort by @id) — pins the achievement to the season and curriculum version (ring) it grew in." ] ;
     sh:property [ sh:path cc:evidence ; sh:minCount 1 ; sh:severity sh:Warning ;
         sh:message "Recommended: evidence (cc:evidence -> a URL, e.g. a portfolio artifact)." ] .

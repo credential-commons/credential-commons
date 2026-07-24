@@ -111,6 +111,21 @@ test("competency alignment is framework-agnostic: two different frameworks both 
   assert.ok(noFramework.results.some((r) => /MUST name the framework/.test(r.message)));
 });
 
+test("cohort (voor) profile: a run with an offering + start date conforms; one that delivers nothing fails", async () => {
+  const ok = await validate(await load("examples/cohort/good.jsonld"), { profile: "cohort" });
+  assert.equal(ok.conforms, true);
+  assert.equal(ok.violations, 0);
+  const noOffering = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "Cohort",
+    "@id": "https://x.ee/voor/1",
+    name: "Orphan voor",
+    startDate: "2026-03-02",
+  }, { profile: "cohort" });
+  assert.equal(noOffering.conforms, false);
+  assert.ok(noOffering.results.some((r) => /MUST deliver a known offering/.test(r.message)));
+});
+
 test("learning-outcome profile: an identified cross-cutting outcome conforms; a node with no statement fails", async () => {
   const ok = await validate(await load("examples/learning-outcome/good.jsonld"), { profile: "learning-outcome" });
   assert.equal(ok.conforms, true);

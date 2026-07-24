@@ -17,6 +17,7 @@
     "CompetencyAlignment": "cc:CompetencyAlignment",
     "LearningOutcome": "cc:LearningOutcome",
     "LearningResource": "cc:LearningResource",
+    "Cohort": "cc:Cohort",
     "Organization": "schema:Organization",
     "Person": "schema:Person",
 
@@ -48,7 +49,12 @@
     "schedule": "cc:schedule",
     "endDate": { "@id": "schema:endDate", "@type": "xsd:date" },
 
+    "delivers": { "@id": "cc:delivers", "@type": "@id" },
+    "capacity": "schema:maximumAttendeeCapacity",
+    "location": "schema:location",
+
     "awards": { "@id": "cc:awards", "@type": "@id" },
+    "cohort": { "@id": "cc:cohort", "@type": "@id" },
     "awardedTo": "cc:awardedTo",
     "awardedDate": { "@id": "cc:awardedDate", "@type": "xsd:date" },
     "issuer": "schema:issuer",

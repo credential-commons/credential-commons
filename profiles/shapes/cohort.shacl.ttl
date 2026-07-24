@@ -1,0 +1,41 @@
+# Credential Commons — Cohort profile (v0.2)
+#
+# A cohort (Estonian: voor; a graduating year-group is a lend) — one scheduled RUN
+# of a programme or course, bound to a season and a specific version (ring) of the
+# curriculum. This is the INSTANCE layer: where a type is grown into real life.
+#
+# PUBLIC-SAFE BY DESIGN. A cohort here is the advertised shell of a run — dates and
+# seats — and MUST NOT carry participants, rosters, enrolments or any personal data.
+# Those live in the adopter's product/operations tree and its restricted zone. CC
+# touches a real person only at the credential seam (see the achievement profile).
+#
+# Aligns with schema:CourseInstance. STRUCTURE only.
+# Severity: sh:Violation = MUST fix; sh:Warning = SHOULD add.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix cc:      <https://credentialcommons.org/ns/0.1/> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+cc:CohortShape
+    a sh:NodeShape ;
+    sh:targetClass cc:Cohort ;
+    rdfs:label "Cohort profile" ;
+
+    # --- Required (Violation) ---
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:datatype xsd:string ; sh:severity sh:Violation ;
+        sh:message "A cohort MUST have a name (schema:name), e.g. \"Kevad 2026 voor\"." ] ;
+    sh:property [ sh:path cc:delivers ; sh:minCount 1 ; sh:nodeKind sh:IRI ; sh:severity sh:Violation ;
+        sh:message "A cohort MUST deliver a known offering (cc:delivers -> a Programme/Course by @id) — the run points at what it runs." ] ;
+    sh:property [ sh:path schema:startDate ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "A cohort MUST have a start date (schema:startDate) — a run is bound to a season and a curriculum version." ] ;
+
+    # --- Recommended (Warning) ---
+    sh:property [ sh:path schema:endDate ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: an end date (schema:endDate)." ] ;
+    sh:property [ sh:path schema:maximumAttendeeCapacity ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: seats (capacity -> schema:maximumAttendeeCapacity) — a count, never a roster." ] ;
+    sh:property [ sh:path cc:deliveryMode ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Recommended: delivery mode (cc:deliveryMode — online / blended / onsite)." ] .

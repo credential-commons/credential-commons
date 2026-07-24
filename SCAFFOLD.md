@@ -49,6 +49,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 | Entity | Reuse | CC develops | Status |
 |---|---|---|---|
 | **Session / schedule** | `schema:Event` / `CourseInstance`, `startDate`/`endDate` | `cc:Session` + **the calendar guarantee** (every session MUST have a start date → ainekava is schedulable) | ✅ |
+| **Cohort / run** (voor; lend = graduating year-group) | `schema:CourseInstance` | `cohort` profile — one scheduled run of an offering (`delivers` + start date + seats). **Public-safe shell: dates & seats, NEVER a roster.** The instance layer's only public face. | ✅ |
 | Delivery mode, location | `schema:courseMode`, `schema:location` | `cc:deliveryMode` | ✅ / ⬜ |
 
 ### 4. Substance — the learning itself
@@ -84,8 +85,16 @@ LearningOutcome --broader--> LearningOutcome   (roll-up: course outcome → prog
 (same @id in Programme + Course + Material)     (cross-cutting / läbiv — e.g. AI through the whole programme)
 LearningResource --teaches--> LearningOutcome  (Moodle material → outcome), --partOf--> Course
 Course/Program --awardsCredential--> MicroCredential/Qualification
-Learner --earned--> Achievement (VC/OB3) --proves--> Credential
+Cohort (voor) --delivers--> Programme/Course    (a scheduled run; public shell, no roster)
+Learner --earned--> Achievement (VC/OB3) --awards--> Credential, --cohort--> Cohort (voor)
 ```
+
+**Types vs instances.** Everything above the last two lines is a **type** (public,
+no PII). A **cohort/voor** is the one *instance* CC gives a public shell (dates and
+seats). Participants, rosters and work groups (töörühm) are the rest of the
+instance layer — they stay in the adopter's product/operations tree and its
+restricted person-data zone. CC meets a real person only at the **achievement**
+seam (PII → restricted). See [`docs/integrate.md`](docs/integrate.md).
 
 ## Two views over the same nodes: the architecture and the living tree
 
@@ -133,7 +142,9 @@ crosswalks, a live reference (mikrokvalifikatsioon.ee) and dereferenceable data.
 **v0.2 (shipped):** achievement / VC (layer 6), competency alignment (layer 4,
 framework-agnostic), **learning resource** (layer 4 — Moodle materials, each MUST
 teach ≥1 outcome), **learning outcome as an identified node** (layer 4 —
-cross-cutting via shared `@id`, roll-up via `broader`). Eight profiles now.
+cross-cutting via shared `@id`, roll-up via `broader`), **cohort / voor** (layer 3
+— the public-safe run shell, no roster; achievement now binds to its cohort).
+Nine profiles now.
 
 **Still open — in priority order:**
 1. **Wholeness guarantee** (validation, not a profile) — the substance analogue of

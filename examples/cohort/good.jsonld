@@ -1,0 +1,13 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Cohort",
+  "@id": "https://beta.ettevotluskeskus.ee/uap/voor/2026-kevad",
+  "name": "Uue aja projektijuht — kevad 2026 voor",
+  "delivers": "https://beta.ettevotluskeskus.ee/uap",
+  "language": "et",
+  "startDate": "2026-03-02",
+  "endDate": "2026-06-12",
+  "capacity": 24,
+  "deliveryMode": "blended",
+  "registrationDeadline": "2026-02-20"
+}
