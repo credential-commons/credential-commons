@@ -32,6 +32,13 @@ lets a learner's growth survive being transplanted to the next org. Before addin
 anything, ask "would the *next* organisation need this to continue the learner's
 growth?" — **yes → core; no → stays in the nursery.** Less is more.
 
+Underneath all of this is one meta-principle: **enabling constraints.** Every rule
+here — the profiles, the neutral slots, the transplant test, versioning — exists to
+make learning and adoption *fast and safe*, never to lock things down. We constrain
+only where a constraint sets people (and agents) free to move quickly. Versioning is
+the clearest case: we can keep evolving because every version is a fixed point you can
+hold (see [`VERSIONING.md`](VERSIONING.md)).
+
 Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 
 ## Layers
