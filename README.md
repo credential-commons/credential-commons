@@ -9,9 +9,10 @@ record looks like), a *validator* (does your data conform?), and *crosswalks*
 national vocabularies such as [schema.edu.ee](https://schema.edu.ee/) rather than
 replacing them.
 
-> Status: **v0.1→0.2.** Five profiles (`micro-credential`, `curriculum`,
-> `course`, `program`, `achievement`) — courses compose into programs, sessions
-> tie to the calendar, and achievements record what a learner earned. Built to
+> Status: **0.x, pre-stable** (see [`VERSIONING.md`](VERSIONING.md)). Nine profiles —
+> `micro-credential`, `curriculum`, `course`, `program`, `learning-outcome`,
+> `learning-resource`, `competency-alignment`, `achievement`, `cohort` — plus a
+> continuous health check (`cc diagnose`). Framework-neutral by design; built to
 > grow by contribution.
 
 ## Why
@@ -78,7 +79,7 @@ crosswalks, and reports any field it could not map (nothing is dropped silently)
 | `profiles/context/` | JSON-LD context — friendly keys → shared IRIs (schema.org, `haridus:`, dcterms) |
 | `profiles/shapes/` | SHACL profiles — the conformance rules (required vs recommended) |
 | `profiles/crosswalks/` | Field maps to CTDL, ELM/Europass, Open Badges 3.0 |
-| `validator/` | `cc` CLI — validate JSON-LD against a profile |
+| `validator/` | `cc` CLI — `validate` a record, `diagnose` a programme's health, `export` to CTDL/ELM/OB3 |
 | `action/` | GitHub Action to run the validator in any institution's CI |
 | `examples/mkval/` | Reference dataset: real Estonian micro-qualifications, conformant |
 
@@ -109,18 +110,19 @@ but never fills itself or mandates a framework.
 
 ## Roadmap
 
-- **v0.1 (now):** micro-credential, curriculum, **course and program** profiles (courses compose into programs; sessions tie to the calendar), validator,
-  CTDL/ELM/OB3 crosswalks, 250-record reference dataset, GitHub Action, published
-  context + vocabulary.
-- **Next:** executable exporters (deep structural mapping, not just field maps —
-  CTDL `QuantitativeValue` for credits, `CredentialAlignmentObject` for outcomes);
-  more profiles (full qualification, competency); learner achievement (VC / Open
-  Badges 3.0); linking courses to learning materials (Moodle) and calendars; a
-  hosted web validator.
-- **Later:** Verifiable Credentials / Open Badges 3.0 issuance, SPARQL endpoint,
-  competency-framework alignment (ESCO), conformance test suite & badge.
+- **Now (0.x):** nine profiles across the layers (offerings, delivery, substance,
+  credential, achievement, cohort), the SHACL validator + CLI, a **health check**
+  (`cc diagnose`) that flags which outcome branch is starving, CTDL/ELM/OB3
+  crosswalks, a 250-record reference dataset, a GitHub Action, a published context +
+  dereferenceable vocabulary, a [versioning policy](VERSIONING.md), and an i18n site.
+- **Next (only as adopters need it):** deeper structural exporters (CTDL
+  `QuantitativeValue` for credits, `CredentialAlignmentObject` for outcomes);
+  optional assessment and enrolment/xAPI profiles; a hosted web validator.
+- **At 1.0:** stable, permanent URIs and SemVer guarantees.
 
-Contributions and new profiles welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+CC mandates **no** competency or level framework — EQF and the like are realisations
+that fill neutral slots (see [`docs/choosing-frameworks.md`](docs/choosing-frameworks.md)).
+Contributions welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Who's using it
 
