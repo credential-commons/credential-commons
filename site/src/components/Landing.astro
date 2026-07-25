@@ -25,8 +25,8 @@ const faqJsonLd = {
     <h1>Credential Commons</h1>
     <p class="lede" set:html={t.tagline.replace("schema.edu.ee", '<a href="https://schema.edu.ee/">schema.edu.ee</a>')} />
 
-    <pre>npx cc validate my-credential.jsonld
-npx cc export  my-credential.jsonld --to ctdl</pre>
+    <pre>npx credential-commons validate my-credential.jsonld
+npx credential-commons export  my-credential.jsonld --to ctdl</pre>
 
     <div class="grid">
       {t.cards.map((c) => (
@@ -40,6 +40,14 @@ npx cc export  my-credential.jsonld --to ctdl</pre>
       <a href="/ns/0.1/">{t.linkVocab}</a> ·
       <a href="/llms.txt">llms.txt</a> ·
       <a href="https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md">{t.linkAgents}</a>
+    </p>
+
+    <p class="stories">
+      <strong>Why it matters &amp; how to adopt:</strong>
+      <a href="https://github.com/credential-commons/credential-commons/blob/main/docs/what-travels.md">what travels (the idea)</a> ·
+      <a href="https://github.com/credential-commons/credential-commons/blob/main/docs/integrate.md">integrate with your system</a> ·
+      <a href="https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/aggregator-catalog.md">case: a public catalog</a> ·
+      <a href="https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/provider-nursery.md">case: a training provider</a>
     </p>
 
     <section class="faq" aria-label={t.faqHeading}>

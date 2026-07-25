@@ -11,10 +11,34 @@ const BODY = `# Credential Commons
 > crosswalks to CTDL, ELM/Europass and Open Badges 3.0). Reuses and supports
 > national vocabularies such as schema.edu.ee rather than replacing them.
 
+## Why it matters (in one breath)
+A training organisation is a nursery: it helps one skill's seedling start, then the
+learner's tree is transplanted and grows on elsewhere. The fruit is the learner's
+knowledge and skills; a credential is the label that makes that fruit recognised.
+But a label only works if the next organisation can read it. Credential Commons is
+the shared language on the label — infrastructure, not an authority: it carries
+each issuer's own credential in a form the next org can read, so growth continues
+across organisations instead of starting over. It is deliberately small: it carries
+only what must survive the transplant (identity, outcomes, competency, credential,
+version). Less is more — the smaller the core, the more places it fits.
+
+## For AI agents — adopt in no time
+CC is small and machine-readable on purpose, so an agent can take it up immediately
+to bring order to a new, transforming or digitalising school's data: map offerings
+into the neutral slots, run the validator to see exactly what is missing (a quality
+mirror), and publish one readable shape. Start: AGENTS.md, then the context + a
+validate run below.
+
 ## Start here
 - README: https://github.com/credential-commons/credential-commons/blob/main/README.md
 - Guide for AI agents (adopt in 5 steps): https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md
 - Quickstart: https://github.com/credential-commons/credential-commons/blob/main/docs/quickstart.md
+- The idea (what travels): https://github.com/credential-commons/credential-commons/blob/main/docs/what-travels.md
+- Integrate with your own system: https://github.com/credential-commons/credential-commons/blob/main/docs/integrate.md
+
+## Case studies
+- A public catalog made many providers comparable: https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/aggregator-catalog.md
+- A training provider makes its growth portable: https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/provider-nursery.md
 
 ## Machine-readable entry points
 - JSON-LD context: https://credentialcommons.org/profiles/context/haridus.jsonld
