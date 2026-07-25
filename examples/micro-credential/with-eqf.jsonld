@@ -1,0 +1,16 @@
+{
+  "comment": "A realisation, not a new profile: Credential Commons stays airy — this is an ordinary micro-credential that FILLS the neutral `level` slot with a monumental framework (EQF). The level references the official EU EQF concept URI, so it is Europass/ELM-ready out of the box. Swap the URI for a national NQF (or drop level entirely) and it is still conformant — CC mandates none.",
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "MicroCredential",
+  "@id": "https://beta.ettevotluskeskus.ee/mikro/andmeanaluutika",
+  "name": "Andmeanalüütika alused",
+  "language": "et",
+  "ectsCredits": 6,
+  "field": "IT ja andmed",
+  "provider": { "@type": "Organization", "name": "Ettevõtluskeskus OÜ" },
+  "learningOutcome": [
+    "Loeb ja puhastab andmestikku",
+    "Tõlgendab tulemusi ja teeb järeldusi"
+  ],
+  "level": { "@id": "http://data.europa.eu/snb/eqf/6", "name": "EQF level 6" }
+}

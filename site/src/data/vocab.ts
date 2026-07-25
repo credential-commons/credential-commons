@@ -46,7 +46,7 @@ export const terms: Term[] = [
   { id: "entryRequirements", kind: "Property", label: "Entry requirements", comment: "Conditions for starting the curriculum." },
   { id: "content", kind: "Property", label: "Content", comment: "An outline of the curriculum content." },
   { id: "awardedCredential", kind: "Property", label: "Awarded credential", comment: "What completion of the curriculum awards." },
-  { id: "level", kind: "Property", label: "Level", comment: "Qualification level (e.g. EQF/NQF)." },
+  { id: "level", kind: "Property", label: "Level", comment: "Optional, framework-agnostic qualification level. Fill with EQF (use the official level URI), a national NQF, or leave it out — a micro-credential need not claim a level. CC mandates none." },
   { id: "field", kind: "Property", label: "Subject field", comment: "Broad subject area of the credential." },
   { id: "price", kind: "Property", label: "Price", comment: "Price of the credential (amount)." },
   { id: "priceCurrency", kind: "Property", label: "Price currency", comment: "ISO 4217 currency code for the price." },

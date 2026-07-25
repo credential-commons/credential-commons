@@ -196,6 +196,11 @@ test("health check: an uncovered programme outcome is flagged as starving", asyn
   assert.ok(r.findings.some((f) => f.code === "uncovered-outcome" && /Orphan/.test(f.message)));
 });
 
+test("EQF is a realisation on top of the neutral level slot — a micro-credential with an EQF level conforms", async () => {
+  const report = await validate(await load("examples/micro-credential/with-eqf.jsonld"));
+  assert.equal(report.conforms, true); // the neutral `level` slot filled with the EQF URI does not break conformance
+});
+
 test("published context (site/) matches the source of truth (profiles/)", async () => {
   const src = await readFile(path.join(ROOT, "profiles/context/haridus.jsonld"), "utf8");
   const pub = await readFile(path.join(ROOT, "site/public/profiles/context/haridus.jsonld"), "utf8");

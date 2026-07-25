@@ -167,10 +167,18 @@ or `broader`), a `broader` that rolls up into nothing, and (to tend) a course
 outcome with no material. It diagnoses so the gardener can act in time — it never
 treats or certifies. See [`docs/health-check.md`](docs/health-check.md).
 
-**Still open — in priority order:**
-1. **Qualification** profile (layer 2) — full qualifications with EQF level.
-3. **Assessment** profile (layer 4) — how an outcome is evidenced.
-4. **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
+**Decided against — a qualification/EQF profile.** Level frameworks (EQF/NQF) are a
+translation device for *formal* qualifications — an industrial, deterministic ladder,
+not the organic heart of micro-credentials. So CC does **not** build an EQF-centric
+profile. A full qualification is already expressible (program/curriculum + credential
++ composition), and level is a **neutral, optional slot** (`cc:level`) — EQF is a
+*realisation on top* (`examples/micro-credential/with-eqf.jsonld`, using the official
+EQF URI, Europass/ELM-ready), never baked in. CC stays airy and organic-friendly *and*
+works with the monumental frameworks when you need them.
+
+**Still open (small, only if an adopter needs it — not core):**
+- **Assessment** (layer 4) — how an outcome is evidenced.
+- **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
 
 Each is a small profile over a reused vocabulary — never a new silo. Contributions
 welcome (`CONTRIBUTING.md`); nothing here is locked.

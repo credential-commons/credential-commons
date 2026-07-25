@@ -37,8 +37,28 @@ regulators) and ECTS where it applies.
 | Option | Fits when |
 |---|---|
 | **Micro-credential** (CTDL / schema.org) | a short, single-skill credential |
-| **Qualification** (EQF level) | a full qualification |
+| **Qualification** | a full qualification — expressed as a program/curriculum with an awarded credential (and an optional `level`), not a separate profile |
 | **Open Badges 3.0 / W3C Verifiable Credentials** | a credential *issued to a learner* (the achievement layer) |
+
+## Qualification level
+
+The `level` slot is a **neutral, optional slot**, exactly like the competency slot —
+CC mandates no level framework, and **a micro-credential need not claim a level at
+all.** Level frameworks (EQF/NQF) are a translation device for *formal* qualifications;
+useful where regulators, funders or cross-border recognition require them, but not the
+organic heart of micro-credentials. Fill the slot with whatever identifier your
+audience reads:
+
+| Option | Fits when |
+|---|---|
+| **EQF** | EU / cross-border recognition. Use the official level URI (`http://data.europa.eu/snb/eqf/…`) so it is Europass/ELM-ready — see `examples/micro-credential/with-eqf.jsonld` |
+| **National NQF** (e.g. Estonian EKR) | national recognition / funding |
+| **SCQF, AQF, others** | the national system your audience uses |
+| **none** | a micro-credential that makes no level claim — perfectly conformant |
+
+EQF and other established frameworks are a **realisation on top of the neutral slot**,
+never baked into the core: CC stays airy and organic-friendly *and* works with the
+monumental frameworks when you need them.
 
 ## Delivery & activity
 
