@@ -159,12 +159,16 @@ cross-cutting via shared `@id`, roll-up via `broader`), **cohort / voor** (layer
 — the public-safe run shell, no roster; achievement now binds to its cohort).
 Nine profiles now.
 
+**Shipped — the health check (`cc diagnose`, not a profile):** the substance
+analogue of the calendar guarantee, run as a *continuous health monitor* (in CI or
+a daily job), not an end-gate. Over a programme graph it reports which branch is
+**starving**: a programme outcome not reached by any course outcome (shared `@id`
+or `broader`), a `broader` that rolls up into nothing, and (to tend) a course
+outcome with no material. It diagnoses so the gardener can act in time — it never
+treats or certifies. See [`docs/health-check.md`](docs/health-check.md).
+
 **Still open — in priority order:**
-1. **Wholeness guarantee** (validation, not a profile) — the substance analogue of
-   the calendar guarantee: across a programme graph, every programme outcome is
-   reached by ≥1 course outcome (shared `@id` or `broader`), and every course
-   outcome is developed by ≥1 material (`teaches`). Reports the broken rung.
-2. **Qualification** profile (layer 2) — full qualifications with EQF level.
+1. **Qualification** profile (layer 2) — full qualifications with EQF level.
 3. **Assessment** profile (layer 4) — how an outcome is evidenced.
 4. **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
 

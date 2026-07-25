@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { validate } from "../validator/validate.mjs";
 import { exportDoc } from "../validator/export.mjs";
+import { diagnose } from "../validator/diagnose.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const load = async (rel) => JSON.parse(await readFile(path.join(ROOT, rel), "utf8"));
@@ -160,6 +161,39 @@ test("learning-resource profile: conformant when it teaches an outcome; a resour
   }, { profile: "learning-resource" });
   assert.equal(noOutcome.conforms, false);
   assert.ok(noOutcome.results.some((r) => /MUST teach at least one learning outcome/.test(r.message)));
+});
+
+test("health check: the UAP chain is healthy — every programme outcome is fed", async () => {
+  const r = await diagnose(await load("examples/learning-outcome/uap-chain.jsonld"));
+  assert.equal(r.healthy, true);
+  assert.equal(r.starving, 0);
+  // the budgeting course outcome has no material yet -> a 'tend' warning, never starving
+  assert.ok(r.findings.some((f) => f.code === "outcome-without-material"));
+});
+
+test("health check: an uncovered programme outcome is flagged as starving", async () => {
+  const doc = {
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@graph": [
+      {
+        "@type": "Program", "@id": "https://x.ee/p", name: "P", language: "et",
+        provider: { "@type": "Organization", name: "X" },
+        learningOutcome: [
+          { "@id": "https://x.ee/lo/a", "@type": "LearningOutcome", name: "Covered" },
+          { "@id": "https://x.ee/lo/orphan", "@type": "LearningOutcome", name: "Orphan" },
+        ],
+        hasPart: ["https://x.ee/c"],
+      },
+      {
+        "@type": "Course", "@id": "https://x.ee/c", name: "C", language: "et",
+        provider: { "@type": "Organization", name: "X" },
+        learningOutcome: [{ "@id": "https://x.ee/lo/a" }],
+      },
+    ],
+  };
+  const r = await diagnose(doc);
+  assert.equal(r.healthy, false);
+  assert.ok(r.findings.some((f) => f.code === "uncovered-outcome" && /Orphan/.test(f.message)));
 });
 
 test("published context (site/) matches the source of truth (profiles/)", async () => {

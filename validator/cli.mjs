@@ -8,6 +8,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { validate, PROFILES } from "./validate.mjs";
 import { exportDoc, TARGETS } from "./export.mjs";
+import { diagnose } from "./diagnose.mjs";
 
 function parseArgs(argv) {
   const args = { command: argv[0], file: null, profile: "micro-credential", json: false, to: null, out: null };
@@ -103,14 +104,51 @@ async function runExport(args) {
   }
 }
 
+async function runDiagnose(args) {
+  const doc = await readDoc(args.file);
+  let report;
+  try {
+    report = await diagnose(doc);
+  } catch (error) {
+    process.stderr.write(`diagnose error: ${error.message}\n`);
+    process.exit(2);
+  }
+
+  if (args.json) {
+    process.stdout.write(`${JSON.stringify({ file: args.file, ...report }, null, 2)}\n`);
+    process.exit(report.healthy ? 0 : 1);
+  }
+
+  const c = report.counts;
+  process.stdout.write(
+    `\nCredential Commons — health check\nfile: ${args.file}\n` +
+      `(${c.programmes} programme(s), ${c.courses} course(s), ${c.outcomes} outcome node(s), ${c.materials} material(s))\n\n`
+  );
+  if (report.findings.length === 0) {
+    process.stdout.write("healthy — every outcome is fed; the chain is unbroken.\n\n");
+  } else {
+    for (const f of report.findings) {
+      const icon = f.severity === "starving" ? "STARVING" : "tend    ";
+      process.stdout.write(`  ${icon}  ${f.message}\n`);
+    }
+    process.stdout.write(
+      `\n${report.healthy ? "healthy (with things to tend)" : "NEEDS CARE"} — ` +
+        `${report.starving} starving, ${report.warnings} to tend.\n\n`
+    );
+  }
+  process.exit(report.healthy ? 0 : 1);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.command === "validate" && args.file) return runValidate(args);
   if (args.command === "export" && args.file) return runExport(args);
+  if (args.command === "diagnose" && args.file) return runDiagnose(args);
   process.stderr.write(
     "usage:\n" +
       "  cc validate <file.jsonld> [--profile <name>] [--json]\n" +
       "  cc export   <file.jsonld> --to <ctdl|elm|ob3> [--out <file>]\n" +
+      "  cc diagnose <file.jsonld> [--json]   health check over a programme graph\n" +
       `profiles: ${Object.keys(PROFILES).join(", ")}\n`
   );
   process.exit(2);

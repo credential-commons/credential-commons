@@ -49,6 +49,7 @@ validate run below.
 
 ## Use
 - Validate: npx credential-commons validate <file>.jsonld  (exit 0 conformant, 1 violations)
+- Diagnose: npx credential-commons diagnose <programme>.jsonld  (continuous health check — which outcome branch is starving; exit 0 healthy, 1 starving)
 - Export:   npx credential-commons export <file>.jsonld --to ctdl|elm|ob3
 - CI:       uses: credential-commons/credential-commons/action@v0
 
