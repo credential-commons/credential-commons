@@ -1,0 +1,11 @@
+---
+import Why from "../../components/Why.astro";
+import { locales, type Locale } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return locales.filter((l) => l !== "en").map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+---
+<Why lang={locale} />

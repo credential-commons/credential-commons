@@ -1,8 +1,8 @@
 ---
 import { locales, type Locale } from "../i18n/ui";
-const { lang, title, description } = Astro.props as { lang: Locale; title: string; description: string };
+const { lang, title, description, path = "" } = Astro.props as { lang: Locale; title: string; description: string; path?: string };
 const SITE = "https://credentialcommons.org";
-const pathFor = (l: Locale) => (l === "en" ? `${SITE}/` : `${SITE}/${l}/`);
+const pathFor = (l: Locale) => (l === "en" ? `${SITE}/${path}` : `${SITE}/${l}/${path}`);
 const canonical = pathFor(lang);
 
 const jsonLd = {

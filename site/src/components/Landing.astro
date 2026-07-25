@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { ui, locales, localeName, type Locale } from "../i18n/ui";
 import { faq } from "../i18n/faq";
+import { why } from "../i18n/why";
 const { lang } = Astro.props as { lang: Locale };
 const t = ui[lang];
 const qa = faq[lang];
@@ -24,6 +25,7 @@ const faqJsonLd = {
     <span class="tag">{t.tag}</span>
     <h1>Credential Commons</h1>
     <p class="lede" set:html={t.tagline.replace("schema.edu.ee", '<a href="https://schema.edu.ee/">schema.edu.ee</a>')} />
+    <p class="why-link"><a href={lang === "en" ? "/why" : `/${lang}/why`}>{why[lang].heading} →</a></p>
 
     <pre>npx credential-commons validate my-credential.jsonld
 npx credential-commons export  my-credential.jsonld --to ctdl</pre>
