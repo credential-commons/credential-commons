@@ -163,6 +163,21 @@ test("learning-resource profile: conformant when it teaches an outcome; a resour
   assert.ok(noOutcome.results.some((r) => /MUST teach at least one learning outcome/.test(r.message)));
 });
 
+test("assessment profile: conformant when it assesses an outcome; one that assesses nothing fails", async () => {
+  const ok = await validate(await load("examples/assessment/good.jsonld"), { profile: "assessment" });
+  assert.equal(ok.conforms, true);
+  assert.equal(ok.violations, 0);
+  const noOutcome = await validate({
+    "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+    "@type": "Assessment",
+    "@id": "https://x.ee/hindamine/1",
+    name: "Test",
+    criteria: ["something objective"],
+  }, { profile: "assessment" });
+  assert.equal(noOutcome.conforms, false);
+  assert.ok(noOutcome.results.some((r) => /MUST reference the learning outcome/.test(r.message)));
+});
+
 test("health check: the UAP chain is healthy — every programme outcome is fed", async () => {
   const r = await diagnose(await load("examples/learning-outcome/uap-chain.jsonld"));
   assert.equal(r.healthy, true);

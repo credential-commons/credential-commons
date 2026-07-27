@@ -1,0 +1,8 @@
+{
+  "@context": "https://credentialcommons.org/profiles/context/haridus.jsonld",
+  "@type": "Assessment",
+  "@id": "https://beta.ettevotluskeskus.ee/uap/hindamine/eelarve",
+  "name": "Praktiline töö: projekti eelarve koostamine",
+  "criteria": ["Eelarve katab kõik projekti põhikulud ja on põhjendatud", "Rahavoo prognoos on realistlik ja seotud tegevuskavaga"],
+  "assesses": ["https://beta.ettevotluskeskus.ee/uap/kursus/eelarve/lo/1"]
+}

@@ -31,6 +31,7 @@ export const PROFILES = {
   "cohort": "profiles/shapes/cohort.shacl.ttl",
   "learning-outcome": "profiles/shapes/learning-outcome.shacl.ttl",
   "learning-resource": "profiles/shapes/learning-resource.shacl.ttl",
+  "assessment": "profiles/shapes/assessment.shacl.ttl",
 };
 
 // Resolve the canonical context (and any relative ref) to the local file, so

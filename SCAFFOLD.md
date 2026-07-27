@@ -72,7 +72,7 @@ Legend: ✅ built (v0.1) · 🔧 next (v0.2) · ⬜ later.
 | **Volume** | ECTS | `academicHours` + `clockHours` (Estonian dual-unit: Töötukassa + HAKA) | ✅ |
 | **Competency** (aligns outcome) | **any framework by URI** — ESCO, O*NET, EQF, national, or your own (pattern: CTDL `CredentialAlignmentObject`) | a framework-**agnostic** alignment slot; mandates none | ✅ |
 | **Learning resource** (Moodle materials) | `schema:LearningResource`, `schema:teaches` | `learning-resource` profile; **every resource MUST teach ≥1 outcome** (the substance link) | ✅ |
-| Assessment | `schema:AssessmentAction` / CTDL | assessment profile | ⬜ |
+| Assessment | `schema:AssessmentAction` / CTDL | `assessment` profile — method + criteria, assesses ≥1 outcome (HAKA 6.5 requires it); design travels, results stay in the nursery | ✅ |
 
 ### 5. Credential — what is awarded
 | Entity | Reuse | CC develops | Status |
@@ -157,7 +157,7 @@ framework-agnostic), **learning resource** (layer 4 — Moodle materials, each M
 teach ≥1 outcome), **learning outcome as an identified node** (layer 4 —
 cross-cutting via shared `@id`, roll-up via `broader`), **cohort / voor** (layer 3
 — the public-safe run shell, no roster; achievement now binds to its cohort).
-Nine profiles now.
+Ten profiles now.
 
 **Shipped — the health check (`cc diagnose`, not a profile):** the substance
 analogue of the calendar guarantee, run as a *continuous health monitor* (in CI or
@@ -177,7 +177,6 @@ EQF URI, Europass/ELM-ready), never baked in. CC stays airy and organic-friendly
 works with the monumental frameworks when you need them.
 
 **Still open (small, only if an adopter needs it — not core):**
-- **Assessment** (layer 4) — how an outcome is evidenced.
 - **Enrolment / learning activity** (layer 6) — xAPI / Caliper crosswalk.
 
 Each is a small profile over a reused vocabulary — never a new silo. Contributions

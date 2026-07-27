@@ -18,6 +18,7 @@
     "LearningOutcome": "cc:LearningOutcome",
     "LearningResource": "cc:LearningResource",
     "Cohort": "cc:Cohort",
+    "Assessment": "cc:Assessment",
     "Organization": "schema:Organization",
     "Person": "schema:Person",
 
@@ -72,6 +73,9 @@
     "price": "cc:price",
     "priceCurrency": "cc:priceCurrency",
     "registrationDeadline": { "@id": "cc:registrationDeadline", "@type": "xsd:date" },
-    "startDate": { "@id": "schema:startDate", "@type": "xsd:date" }
+    "startDate": { "@id": "schema:startDate", "@type": "xsd:date" },
+
+    "criteria": "cc:criteria",
+    "assesses": { "@id": "cc:assesses", "@type": "@id" }
   }
 }

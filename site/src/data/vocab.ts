@@ -51,6 +51,9 @@ export const terms: Term[] = [
   { id: "price", kind: "Property", label: "Price", comment: "Price of the credential (amount)." },
   { id: "priceCurrency", kind: "Property", label: "Price currency", comment: "ISO 4217 currency code for the price." },
   { id: "registrationDeadline", kind: "Property", label: "Registration deadline", comment: "Deadline to register (xsd:date)." },
+  { id: "Assessment", kind: "Class", label: "Assessment", comment: "How a learning outcome is assessed — the method (schema:name) and criteria (cc:criteria) for objective, transparent assessment. Models the assessment DESIGN (which travels; HAKA requires it), never test instances or learner results (PII -> nursery)." },
+  { id: "criteria", kind: "Property", label: "Criteria", comment: "The assessment criteria — what an objective, transparent judgement of the outcome checks." },
+  { id: "assesses", kind: "Property", label: "Assesses", comment: "The learning outcome(s) this assessment checks (cc:assesses -> a LearningOutcome by @id). HAKA: every outcome must be assessable." },
 ];
 
 export const findTerm = (id: string) => terms.find((t) => t.id === id);
