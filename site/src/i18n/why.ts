@@ -43,15 +43,15 @@ export const why: Record<Locale, WhyDict> = {
     readers: [
       {
         who: "For the learner",
-        p: "Your growth is recognised wherever this language is spoken. You never start from zero. You carry proof anyone can read — and you save your time.",
+        p: "Wherever this language is spoken, your credential can be read and understood. You never start from zero. You carry proof anyone can read — and you save your time.",
       },
       {
         who: "For a school — and its agent",
-        p: "Trust and build on what a learner already grew, instead of replanting from seed. A new or transforming school can adopt the language in no time — even an AI agent can pick it up at once, organise a scattered system, and show exactly what is missing. Then your own system grows organically, the way a tree later grows more trees.",
+        p: "Build on what a learner already grew, instead of replanting from seed. A new or transforming school can adopt the language in no time — even an AI agent can pick it up at once, organise a scattered system, and show exactly what is missing. Then your own system grows organically, the way a tree later grows more trees.",
       },
       {
         who: "For employers and clients",
-        p: "A credential you can actually read and trust — because it speaks one language, and rests on data that was cleaned, not just claimed.",
+        p: "A credential you can actually read and understand — because it speaks one language, and rests on data that was cleaned, not just claimed.",
       },
     ],
     start: {
@@ -92,15 +92,15 @@ export const why: Record<Locale, WhyDict> = {
     readers: [
       {
         who: "Õppijale",
-        p: "Sinu kasv on tunnustatud kõikjal, kus seda keelt räägitakse. Sa ei alusta kunagi nullist. Sa kannad tõendit, mida igaüks loeb — ja hoiad kokku oma aega.",
+        p: "Sinu tunnistus on arusaadav kõikjal, kus seda keelt räägitakse. Sa ei alusta kunagi nullist. Sa kannad tõendit, mida igaüks loeb — ja hoiad kokku oma aega.",
       },
       {
         who: "Koolile — ja tema agendile",
-        p: "Usalda ja ehita selle peale, mis õppijas juba kasvas, selle asemel et uuesti seemnest istutada. Uus või muutuv kool võtab keele kasutusse hetkega — isegi AI-agent haarab selle kohe, korrastab segase süsteemi ja näitab täpselt, mis puudu on. Ja siis kasvab su enda süsteem orgaaniliselt, samamoodi nagu puu hiljem ise puid kasvatab.",
+        p: "Ehita selle peale, mis õppijas juba kasvas, selle asemel et uuesti seemnest istutada. Uus või muutuv kool võtab keele kasutusse hetkega — isegi AI-agent haarab selle kohe, korrastab segase süsteemi ja näitab täpselt, mis puudu on. Ja siis kasvab su enda süsteem orgaaniliselt, samamoodi nagu puu hiljem ise puid kasvatab.",
       },
       {
         who: "Tööandjale ja kliendile",
-        p: "Tunnistus, mida saab päriselt lugeda ja usaldada — sest ta räägib üht keelt ja tugineb andmetele, mis on puhastatud, mitte ainult väidetud.",
+        p: "Tunnistus, mida saab päriselt lugeda ja mõista — sest ta räägib üht keelt ja tugineb andmetele, mis on puhastatud, mitte ainult väidetud.",
       },
     ],
     start: {
