@@ -30,6 +30,13 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
       ))}
     </div>
 
+    <h2 class="readers-h">{w.start.heading}</h2>
+    <div class="readers">
+      {w.start.steps.map((s) => (
+        <div class="reader"><h3>{s.who}</h3><p>{s.how}</p></div>
+      ))}
+    </div>
+
     <p class="close">{w.close}</p>
 
     <footer><a href={homeFor(lang)}>{w.backHome}</a></footer>

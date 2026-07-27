@@ -12,6 +12,7 @@ export type WhyDict = {
   sections: { h: string; p: string }[];
   readersHeading: string;
   readers: { who: string; p: string }[];
+  start: { heading: string; steps: { who: string; how: string }[] };
   close: string;
   backHome: string;
 };
@@ -53,6 +54,14 @@ export const why: Record<Locale, WhyDict> = {
         p: "A credential you can actually read and trust — because it speaks one language, and rests on data that was cleaned, not just claimed.",
       },
     ],
+    start: {
+      heading: "How to start",
+      steps: [
+        { who: "Run a training or an institution", how: "Describe your offering once — an AI assistant can do it from your existing Word or Excel, or use a tool built on the standard. Validate for free, then publish. No new system to buy." },
+        { who: "A learner", how: "You set nothing up. Ask your provider to publish your credential in the standard — then it is portable and readable wherever you go next." },
+        { who: "A developer or AI agent", how: "Read AGENTS.md and the JSON-LD context, map your data into the neutral slots, and validate with one command. Built to be adopted in minutes." },
+      ],
+    },
     close:
       "So knowledge grows like a forest — one growth continuing the next — not like a single tree fenced inside one garden.",
     backHome: "← Home",
@@ -94,6 +103,14 @@ export const why: Record<Locale, WhyDict> = {
         p: "Tunnistus, mida saab päriselt lugeda ja usaldada — sest ta räägib üht keelt ja tugineb andmetele, mis on puhastatud, mitte ainult väidetud.",
       },
     ],
+    start: {
+      heading: "Kuidas alustada",
+      steps: [
+        { who: "Koolitus või asutus", how: "Kirjelda oma pakkumine korra — AI-abiline teeb selle su Wordi- või Exceli-failist, või kasuta standardile ehitatud tööriista. Kontrolli tasuta, siis avalda. Uut süsteemi pole vaja osta." },
+        { who: "Õppija", how: "Sa ei pea midagi seadistama. Palu oma koolitajal avaldada su tunnistus selles standardis — siis on see kaasaskantav ja loetav kõikjal, kuhu edasi lähed." },
+        { who: "Arendaja või AI-agent", how: "Loe AGENTS.md ja JSON-LD kontekst, kaardista oma andmed neutraalsetesse pesadesse ja kontrolli ühe käsuga. Tehtud minutitega kasutusele võtmiseks." },
+      ],
+    },
     close:
       "Nii kasvab teadmine nagu mets — üks kasv jätkab teist — mitte nagu üksik puu, ühe tara sisse suletud.",
     backHome: "← Avaleht",
@@ -135,6 +152,14 @@ export const why: Record<Locale, WhyDict> = {
         p: "Todistus, jonka voi todella lukea ja johon voi luottaa — koska se puhuu yhtä kieltä ja perustuu dataan, joka on siivottu eikä vain väitetty.",
       },
     ],
+    start: {
+      heading: "Näin aloitat",
+      steps: [
+        { who: "Koulutus tai oppilaitos", how: "Kuvaa tarjontasi kerran — tekoälyavustaja tekee sen Word- tai Excel-tiedostostasi, tai käytä standardiin rakennettua työkalua. Validoi ilmaiseksi ja julkaise. Uutta järjestelmää ei tarvitse ostaa." },
+        { who: "Oppija", how: "Sinun ei tarvitse asentaa mitään. Pyydä kouluttajaasi julkaisemaan todistuksesi tässä standardissa — silloin se on siirrettävä ja luettava kaikkialla, minne seuraavaksi menet." },
+        { who: "Kehittäjä tai tekoälyagentti", how: "Lue AGENTS.md ja JSON-LD-konteksti, kartoita datasi neutraaleihin paikkoihin ja validoi yhdellä komennolla. Tehty otettavaksi käyttöön minuuteissa." },
+      ],
+    },
     close:
       "Näin tieto kasvaa kuin metsä — yksi kasvu jatkaa toista — eikä kuin yksittäinen puu yhden aidan sisällä.",
     backHome: "← Etusivu",
@@ -176,6 +201,14 @@ export const why: Record<Locale, WhyDict> = {
         p: "Ein Nachweis, den man wirklich lesen und dem man vertrauen kann — weil er eine Sprache spricht und auf Daten beruht, die bereinigt und nicht nur behauptet wurden.",
       },
     ],
+    start: {
+      heading: "So fangen Sie an",
+      steps: [
+        { who: "Eine Schulung oder Institution", how: "Beschreiben Sie Ihr Angebot einmal — ein KI-Assistent macht das aus Ihrer Word- oder Excel-Datei, oder nutzen Sie ein auf dem Standard aufgebautes Werkzeug. Kostenlos validieren, dann veröffentlichen. Kein neues System zu kaufen." },
+        { who: "Eine lernende Person", how: "Sie richten nichts ein. Bitten Sie Ihren Anbieter, Ihren Nachweis in diesem Standard zu veröffentlichen — dann ist er portabel und überall lesbar, wohin Sie als Nächstes gehen." },
+        { who: "Entwickler oder KI-Agent", how: "Lesen Sie AGENTS.md und den JSON-LD-Kontext, ordnen Sie Ihre Daten den neutralen Slots zu und validieren Sie mit einem Befehl. Gemacht, um in Minuten übernommen zu werden." },
+      ],
+    },
     close:
       "So wächst Wissen wie ein Wald — ein Wachstum setzt das nächste fort — nicht wie ein einzelner Baum, eingezäunt in einem Garten.",
     backHome: "← Startseite",
@@ -217,6 +250,14 @@ export const why: Record<Locale, WhyDict> = {
         p: "Un titre que l'on peut vraiment lire et auquel on peut se fier — parce qu'il parle un seul langage et repose sur des données nettoyées, non pas simplement déclarées.",
       },
     ],
+    start: {
+      heading: "Comment commencer",
+      steps: [
+        { who: "Un organisme de formation ou une institution", how: "Décrivez votre offre une fois — un agent IA le fait depuis votre fichier Word ou Excel, ou utilisez un outil bâti sur la norme. Validez gratuitement, puis publiez. Aucun nouveau système à acheter." },
+        { who: "Un apprenant", how: "Vous n'installez rien. Demandez à votre organisme de publier votre titre dans cette norme — il devient alors portable et lisible partout où vous irez ensuite." },
+        { who: "Un développeur ou un agent IA", how: "Lisez AGENTS.md et le contexte JSON-LD, mappez vos données vers les emplacements neutres et validez en une commande. Conçu pour être adopté en quelques minutes." },
+      ],
+    },
     close:
       "Ainsi le savoir grandit comme une forêt — une croissance en prolongeant une autre — et non comme un arbre isolé, clôturé dans un seul jardin.",
     backHome: "← Accueil",
