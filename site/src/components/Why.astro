@@ -7,7 +7,7 @@ const w = why[lang];
 const pathFor = (l: Locale) => (l === "en" ? "/why" : `/${l}/why`);
 const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 ---
-<Base lang={lang} title={w.metaTitle} description={w.metaDescription} path="why">
+<Base lang={lang} title={w.metaTitle} description={w.metaDescription} path="why" ogDiagram="two-trees">
   <main class="wrap">
     <nav class="langs" aria-label="Languages">
       {locales.map((l) => (l === lang ? <strong>{localeName[l]}</strong> : <a href={pathFor(l)}>{localeName[l]}</a>))}

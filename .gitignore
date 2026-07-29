@@ -4,3 +4,6 @@ npm-debug.log*
 *.tgz
 dist/
 _dbg.mjs
+
+# Diagram preview output (scripts/preview-diagrams.mjs) — build artefact, not source.
+tmp/
