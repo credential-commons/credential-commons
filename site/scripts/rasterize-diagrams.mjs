@@ -21,8 +21,11 @@ import path from "node:path";
 // build — before this script runs. Writing only into dist/client would leave the
 // PNGs out of the deployed directory and every og:image would 404. So rasterise
 // into whichever output directories actually exist.
-const targets = (process.argv[2] ? [process.argv[2]] : [".vercel/output/static/diagrams", "dist/client/diagrams"]).filter(
-  (d) => existsSync(d),
+// Diagrams live at /diagrams/… for the default locale and /<locale>/diagrams/…
+// for the rest, so walk the whole static root and pick out anything under a
+// "diagrams" directory.
+const targets = (process.argv[2] ? [process.argv[2]] : [".vercel/output/static", "dist/client"]).filter((d) =>
+  existsSync(d),
 );
 if (targets.length === 0) {
   process.stdout.write("No diagram output directory — nothing to rasterise.\n");
@@ -32,12 +35,14 @@ if (targets.length === 0) {
 const OG_W = 1200;
 const OG_H = 630;
 
+const DIAGRAM_SEG = `${path.sep}diagrams${path.sep}`;
+
 function svgFiles(dir) {
   const out = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) out.push(...svgFiles(full));
-    else if (entry.name.endsWith(".svg")) out.push(full);
+    else if (entry.name.endsWith(".svg") && full.includes(DIAGRAM_SEG)) out.push(full);
   }
   return out;
 }
