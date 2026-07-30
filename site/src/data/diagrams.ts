@@ -196,8 +196,11 @@ export function buildDiagrams(lang: Locale): Diagram[] {
         const cw = (z.w - gap * (cols - 1)) / cols;
         const labelH = 22;
         const linkH = 34;
-        // Both track names sit ABOVE their row, so nothing can reach the footer rule.
-        const ch = Math.max(44, Math.min(54, (z.h - labelH * 2 - linkH) / 2));
+        // Both track names sit ABOVE their row. The cell height follows the space
+        // actually left — a fixed floor pushed the lower row into the footer rule
+        // in the languages whose headline or deck runs longer than English.
+        const avail = z.h - labelH * 2 - linkH;
+        const ch = Math.max(34, Math.min(54, avail / 2));
         const total = labelH * 2 + ch * 2 + linkH;
         const top = z.y + Math.max(0, (z.h - total) / 2);
         const kSize = t.sub * 0.8;
