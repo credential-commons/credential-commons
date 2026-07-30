@@ -84,13 +84,17 @@ then the rest as capacity allows.
 
 ## Still open
 
-- **Diagrams are English only.** The site publishes in five languages, and every
-  locale currently shares the English card. Diagram copy needs a native reader
-  before it goes out, so the translations are deliberately not guessed. The
-  drawing system takes its strings from the diagram description, so adding a
-  locale is a copy task, not a code task.
 - **Diagrams are not yet embedded in page content.** They exist as routes and as
   share cards. Placing them inline on `/why` and the `ns/0.1` term pages is the
-  next step, and depends on the locale question above.
+  next step.
+- **The translations still want a native reader.** All five languages ship, and
+  each reuses the terminology already published in `why.ts` / `ui.ts` / `faq.ts`,
+  but a native speaker reading the rendered pictures may still improve them.
+  Corrections are welcome as PRs against `site/src/i18n/diagrams.ts` — that file
+  is the only place diagram text lives.
+- **One deliberate trade in French.** Its `overview.takeaway` says *validez-les*
+  rather than *check it conforms*, which bought the space to say
+  *vos normes habituelles* as precisely as the English. Conformity is still
+  explicit on the same canvas via `parts[1].sub`.
 - **Crosswalk detail.** `neutral-slots` names the three crosswalk targets but
   does not show a field-level mapping. A separate diagram could.
