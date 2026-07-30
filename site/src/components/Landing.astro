@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Figure from "./Figure.astro";
 import { ui, locales, localeName, type Locale } from "../i18n/ui";
 import { faq } from "../i18n/faq";
 import { why } from "../i18n/why";
@@ -26,6 +27,11 @@ const faqJsonLd = {
     <h1>Credential Commons</h1>
     <p class="lede" set:html={t.tagline.replace("schema.edu.ee", '<a href="https://schema.edu.ee/">schema.edu.ee</a>')} />
     <p class="why-link"><a href={lang === "en" ? "/why" : `/${lang}/why`}>{why[lang].heading} →</a></p>
+
+    {/* The cards below name the three parts. This carries the claim they do not
+        make — that this is a layer and not a portal, which is the commonest
+        misreading of the project. */}
+    <Figure lang={lang} id="credential-commons" priority={true} />
 
     <pre>npx credential-commons validate my-credential.jsonld
 npx credential-commons export  my-credential.jsonld --to ctdl</pre>

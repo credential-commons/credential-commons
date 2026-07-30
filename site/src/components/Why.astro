@@ -1,9 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
+import Figure from "./Figure.astro";
 import { locales, localeName, type Locale } from "../i18n/ui";
 import { why } from "../i18n/why";
 const { lang } = Astro.props as { lang: Locale };
 const w = why[lang];
+// A diagram per section, by position. Every locale has the same three sections in
+// the same order (the nursery and the transplant → the fruit and the label → one
+// shared language), so the mapping holds across languages.
+const sectionFigures: (string | null)[] = ["what-travels", "growth-rings", "neutral-slots"];
 const pathFor = (l: Locale) => (l === "en" ? "/why" : `/${l}/why`);
 const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 ---
@@ -16,10 +21,14 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
     <h1>{w.heading}</h1>
     <p class="lede">{w.lede}</p>
 
-    {w.sections.map((s) => (
+    {/* This page's own share card, so what a reader sees here is what they share. */}
+    <Figure lang={lang} id="two-trees" priority={true} />
+
+    {w.sections.map((s, i) => (
       <section class="why-sec">
         <h2>{s.h}</h2>
         <p>{s.p}</p>
+        {sectionFigures[i] && <Figure lang={lang} id={sectionFigures[i]!} />}
       </section>
     ))}
 

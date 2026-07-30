@@ -1,0 +1,80 @@
+---
+/**
+ * A concept diagram shown on the page.
+ *
+ * The same file already serves as the page's share card and is listed in
+ * llms.txt; this is the third channel — a reader actually seeing it.
+ *
+ * Two shapes, picked by viewport: the wide 960×504 drawing on desktop, and a
+ * portrait 400×640 recomposition on phones. A wide diagram scaled into a 360 px
+ * screen renders its labels at roughly 8 px, which is no longer a diagram — so
+ * this is art direction, not a resize. Each <source> carries its own width and
+ * height, otherwise the browser would force one aspect ratio on both.
+ *
+ * The <img> fallback points at the PNG: image search indexes raster reliably and
+ * SVG poorly, and the alt text is the diagram's own written explanation.
+ */
+import { buildDiagrams } from "../data/diagrams";
+import type { Locale } from "../i18n/ui";
+
+const { lang, id, priority = false } = Astro.props as { lang: Locale; id: string; priority?: boolean };
+const d = buildDiagrams(lang).find((x) => x.id === id);
+const prefix = lang === "en" ? "" : `/${lang}`;
+const wide = `${prefix}/diagrams/${id}`;
+const narrow = `${prefix}/diagrams/stacked/${id}`;
+---
+
+{
+  d && (
+    <figure class="cc-figure">
+      <picture>
+        <source media="(max-width: 640px)" srcset={`${narrow}.svg`} type="image/svg+xml" width={400} height={640} />
+        <source srcset={`${wide}.svg`} type="image/svg+xml" width={960} height={504} />
+        <img
+          src={`${wide}.png`}
+          alt={d.alt}
+          width={960}
+          height={504}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchpriority={priority ? "high" : "auto"}
+        />
+      </picture>
+      <figcaption>{d.caption}</figcaption>
+    </figure>
+  )
+}
+
+<style>
+  /* Step outside the 760px reading column. Constrained to the column, the wide
+     drawing's labels render at about 12px; a diagram earns more width than a line
+     of prose. Centred on the container, so no horizontal scrollbar. */
+  .cc-figure {
+    margin: 24px 0 30px;
+    width: min(1010px, calc(100vw - 32px));
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cc-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+  }
+  /* The narrow variant is portrait; keep it from filling the whole screen. */
+  @media (max-width: 640px) {
+    .cc-figure img {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+  }
+  .cc-figure figcaption {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+</style>
