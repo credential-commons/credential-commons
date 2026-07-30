@@ -93,18 +93,67 @@ export function toJsonLd(list: Term[]): object {
   };
 }
 
+const SITE = "https://credentialcommons.org";
+/** HTML-attribute escaping. Distinct from `esc` above, which escapes Turtle strings. */
+const escAttr = (s: string): string => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+
 export function toHtml(list: Term[], title: string): string {
   const rows = list
     .map((t) => `<tr><td><code>cc:${t.id}</code></td><td>${t.kind}</td><td>${t.label}</td><td>${t.comment}</td></tr>`)
     .join("\n");
+
+  // A single-term page dereferences one cc: URI; the index lists the whole
+  // vocabulary. Different canonical, different description.
+  const single = list.length === 1 ? list[0] : null;
+  const canonical = single ? `${NS}${single.id}` : NS;
+  const description = single
+    ? `cc:${single.id} — ${single.label}. ${single.comment} Part of the Credential Commons cc: vocabulary (v0.1); dereferences to Turtle or JSON-LD by content negotiation.`
+    : "The Credential Commons cc: vocabulary (v0.1). Terms are minted only where no existing vocabulary fits, and every term dereferences to Turtle or JSON-LD by content negotiation.";
+
+  // These pages are hand-built HTML rather than the Astro layout, which left them
+  // the one part of the site with no description and no share card at all — and
+  // they are the most citable URLs the project has.
+  const ogImage = `${SITE}/diagrams/neutral-slots.og.png`;
+  const meta = `<meta name="description" content="${escAttr(description)}">
+<link rel="canonical" href="${canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Credential Commons">
+<meta property="og:title" content="${escAttr(title)}">
+<meta property="og:description" content="${escAttr(description)}">
+<meta property="og:url" content="${canonical}">
+<meta property="og:image" content="${ogImage}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escAttr(title)}">
+<meta name="twitter:description" content="${escAttr(description)}">
+<meta name="twitter:image" content="${ogImage}">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">`;
+
+  // The neutral-slots diagram explains what this vocabulary IS — a set of
+  // framework-agnostic sockets — so it belongs on the index. On a single-term
+  // page it would only decorate, so it is left off.
+  const figure = single
+    ? ""
+    : `<figure style="margin:22px 0 26px">
+<picture>
+<source media="(max-width: 640px)" srcset="/diagrams/stacked/neutral-slots.svg" type="image/svg+xml" width="400" height="640">
+<source srcset="/diagrams/neutral-slots.svg" type="image/svg+xml" width="960" height="504">
+<img src="/diagrams/neutral-slots.png" alt="Credential Commons mandates no single vendor, product or framework. Where a layer needs an external model — a competency framework, a credit system, a level, a delivery mode — it defines a neutral, framework-agnostic slot plus a crosswalk mechanism. Adopters plug in whatever they already use, and the crosswalks describe how those fields map to CTDL, ELM/Europass and Open Badges 3.0." width="960" height="504" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border:1px solid #dbe4ee;border-radius:12px;background:#fff">
+</picture>
+<figcaption style="margin-top:8px;color:#5a6b80;font-size:.9rem;line-height:1.45">Neutral slots with crosswalks: Credential Commons defines the socket, not your choice of framework.</figcaption>
+</figure>`;
+
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title}</title>
-<link rel="canonical" href="${NS}">
+<title>${escAttr(title)}</title>
+${meta}
 <style>body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#12212e}.wrap{max-width:760px;margin:0 auto;padding:44px 20px}code{font-family:ui-monospace,Menlo,monospace;background:#eef3f7;padding:1px 5px;border-radius:5px}table{border-collapse:collapse;width:100%;margin-top:16px}th,td{border:1px solid #dbe4ee;padding:8px 10px;text-align:left;vertical-align:top;font-size:.94rem}th{background:#f5f9fb}a{color:#2f9e95;font-weight:600}</style>
 </head><body><main class="wrap">
 <h1>Credential Commons vocabulary — <code>cc:</code> v0.1</h1>
 <p>Namespace <code>${NS}</code>. Terms minted where no existing vocabulary fits; prefer <code>schema:</code>, <code>haridus:</code> (schema.edu.ee) and <code>dcterms:</code> otherwise. This page content-negotiates: request it with <code>Accept: text/turtle</code> or <code>application/ld+json</code> for RDF.</p>
+${figure}
 <table><tr><th>Term</th><th>Kind</th><th>Label</th><th>Meaning</th></tr>
 ${rows}
 </table>
