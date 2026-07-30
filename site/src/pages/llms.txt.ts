@@ -1,7 +1,19 @@
 import type { APIRoute } from "astro";
+import { diagrams } from "../data/diagrams";
 import { faq } from "../i18n/faq";
 
 const qa = faq.en.map((x) => `### ${x.q}\n${x.a.replace(/`/g, "")}`).join("\n\n");
+
+// The diagrams carry explanations a paragraph struggles with. Their `alt` text is
+// written to stand alone, so listing it here gives a reader that cannot see the
+// picture the same explanation the picture gives — and the URL to cite it by.
+const figures = diagrams
+  .map(
+    (d) =>
+      `### ${d.headline}\n${d.alt}\nSVG: https://credentialcommons.org/diagrams/${d.id}.svg` +
+      `\nShare card (1200x630 PNG): https://credentialcommons.org/diagrams/${d.id}.og.png`,
+  )
+  .join("\n\n");
 
 const BODY = `# Credential Commons
 
@@ -53,11 +65,19 @@ validate run below.
 - Export:   npx credential-commons export <file>.jsonld --to ctdl|elm|ob3
 - CI:       uses: credential-commons/credential-commons/action@v0
 
+## Concept diagrams
+Each is a self-contained SVG whose text layer is real text, not outlines — so it can
+be read, not only looked at — plus a 1200x630 PNG for sharing. The same paths exist
+under a locale prefix, e.g. /et/diagrams/two-trees.svg.
+
+${figures}
+
 ## Answers
 ${qa}
 
 ## Languages
 Site available in: en (/), et (/et/), fi (/fi/), de (/de/), fr (/fr/).
+Diagrams are published in every language at the same paths under the locale prefix.
 
 ## Licence
 Code: Apache-2.0. Profiles/contexts/crosswalks/docs: CC-BY-4.0. Name/logo: TRADEMARK.md.

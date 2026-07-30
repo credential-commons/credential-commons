@@ -69,15 +69,15 @@ export const ui: Record<Locale, Dict> = {
   },
   fi: {
     metaDescription:
-      "Avoimet työkalut tutkinto- ja oppimistulostietojen validointiin ja julkaisuun jaettujen koulutusontologioiden mukaisesti. JSON-LD-profiilit, SHACL-validaattori ja vastaavuudet CTDL:ään, ELM/Europassiin ja Open Badges 3.0:aan.",
+      "Avoimet työkalut todistus- ja oppimistulostietojen validointiin ja julkaisuun jaettujen koulutusontologioiden mukaisesti. JSON-LD-profiilit, SHACL-validaattori ja vastaavuudet CTDL:ään, ELM/Europassiin ja Open Badges 3.0:aan.",
     tag: "avoin · Apache-2.0 / CC-BY-4.0 · v0.1",
     tagline:
-      "Avoimet työkalut tutkinto- ja oppimistulostietojen validointiin ja julkaisuun jaettujen koulutusontologioiden mukaisesti — nopeasti. Ei uusi ontologia eikä portaali, vaan ohut yhteentoimivuus- ja vaatimustenmukaisuuskerros, joka käyttää ja tukee kansallisia sanastoja kuten schema.edu.ee.",
+      "Avoimet työkalut todistus- ja oppimistulostietojen validointiin ja julkaisuun jaettujen koulutusontologioiden mukaisesti — nopeasti. Ei uusi ontologia eikä portaali, vaan ohut yhteentoimivuus- ja vaatimustenmukaisuuskerros, joka käyttää ja tukee kansallisia sanastoja kuten schema.edu.ee.",
     cards: [
       { title: "Profiilit", desc: "JSON-LD-konteksti + SHACL-säännöt — pakollinen vs suositeltu." },
       { title: "Validaattori", desc: "Selkokielinen vaatimustenmukaisuusraportti; CI-valmis." },
       { title: "Vastaavuudet", desc: "CTDL · ELM/Europass · Open Badges 3.0." },
-      { title: "Referenssidata", desc: "250 todellista mikrotutkintoa, vaatimustenmukaisia." },
+      { title: "Referenssidata", desc: "250 todellista mikropätevyyttä, vaatimustenmukaisia." },
     ],
     faqHeading: "Usein kysyttyä",
     linkRepo: "GitHub-repositorio",

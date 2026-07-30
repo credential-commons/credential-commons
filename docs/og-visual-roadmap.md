@@ -1,7 +1,35 @@
 # Visual explanations: OG images and concept diagrams
 
-**Status: roadmap (not yet built).** This note records a gap and a plan so the
-work is visible to anyone picking it up next.
+**Status: built.** The OG foundation and the first five concept diagrams now ship.
+What is still open is listed at the end. The rest of this note records why the
+work was done the way it was.
+
+## What exists now
+
+- `site/src/lib/diagram.ts` — the drawing system: palette taken from the site's
+  own tokens, approximate text measurement, layout primitives, and a frame that
+  sizes its own footer from its content.
+- `site/src/data/diagrams.ts` — five diagrams: `credential-commons` (the three
+  parts), `two-trees`, `what-travels`, `growth-rings`, `neutral-slots`.
+- Routes `/diagrams/<id>.svg` and `/diagrams/stacked/<id>.svg`, rasterised after
+  the build by `site/scripts/rasterize-diagrams.mjs` to `<id>.png` and a
+  `1200×630` `<id>.og.png`.
+- `Base.astro` now emits `og:image`, its dimensions and alt text, plus the full
+  Twitter `summary_large_image` set. A page picks its card with the `ogDiagram`
+  prop; `/why` uses `two-trees`, everything else uses `credential-commons`.
+- `npm run diagrams` in `site/` renders every diagram to `tmp/diagrams/` so the
+  drawing can be reviewed as a real picture without building the site.
+
+Two things worth knowing before changing any of it:
+
+- **Rasterise into the deployed directory.** The Vercel adapter copies static
+  output to `.vercel/output/static` *during* the build, before any post-build
+  step runs. Writing PNGs only into `dist/client` leaves them out of the deploy
+  and every `og:image` 404s. The script writes to both.
+- **Two shapes, not one scaled shape.** Wide is `960×504` — exactly the
+  `1200×630` ratio, so a shared card fills the frame with no letterbox. A wide
+  diagram scaled into a 360 px viewport renders its labels at roughly 8 px, so
+  narrow screens get a genuinely different composition at `400×640`.
 
 ## Why
 
@@ -53,3 +81,20 @@ Credential Commons link produces no visual, and the core concepts have no figure
 
 Priority order: OG foundation first, then the two-trees and living-tree cards,
 then the rest as capacity allows.
+
+## Still open
+
+- **Diagrams are not yet embedded in page content.** They exist as routes and as
+  share cards. Placing them inline on `/why` and the `ns/0.1` term pages is the
+  next step.
+- **The translations still want a native reader.** All five languages ship, and
+  each reuses the terminology already published in `why.ts` / `ui.ts` / `faq.ts`,
+  but a native speaker reading the rendered pictures may still improve them.
+  Corrections are welcome as PRs against `site/src/i18n/diagrams.ts` — that file
+  is the only place diagram text lives.
+- **One deliberate trade in French.** Its `overview.takeaway` says *validez-les*
+  rather than *check it conforms*, which bought the space to say
+  *vos normes habituelles* as precisely as the English. Conformity is still
+  explicit on the same canvas via `parts[1].sub`.
+- **Crosswalk detail.** `neutral-slots` names the three crosswalk targets but
+  does not show a field-level mapping. A separate diagram could.
