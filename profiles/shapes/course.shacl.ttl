@@ -37,6 +37,19 @@ cc:CourseShape
         [ sh:property [ sh:path cc:clockHours ;    sh:minCount 1 ] ]
     ) ;
 
+    # If a volume IS given, it must be a positive number. Deliberately separate from
+    # the sh:or above: the or decides "at least one unit is present", these decide
+    # "whatever is present is well-formed". Folding them together would let a
+    # malformed value fall through to another branch of the or and pass.
+    # xsd:decimal, not integer — 7.5 ECTS is ordinary, and the JSON-LD context
+    # already coerces all three properties to xsd:decimal.
+    sh:property [ sh:path cc:ectsCredits ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "ECTS/EAP credits must be a positive number (7.5 is valid; 0, negatives and text are not)." ] ;
+    sh:property [ sh:path cc:academicHours ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "Academic hours (45 min) must be a positive number." ] ;
+    sh:property [ sh:path cc:clockHours ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "Clock hours (60 min) must be a positive number." ] ;
+
     # --- Recommended (Warning) ---
     sh:property [ sh:path cc:schedule ; sh:minCount 1 ; sh:severity sh:Warning ;
         sh:message "Recommended: a schedule (cc:schedule -> one or more Session with a start date) — ties the course to the calendar." ] ;

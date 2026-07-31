@@ -45,6 +45,40 @@ CC may still offer *optional, neutral slots* for some nursery-internal things (a
 public cohort shell, a material link) — but they are **periphery, never core**.
 Adding one must never thicken the core.
 
+## Carry the unit, never the conversion
+
+Two failures look alike and both come from a number arriving without its unit.
+
+**Volume.** CC has three separate properties — `cc:ectsCredits`, `cc:academicHours`
+(45 min) and `cc:clockHours` (60 min) — precisely so a volume can never be
+ambiguous. The unit lives in the property name, not in the value. Publish what the
+source states, in the unit it states, and publish several units side by side when
+the source gives several. Estonian continuing-education curricula should carry both
+hour units, because Töötukassa reads academic hours and HAKA reads clock hours.
+
+**Do not convert between them.** The credit-to-hours ratio is a local convention:
+Estonia treats 1 EAP as roughly 26 hours, but providers use anywhere from 25 to 30.
+A converted figure is a number no provider ever published, and once it is in the
+record nobody downstream can tell it from a stated one. Conversion belongs at the
+crosswalk boundary, where it is visible and its cost is declared — this is why
+`cc:academicHours` maps to `elm:volumeOfLearning` at *medium* confidence while
+`cc:clockHours` maps at *high*: the 45-minute unit needs a conversion, and the
+crosswalk says so out loud.
+
+**Price is the same trap, and a real one.** A provider page stating
+*"2250 EUR total, 1 ECTS is 75 EUR"* offers two correct numbers for one field. An
+aggregator took the second, and a 2250 EUR programme was advertised for months at
+75 EUR — through its catalogue page, its share cards, its price range and its
+machine-readable output. `cc:price` is therefore defined as the **total for the
+whole offering**; a per-unit rate is not expressed in CC at all. If you need to
+publish a unit rate, publish it in your own system: it is a commercial fact about
+your offering, and by the test above it does not travel.
+
+That last point is worth stating plainly: price does not pass the transplant test.
+The next organisation does not need it to recognise a credential or continue a
+learner's growth. `cc:price` exists as periphery for catalogue use, never as core,
+and no profile requires it.
+
 ## Why this is the whole point
 
 The tree leaves. If what you grew cannot travel, the next organisation cannot read
