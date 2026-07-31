@@ -59,6 +59,16 @@ cc:CurriculumShape
         [ sh:property [ sh:path cc:clockHours ;    sh:minCount 1 ] ]
     ) ;
 
+    # If a volume IS given, it must be a positive number. Separate from the sh:or on
+    # purpose — the or decides "at least one unit is present", these decide "whatever
+    # is present is well-formed". xsd:decimal, not integer: 7.5 ECTS is ordinary.
+    sh:property [ sh:path cc:ectsCredits ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "ECTS/EAP credits must be a positive number (7.5 is valid; 0, negatives and text are not)." ] ;
+    sh:property [ sh:path cc:academicHours ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "Academic hours (45 min) must be a positive number." ] ;
+    sh:property [ sh:path cc:clockHours ; sh:datatype xsd:decimal ; sh:minExclusive 0 ; sh:severity sh:Violation ;
+        sh:message "Clock hours (60 min) must be a positive number." ] ;
+
     # --- Recommended (Warning) ---
     sh:property [
         sh:path cc:field ;
