@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import { locales, localeName, type Locale } from "../i18n/ui";
+import { standards } from "../i18n/standards";
+const { lang } = Astro.props as { lang: Locale };
+const s = standards[lang];
+const pathFor = (l: Locale) => (l === "en" ? "/standards" : `/${l}/standards`);
+const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
+// The first row is Credential Commons itself; it is marked so a reader can see at
+// a glance which line is "us" without the table shouting it in every cell.
+---
+<Base lang={lang} title={s.metaTitle} description={s.metaDescription} path="standards" ogDiagram="neutral-slots">
+  <main class="wrap standards-wrap">
+    <nav class="langs" aria-label="Languages">
+      {locales.map((l) => (l === lang ? <strong>{localeName[l]}</strong> : <a href={pathFor(l)}>{localeName[l]}</a>))}
+    </nav>
+
+    <h1>{s.heading}</h1>
+    <p class="lede">{s.lede}</p>
+
+    {s.sections.map((sec) => (
+      <section class="std-sec">
+        <h2>{sec.h}</h2>
+        <p>{sec.p}</p>
+      </section>
+    ))}
+
+    <h2 class="std-h">{s.tableHeading}</h2>
+    <p class="std-intro">{s.tableIntro}</p>
+
+    {/* Wide screens get a real comparison table; below 760px each row restacks
+        into a labelled block, because a four-column table is unreadable on a
+        phone and this page exists to be understood, not admired. */}
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th scope="col">{s.columns.name}</th>
+            <th scope="col">{s.columns.what}</th>
+            <th scope="col">{s.columns.need}</th>
+            <th scope="col">{s.columns.not}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {s.rows.map((r, i) => (
+            <tr class={i === 0 ? "self" : undefined}>
+              <th scope="row" data-label={s.columns.name}>{r.name}</th>
+              <td data-label={s.columns.what}>{r.what}</td>
+              <td data-label={s.columns.need}>{r.need}</td>
+              <td data-label={s.columns.not}>{r.not}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="std-h">{s.addsHeading}</h2>
+    <div class="adds">
+      {s.adds.map((a) => (
+        <div class="card"><h3>{a.h}</h3><p>{a.p}</p></div>
+      ))}
+    </div>
+
+    <h2 class="std-h">{s.gapsHeading}</h2>
+    <p class="gaps">{s.gapsP}</p>
+
+    <p class="close">{s.close}</p>
+
+    <footer><a href={homeFor(lang)}>{s.backHome}</a></footer>
+  </main>
+</Base>
+
+<style>
+  .standards-wrap { max-width: 1040px; }
+  .std-sec { margin: 22px 0; }
+  .std-sec h2 { font-size: 1.15rem; margin: 0 0 6px; }
+  .std-sec p { margin: 0; }
+  .std-h { font-size: 1.15rem; margin: 34px 0 8px; }
+  .std-intro { margin: 0 0 14px; color: var(--muted); }
+
+  .table-scroll { overflow-x: auto; }
+  .cmp { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .cmp thead th {
+    text-align: left; vertical-align: bottom; padding: 8px 12px;
+    border-bottom: 2px solid var(--line); font-size: .82rem;
+    text-transform: uppercase; letter-spacing: .03em; color: var(--muted);
+  }
+  .cmp tbody th, .cmp tbody td {
+    text-align: left; vertical-align: top; padding: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cmp tbody th { font-weight: 700; white-space: nowrap; }
+  .cmp tbody td { color: var(--muted); }
+  .cmp tbody tr.self th, .cmp tbody tr.self td { background: #f2f9f8; color: var(--ink); }
+  .cmp tbody tr.self th { color: var(--teal); }
+
+  .adds { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .adds h3 { margin: 0 0 4px; font-size: 1rem; }
+  .gaps { color: var(--muted); margin: 0; }
+  .close { margin: 30px 0 0; font-weight: 600; }
+  footer a { font-weight: 600; }
+
+  @media (max-width: 760px) {
+    .cmp thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: 100%; }
+    .cmp tbody tr {
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 6px 4px; margin-bottom: 12px;
+    }
+    .cmp tbody th, .cmp tbody td { border-bottom: 0; padding: 8px 12px; white-space: normal; }
+    .cmp tbody th { font-size: 1.05rem; }
+    .cmp tbody td::before {
+      content: attr(data-label); display: block;
+      font-size: .74rem; text-transform: uppercase; letter-spacing: .03em;
+      color: var(--muted); margin-bottom: 2px; font-weight: 700;
+    }
+    .cmp tbody tr.self { border-color: var(--teal); }
+  }
+</style>

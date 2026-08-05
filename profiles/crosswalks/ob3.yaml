@@ -27,9 +27,9 @@ maps:
     target: ob:inLanguage
     confidence: high
   - cc: cc:ectsCredits
-    target: null
-    confidence: none
-    note: "OB3 has no native credit field; carry in ob:alignment or an extension."
+    target: ob:creditsAvailable
+    confidence: low
+    note: "ob:creditsAvailable is a bare number ('credit hours'); no unit or credit system is attached, so ECTS and EAP cannot be told apart. Carry the unit in ob:alignment or an extension where it matters."
   - cc: cc:Achievement
     target: ob:AchievementCredential
     confidence: high

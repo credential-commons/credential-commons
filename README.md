@@ -17,13 +17,49 @@ replacing them.
 
 ## Why
 
-Standards for describing credentials already exist — [schema.edu.ee](https://schema.edu.ee/),
-[CTDL](https://credreg.net/), the [European Learning Model](https://europa.eu/europass/elm-browser/),
-[Open Badges 3.0](https://www.imsglobal.org/spec/ob/v3p0). What is missing is a
-*fast, batteries-included way to adopt them*. Credential Commons is that path:
-point the validator at your data, get a plain-language report of what to fix, and
-publish conformant Linked Data other systems (search, AI, other institutions) can
-reuse.
+Vocabularies for describing credentials already exist — [schema.edu.ee](https://schema.edu.ee/),
+[CTDL](https://credreg.net/), the [European Learning Model](https://europa.eu/europass/elm-browser/).
+What is missing is a *fast, batteries-included way to adopt them*. Credential
+Commons is that path: point the validator at your data, get a plain-language
+report of what to fix, and publish conformant Linked Data other systems (search,
+AI, other institutions) can reuse.
+
+## How it relates to other standards
+
+**Credential Commons does not compete with Verifiable Credentials or Open Badges.**
+A credential has two halves, and they are different jobs:
+
+- **What is this thing?** — name, volume, language, provider, learning outcomes,
+  which version of the curriculum it belongs to. *This is Credential Commons.*
+- **Who earned it, and who says so?** — the person, the date, the evidence, the
+  issuer's signature. *This is [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model-2.0/)
+  and [Open Badges 3.0](https://www.imsglobal.org/spec/ob/v3p0).*
+
+Most of the work happens before anyone earns anything, and none of it has a person
+in it — which is why it can be published openly. A signature proves authorship, not
+quality: a badge with no volume, no language and a one-line description signs and
+verifies exactly as cleanly as a complete one. Credential Commons is the check that
+runs before the signature, and `cc export --to ob3` hands the result straight over.
+
+| Standard | What it actually is | You need it when… | What it does not do |
+|---|---|---|---|
+| **Credential Commons** | A thin shared shape for describing an offering, a curriculum and a credential — plus a validator that tells you what is missing. | You want your catalogue, curricula and credentials readable by other organisations, and you want to know whether your data is complete. | Issues nothing, signs nothing, awards nothing to a person. Not an authority, no stamp of its own. |
+| **W3C Verifiable Credentials** | A container and signature format: proof that a named issuer said something about a named subject, unaltered since. | You must prove who issued a credential and that nobody changed it — wallets, cross-border checks, fraud-sensitive contexts. | Says nothing about what a credential should contain. Empty content signs as well as complete content. |
+| **Open Badges 3.0** | A Verifiable Credentials profile for achievements: this person earned this achievement, with evidence and a date. | You award something to individual people and want it in a wallet or badge platform. | `creditsAvailable` is a bare number with no unit, so ECTS and EAP cannot be told apart; `criteria` is free narrative, not structured learning outcomes. |
+| **CTDL** | A rich vocabulary for credentials, competencies and the organisations behind them, used mainly in the US. | You publish into the US credential ecosystem, or need its depth of credential-type distinctions. | It is large. Adopting it fully is a project, not an afternoon. |
+| **ELM / Europass** | The European Learning Model — the data model behind Europass and European digital credentials. | You need European recognition: Europass, EQF levels, cross-border mobility. | Built for the European formal machinery; does not tell you whether your own data is complete. |
+| **schema.edu.ee** | A national vocabulary that fixes local meaning. Other countries have their own. | You operate in that country and the local terms have to be exact. | On its own it does not travel outside its country. |
+| **schema.org** | The general web vocabulary search engines and AI assistants already read. | You want your programmes understood on the open web. | For education it stays shallow: a bare credit count and a competency link exist, but no ECTS model, no outcome structure, no versioning. |
+
+**Where the join is still rough.** Exporting to Open Badges 3.0 currently loses the
+two things that matter most in Europe: OB3's credit field carries no unit, so
+ECTS/EAP must still travel as an alignment or an extension, and `criteria` is
+narrative, so structured learning outcomes map only loosely (see
+[`profiles/crosswalks/ob3.yaml`](profiles/crosswalks/ob3.yaml), a starter mapping).
+That gap is exactly why a description layer is needed — and closing it properly is
+open work. Pull requests welcome.
+
+Longer version, in five languages: <https://credentialcommons.org/standards>
 
 ## Quick start
 

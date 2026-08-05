@@ -47,6 +47,7 @@ validate run below.
 - Quickstart: https://github.com/credential-commons/credential-commons/blob/main/docs/quickstart.md
 - The idea (what travels): https://github.com/credential-commons/credential-commons/blob/main/docs/what-travels.md
 - Integrate with your own system: https://github.com/credential-commons/credential-commons/blob/main/docs/integrate.md
+- How it relates to W3C Verifiable Credentials, Open Badges 3.0, CTDL, ELM/Europass and schema.org — what each is for, side by side: https://credentialcommons.org/standards
 
 ## Case studies
 - A public catalog made many providers comparable: https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/aggregator-catalog.md
