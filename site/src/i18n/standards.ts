@@ -157,7 +157,7 @@ export const standards: Record<Locale, StandardsDict> = {
         p: "Enamik tööst toimub enne, kui keegi midagi saab. Programm kavandatakse, selle väljundid kirjutatakse, maht määratakse, see avaldatakse kataloogis, seda uuendatakse aasta-aastalt. Selles kõiges pole ühtki inimest — sellepärast saabki seda avaldada avalikult, ilma et see puudutaks kellegi isikuandmeid. Credential Commons on selle etapi kuju. Kui keegi lõpuks asja saab, allkirjastab väljaandja selle Verifiable Credentialiks ja kirjeldus liigub sellega kaasa.",
       },
       {
-        h: "Allkiri ei ole kvaliteet",
+        h: "Allkiri ei taga kvaliteeti",
         p: "Verifiable Credential tõendab, et konkreetne väljaandja ütles konkreetse asja ja et keegi pole seda hiljem muutnud. See ei kontrolli, kas öeldu on üldse hea. Märk ilma mahu ja keeleta, mille kirjeldus on kõigest üherealine, allkirjastub ja kontrollitakse täpselt sama puhtalt kui täielik märk. Credential Commons on kontroll, mis käib enne allkirja: ta ütleb sulle selges keeles, mis on puudu.",
       },
     ],
@@ -237,7 +237,7 @@ export const standards: Record<Locale, StandardsDict> = {
         p: "Millisesse õppekava versiooni tunnistus kuulub. Allkiri jäädvustab ühe hetke; see ei modelleeri programmi ajalugu.",
       },
     ],
-    gapsHeading: "Kus liides on veel konarlik",
+    gapsHeading: "Kus ühenduskohad on veel konarlikud",
     gapsP:
       "Selle kohta ausalt rääkimine ongi osa mõttest. Eksport Open Badges 3.0-le kaotab praegu kaks asja, mis Euroopas kõige rohkem loevad: OB3 ainepunktide väljal pole ühikut, mistõttu ECTS/EAP peab ikkagi liikuma joonduse või laiendusena, ja selle kriteeriumide väli on vabas vormis, mistõttu struktureeritud õpiväljundid kaardistuvad ainult ligikaudselt. Just see lünk ongi põhjus, miks kirjelduskihti on vaja. Selle korralik sulgemine on avatud töö — vasted asuvad hoidlas ja pull request'id on oodatud.",
     close:
@@ -259,7 +259,7 @@ export const standards: Record<Locale, StandardsDict> = {
       },
       {
         h: "Kuvaus tulee ennen myöntämistä",
-        p: "Suurin osa työstä tapahtuu ennen kuin kukaan ansaitsee mitään. Ohjelma suunnitellaan, sen oppimistulokset kirjoitetaan, laajuus määritetään, se julkaistaan luettelossa ja sitä päivitetään vuosi vuodelta. Missään tästä ei ole yhtään ihmistä mukana — siksi sen voi julkaista avoimesti koskematta kenenkään henkilötietoihin. Credential Commons on tämän vaiheen muoto. Kun joku lopulta ansaitsee sen, myöntäjä allekirjoittaa sen Verifiable Credentialiksi ja kuvaus kulkee sen mukana.",
+        p: "Suurin osa työstä tapahtuu ennen kuin kukaan ansaitsee mitään. Ohjelma suunnitellaan, sen oppimistulokset kirjoitetaan, laajuus määritetään, se julkaistaan luettelossa ja sitä päivitetään vuosi vuodelta. Tässä ei ole ihmisiä mukana missään vaiheessa — siksi sen voi julkaista avoimesti koskematta kenenkään henkilötietoihin. Credential Commons on tämän vaiheen muoto. Kun joku lopulta ansaitsee sen, myöntäjä allekirjoittaa sen Verifiable Credentialiksi ja kuvaus kulkee sen mukana.",
       },
       {
         h: "Allekirjoitus ei ole laatu",
@@ -360,7 +360,7 @@ export const standards: Record<Locale, StandardsDict> = {
     sections: [
       {
         h: "Zwei unterschiedliche Fragen",
-        p: "Ein Nachweis hat zwei Hälften. Die erste: Was ist dieses Ding? — sein Name, sein Umfang, seine Sprache, sein Anbieter, die Lernergebnisse, zu welcher Version des Curriculums es gehört. Die zweite: Wer hat es erworben, und wer sagt das? — die Person, das Datum, die Belege, die Signatur des Ausstellers. Verifiable Credentials und Open Badges beantworten die zweite Frage sehr gut. Credential Commons beantwortet die erste.",
+        p: "Ein Nachweis hat zwei Hälften. Die erste: Was ist dieses Ding? — sein Name, sein Umfang, seine Sprache, sein Anbieter, die Lernergebnisse, zu welcher Version des Curriculums es gehört. Die zweite: Wer hat es erworben, und wer sagt das? — die Person, das Datum, die Nachweise, die Signatur des Ausstellers. Verifiable Credentials und Open Badges beantworten die zweite Frage sehr gut. Credential Commons beantwortet die erste.",
       },
       {
         h: "Beschreibung kommt vor der Vergabe",
@@ -395,7 +395,7 @@ export const standards: Record<Locale, StandardsDict> = {
       },
       {
         name: "Open Badges 3.0",
-        what: "Ein Verifiable-Credentials-Profil für Leistungen: Diese Person hat diese Leistung erworben, mit Belegen und einem Datum.",
+        what: "Ein Verifiable-Credentials-Profil für Leistungen: Diese Person hat diese Leistung erworben, mit Nachweisen und einem Datum.",
         need: "Sie vergeben etwas an einzelne Personen und wollen, dass es in einer Wallet oder einer Badge-Plattform landet.",
         not: "Sein Leistungspunkte-Feld hat keine ECTS/EAP-Einheit angehängt, und sein Kriterien-Feld ist freier Fließtext statt strukturierter Lernergebnisse.",
       },
@@ -449,7 +449,7 @@ export const standards: Record<Locale, StandardsDict> = {
     ],
     gapsHeading: "Wo die Nahtstelle noch rau ist",
     gapsP:
-      "Ehrlich damit umzugehen gehört zur Sache. Der Export nach Open Badges 3.0 verliert derzeit zwei Dinge, die in Europa am meisten zählen: OB3s Leistungspunkte-Feld trägt keine Einheit, daher muss ECTS/EAP weiterhin als Zuordnung oder Erweiterung reisen, und sein Kriterien-Feld ist Fließtext, sodass strukturierte Lernergebnisse nur lose abgebildet werden. Genau diese Lücke ist der Grund, warum eine Beschreibungsschicht nötig ist. Sie sauber zu schließen ist offene Arbeit — die Crosswalks liegen im Repository, und Pull Requests sind willkommen.",
+      "Ehrlich damit umzugehen gehört zur Sache. Der Export nach Open Badges 3.0 verliert derzeit zwei Dinge, die in Europa am meisten zählen: OB3s Leistungspunkte-Feld trägt keine Einheit, daher muss ECTS/EAP weiterhin als Verknüpfung oder Erweiterung reisen, und sein Kriterien-Feld ist Fließtext, sodass strukturierte Lernergebnisse nur lose abgebildet werden. Genau diese Lücke ist der Grund, warum eine Beschreibungsschicht nötig ist. Sie sauber zu schließen ist offene Arbeit — die Crosswalks liegen im Repository, und Pull Requests sind willkommen.",
     close:
       "Nichts davon verlangt von Ihnen, sich für eine Seite zu entscheiden. Beschreiben Sie Ihre Daten einmal in einer vollständigen Form, und der Standard, dem Ihr Publikum bereits vertraut, ist nur einen Export entfernt.",
     backHome: "← Startseite",
