@@ -59,7 +59,9 @@ narrative, so structured learning outcomes map only loosely (see
 That gap is exactly why a description layer is needed — and closing it properly is
 open work. Pull requests welcome.
 
-Longer version, in five languages: <https://credentialcommons.org/standards>
+Longer version, in five languages — including a **feature-by-feature matrix**
+(ten things credential data has to do × six standards, each row opening for the
+reasoning): <https://credentialcommons.org/standards>
 
 ## Quick start
 

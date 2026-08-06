@@ -2,14 +2,18 @@
 import Base from "../layouts/Base.astro";
 import { locales, localeName, type Locale } from "../i18n/ui";
 import { standards } from "../i18n/standards";
+import { matrix, MATRIX_COLUMNS, MATRIX_MARKS, type Mark } from "../i18n/matrix";
+import { why } from "../i18n/why";
 const { lang } = Astro.props as { lang: Locale };
 const s = standards[lang];
+const m = matrix[lang];
+const MARK_SYMBOL: Record<Mark, string> = { full: "✓", partial: "◑", none: "–" };
 const pathFor = (l: Locale) => (l === "en" ? "/standards" : `/${l}/standards`);
 const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 // The first row is Credential Commons itself; it is marked so a reader can see at
 // a glance which line is "us" without the table shouting it in every cell.
 ---
-<Base lang={lang} title={s.metaTitle} description={s.metaDescription} path="standards" ogDiagram="neutral-slots">
+<Base lang={lang} title={s.metaTitle} description={s.metaDescription} path="standards" ogDiagram="neutral-slots" pageEntity={{ type: "Article", headline: s.heading }}>
   <main class="wrap standards-wrap">
     <nav class="langs" aria-label="Languages">
       {locales.map((l) => (l === lang ? <strong>{localeName[l]}</strong> : <a href={pathFor(l)}>{localeName[l]}</a>))}
@@ -54,6 +58,42 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
       </table>
     </div>
 
+    {/* The spec-sheet view. Ten things credential data has to do, six standards
+        across, one verdict per cell — and each row opens for the reasoning, so
+        the grid stays scannable and the detail is one click away, never in the
+        way. Native <details>: no JavaScript, works before hydration, and each
+        row is independently linkable and printable. */}
+    <h2 class="std-h">{m.heading}</h2>
+    <p class="std-intro">{m.intro}</p>
+    <p class="legend">
+      <span><b class="mark mark-full" aria-hidden="true">✓</b> {m.legend.full}</span>
+      <span><b class="mark mark-partial" aria-hidden="true">◑</b> {m.legend.partial}</span>
+      <span><b class="mark mark-none" aria-hidden="true">–</b> {m.legend.none}</span>
+    </p>
+
+    <div class="mx" role="group" aria-label={m.heading}>
+      <div class="mx-head" aria-hidden="true">
+        <span class="mx-theme">{m.colTheme}</span>
+        {MATRIX_COLUMNS.map((c, j) => <span class={j === 0 ? "mx-col self" : "mx-col"}>{c}</span>)}
+      </div>
+      {m.rows.map((r, i) => (
+        <details class="mx-row">
+          <summary>
+            <span class="mx-theme">{r.theme}</span>
+            {r.cells.map((cell, j) => (
+              <span class={`mx-cell mark-${MATRIX_MARKS[i][j]}${j === 0 ? " self" : ""}`}>
+                <span class="mx-label" aria-hidden="true">{MATRIX_COLUMNS[j]}</span>
+                <b class="mark" aria-hidden="true">{MARK_SYMBOL[MATRIX_MARKS[i][j]]}</b>
+                <span class="mx-txt">{cell}</span>
+              </span>
+            ))}
+          </summary>
+          <p class="mx-detail">{r.detail}</p>
+        </details>
+      ))}
+    </div>
+    <p class="mx-hint">{m.expandHint}</p>
+
     <h2 class="std-h">{s.addsHeading}</h2>
     <div class="adds">
       {s.adds.map((a) => (
@@ -66,7 +106,10 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 
     <p class="close">{s.close}</p>
 
-    <footer><a href={homeFor(lang)}>{s.backHome}</a></footer>
+    <footer>
+      <a href={homeFor(lang)}>{s.backHome}</a> ·
+      <a href={lang === "en" ? "/why" : `/${lang}/why`}>{why[lang].heading} →</a>
+    </footer>
   </main>
 </Base>
 
@@ -93,6 +136,60 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
   .cmp tbody td { color: var(--muted); }
   .cmp tbody tr.self th, .cmp tbody tr.self td { background: #f2f9f8; color: var(--ink); }
   .cmp tbody tr.self th { color: var(--teal); }
+
+  /* ── Capability matrix ─────────────────────────────────────────────────
+     One grid template shared by the header strip and every row's <summary>,
+     so the columns line up without a <table> — which matters because each
+     row has to be a <details> to open. */
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0 0 14px; color: var(--muted); font-size: .86rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .mark { font-weight: 900; font-style: normal; }
+  .mark-full { color: #2e7d22; }
+  .mark-partial { color: #a06a00; }
+  .mark-none { color: #97a4b3; }
+
+  .mx { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .mx-head, .mx-row > summary {
+    display: grid;
+    grid-template-columns: minmax(190px, 1.5fr) repeat(6, minmax(104px, 1fr));
+    gap: 10px; padding: 10px 14px; align-items: start;
+  }
+  .mx-head {
+    background: #f5f9fb; border-bottom: 2px solid var(--line);
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .03em;
+    color: var(--muted); font-weight: 700;
+  }
+  .mx-head .self { color: var(--teal); }
+  .mx-row { border-bottom: 1px solid var(--line); }
+  .mx-row:last-child { border-bottom: 0; }
+  .mx-row > summary { cursor: pointer; list-style: none; }
+  .mx-row > summary::-webkit-details-marker { display: none; }
+  .mx-row > summary:hover, .mx-row[open] > summary { background: #f7fbfc; }
+  .mx-theme { font-weight: 700; font-size: .92rem; }
+  /* The caret sits on the row label, so the whole row still reads as one control. */
+  .mx-theme::before { content: "▸"; color: var(--teal); margin-right: 7px; font-size: .8em; }
+  .mx-row[open] .mx-theme::before { content: "▾"; }
+  .mx-cell { display: block; font-size: .82rem; line-height: 1.35; color: var(--muted); }
+  .mx-cell.self { color: var(--ink); font-weight: 600; }
+  .mx-cell .mark { margin-right: 5px; }
+  .mx-label { display: none; }
+  .mx-detail { margin: 0; padding: 0 14px 16px calc(14px + 1.1em); color: var(--muted); max-width: 74ch; }
+  .mx-hint { margin: 8px 0 0; color: var(--muted); font-size: .84rem; }
+
+  @media (max-width: 900px) {
+    .mx-head { display: none; }
+    .mx-row > summary { grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+    .mx-theme { grid-column: 1 / -1; font-size: 1rem; margin-bottom: 2px; }
+    .mx-label {
+      display: block; font-size: .68rem; text-transform: uppercase;
+      letter-spacing: .03em; font-weight: 700; color: var(--muted);
+    }
+    .mx-cell.self .mx-label { color: var(--teal); }
+    .mx-detail { padding: 0 14px 16px; }
+  }
+  @media (max-width: 520px) {
+    .mx-row > summary { grid-template-columns: 1fr; }
+  }
 
   .adds { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .adds h3 { margin: 0 0 4px; font-size: 1rem; }

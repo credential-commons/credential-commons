@@ -1,6 +1,21 @@
 import type { APIRoute } from "astro";
 import { diagrams } from "../data/diagrams";
 import { faq } from "../i18n/faq";
+import { matrix, MATRIX_COLUMNS, MATRIX_MARKS } from "../i18n/matrix";
+
+// The capability matrix is the most citable thing on the site — it is precisely
+// what an assistant is asked for ("what is the difference between X and Y?").
+// Linking to the page is not enough; the verdicts themselves have to be in the
+// file the assistant actually reads.
+const MARK_WORD = { full: "yes", partial: "partly", none: "no" } as const;
+const capabilities = matrix.en.rows
+  .map((r, i) => {
+    const cells = r.cells
+      .map((c, j) => `  - ${MATRIX_COLUMNS[j]}: ${MARK_WORD[MATRIX_MARKS[i][j]]} — ${c}`)
+      .join("\n");
+    return `### ${r.theme}\n${cells}\n${r.detail}`;
+  })
+  .join("\n\n");
 
 const qa = faq.en.map((x) => `### ${x.q}\n${x.a.replace(/`/g, "")}`).join("\n\n");
 
@@ -73,11 +88,20 @@ under a locale prefix, e.g. /et/diagrams/two-trees.svg.
 
 ${figures}
 
+## Which standard does what (capability matrix)
+Ten things credential data has to do, and how each standard handles them.
+yes = does this · partly = does part of it, or without the distinction that matters · no = out of scope.
+Full page, in five languages: https://credentialcommons.org/standards
+
+${capabilities}
+
 ## Answers
 ${qa}
 
 ## Languages
 Site available in: en (/), et (/et/), fi (/fi/), de (/de/), fr (/fr/).
+Every page exists in all five: the overview (/), why it matters (/why) and
+how it relates to other standards (/standards), e.g. /et/standards.
 Diagrams are published in every language at the same paths under the locale prefix.
 
 ## Licence

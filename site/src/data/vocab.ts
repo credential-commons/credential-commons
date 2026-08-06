@@ -98,13 +98,22 @@ const SITE = "https://credentialcommons.org";
 const escAttr = (s: string): string => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 
 export function toHtml(list: Term[], title: string): string {
-  const rows = list
-    .map((t) => `<tr><td><code>cc:${t.id}</code></td><td>${t.kind}</td><td>${t.label}</td><td>${t.comment}</td></tr>`)
-    .join("\n");
-
   // A single-term page dereferences one cc: URI; the index lists the whole
   // vocabulary. Different canonical, different description.
   const single = list.length === 1 ? list[0] : null;
+
+  // On the index every term links to its own page. Without this the 47 term
+  // pages are unreachable — nothing on the site pointed at them, and being
+  // on-demand routes they are invisible to the sitemap integration too, so
+  // they were indexable in principle and undiscoverable in practice.
+  const rows = list
+    .map((t) => {
+      const name = single
+        ? `<code>cc:${t.id}</code>`
+        : `<a href="${NS}${t.id}"><code>cc:${t.id}</code></a>`;
+      return `<tr><td>${name}</td><td>${t.kind}</td><td>${t.label}</td><td>${t.comment}</td></tr>`;
+    })
+    .join("\n");
   const canonical = single ? `${NS}${single.id}` : NS;
   const description = single
     ? `cc:${single.id} — ${single.label}. ${single.comment} Part of the Credential Commons cc: vocabulary (v0.1); dereferences to Turtle or JSON-LD by content negotiation.`
@@ -157,7 +166,7 @@ ${figure}
 <table><tr><th>Term</th><th>Kind</th><th>Label</th><th>Meaning</th></tr>
 ${rows}
 </table>
-<p style="margin-top:20px"><a href="/">← Credential Commons</a> · <a href="/profiles/context/haridus.jsonld">JSON-LD context</a> · <a href="https://github.com/credential-commons/credential-commons/tree/main/profiles/crosswalks">crosswalks</a></p>
+<p style="margin-top:20px"><a href="/">← Credential Commons</a>${single ? ` · <a href="${NS}">all vocabulary terms</a>` : ""} · <a href="/standards">how it relates to other standards</a> · <a href="/profiles/context/haridus.jsonld">JSON-LD context</a> · <a href="https://github.com/credential-commons/credential-commons/tree/main/profiles/crosswalks">crosswalks</a></p>
 </main></body></html>`;
 }
 
