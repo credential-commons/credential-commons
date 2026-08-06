@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Figure from "./Figure.astro";
 import { locales, localeName, type Locale } from "../i18n/ui";
 import { why } from "../i18n/why";
+import { standards } from "../i18n/standards";
 const { lang } = Astro.props as { lang: Locale };
 const w = why[lang];
 // A diagram per section, by position. Every locale has the same three sections in
@@ -12,7 +13,7 @@ const sectionFigures: (string | null)[] = ["what-travels", "growth-rings", "neut
 const pathFor = (l: Locale) => (l === "en" ? "/why" : `/${l}/why`);
 const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 ---
-<Base lang={lang} title={w.metaTitle} description={w.metaDescription} path="why" ogDiagram="two-trees">
+<Base lang={lang} title={w.metaTitle} description={w.metaDescription} path="why" ogDiagram="two-trees" pageEntity={{ type: "Article", headline: w.heading }}>
   <main class="wrap">
     <nav class="langs" aria-label="Languages">
       {locales.map((l) => (l === lang ? <strong>{localeName[l]}</strong> : <a href={pathFor(l)}>{localeName[l]}</a>))}
@@ -48,7 +49,10 @@ const homeFor = (l: Locale) => (l === "en" ? "/" : `/${l}/`);
 
     <p class="close">{w.close}</p>
 
-    <footer><a href={homeFor(lang)}>{w.backHome}</a></footer>
+    <footer>
+      <a href={homeFor(lang)}>{w.backHome}</a> ·
+      <a href={lang === "en" ? "/standards" : `/${lang}/standards`}>{standards[lang].navLabel} →</a>
+    </footer>
   </main>
 </Base>
 

@@ -1,13 +1,15 @@
 ---
 import { buildDiagrams } from "../data/diagrams";
 import { locales, type Locale } from "../i18n/ui";
-const { lang, title, description, path = "", ogDiagram = "credential-commons" } = Astro.props as {
+const { lang, title, description, path = "", ogDiagram = "credential-commons", pageEntity } = Astro.props as {
   lang: Locale;
   title: string;
   description: string;
   path?: string;
   /** Concept diagram used as this page's share card — an id from src/data/diagrams.ts. */
   ogDiagram?: string;
+  /** Page-level schema.org entity. Omit on the homepage, which is the software itself. */
+  pageEntity?: { type: "Article" | "WebPage"; headline: string };
 };
 const SITE = "https://credentialcommons.org";
 const pathFor = (l: Locale) => (l === "en" ? `${SITE}/${path}` : `${SITE}/${l}/${path}`);
@@ -68,6 +70,25 @@ const jsonLd = {
       license: "https://creativecommons.org/licenses/by/4.0/",
       isAccessibleForFree: true,
     },
+    // The site-level graph above says what the project is; without this the
+    // subpages carried no entity of their own, so /why and /standards looked
+    // to a crawler like two more copies of the homepage's software listing.
+    ...(pageEntity
+      ? [
+          {
+            "@type": pageEntity.type,
+            "@id": `${canonical}#page`,
+            headline: pageEntity.headline,
+            description,
+            inLanguage: lang,
+            isPartOf: { "@id": `${SITE}/#software` },
+            mainEntityOfPage: canonical,
+            ...(figure ? { image: { "@id": `${canonical}#figure` } } : {}),
+            author: { "@type": "Organization", name: "Credential Commons", url: `${SITE}/` },
+            license: "https://creativecommons.org/licenses/by/4.0/",
+          },
+        ]
+      : []),
   ],
 };
 ---
