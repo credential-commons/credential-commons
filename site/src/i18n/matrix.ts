@@ -220,7 +220,7 @@ export const matrix: Record<Locale, MatrixDict> = {
           "Kaikki, mikä on olemassa ennen kuin oppija ilmoittautuu: ohjelma, sen oppimistulokset, laajuus, versiot. Mukana ei ole yhtään ihmistä, joten sen voi julkaista avoimesti. Verifiable Credentials ja Open Badges alkavat vasta, kun joku on jo jotain ansainnut; Open Badges voi määritellä saavutuksen, mutta ei sen ympärillä olevaa ohjelmaa.",
       },
       {
-        theme: "Ilmaise laajuus opintopisteyksikössä",
+        theme: "Ilmaise laajuus yksikössä",
         cells: ["ECTS/EAP + tunnit", "Rajattu pois", "Luku, ei yksikköä", "Kyllä, tyypitetty", "Kyllä, ECTS-pohjainen", "Paljas luku"],
         detail:
           "Kuinka paljon oppimista tämä oikeasti on. Open Badges 3.0:lla on creditsAvailable ja schema.org:lla numberOfCredits, mutta molemmat ovat pelkkiä lukuja — kumpikaan ei kerro, onko kyse ECTS:stä, EAP:sta vai kontaktitunneista. Credential Commons vaatii opintopistearvon ja pitää akateemiset tunnit ja kellotunnit erillään, koska kaksi eri valvojaa kysyy kahta eri yksikköä.",
@@ -294,7 +294,7 @@ export const matrix: Record<Locale, MatrixDict> = {
           "Alles, was existiert, bevor sich ein Lernender einschreibt: das Programm, seine Lernergebnisse, sein Umfang, seine Versionen. Keine Person ist beteiligt, daher kann es offen veröffentlicht werden. Verifiable Credentials und Open Badges beginnen erst, sobald jemand etwas erworben hat; Open Badges kann die Leistung definieren, aber nicht das Programm darum herum.",
       },
       {
-        theme: "Den Umfang in Leistungspunkten angeben",
+        theme: "Den Umfang in einer Krediteinheit angeben",
         cells: ["ECTS/EAP + Stunden", "Nicht vorgesehen", "Zahl ohne Einheit", "Ja, typisiert", "Ja, ECTS-nativ", "Bloße Zahl"],
         detail:
           "Wie viel Lernen das tatsächlich ist. Open Badges 3.0 hat creditsAvailable und schema.org hat numberOfCredits, aber beides sind bloße Zahlen — nichts sagt, ob es sich um ECTS, EAP oder Kontaktstunden handelt. Credential Commons verlangt einen Punktewert und hält akademische Stunden und Zeitstunden auseinander, weil zwei verschiedene Regulierungsbehörden zwei verschiedene Einheiten verlangen.",
