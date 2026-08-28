@@ -1,0 +1,75 @@
+---
+// Privacy-first, cookieless analytics (Umami: https://umami.is/). Off by
+// default - nothing renders and nothing is sent unless BOTH env vars below
+// are set at build time, and there is no fallback host baked in here on
+// purpose. This repository is public: a hardcoded analytics endpoint in
+// source would either point every fork at somebody else's collector or
+// leak which host we run ourselves. If you fork this site, set your own
+// PUBLIC_UMAMI_SRC (your Umami instance's script.js URL) and
+// PUBLIC_UMAMI_WEBSITE_ID to turn this on for your copy.
+const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC;
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const enabled = Boolean(umamiSrc && umamiWebsiteId);
+---
+
+{enabled && (
+  <script defer src={umamiSrc} data-website-id={umamiWebsiteId}></script>
+)}
+
+{enabled && (
+  <script>
+    (() => {
+      // Umami's script only ever runs on a page that actually includes it.
+      // Two kinds of link on this site lead somewhere that never does, no
+      // matter who follows them:
+      //
+      //  1. Genuinely external links (the GitHub repo, docs, schema.edu.ee).
+      //     Once the browser leaves credentialcommons.org this site's own
+      //     analytics stops seeing anything - the click is the last honest
+      //     data point we get about that visit.
+      //  2. Two same-origin destinations that bypass this site's own layout:
+      //     /ns/0.1/* content-negotiates its own hand-built response
+      //     (src/data/vocab.ts) rather than rendering through Base.astro,
+      //     and /llms.txt is served as plain text. Neither response ever
+      //     includes this script, so even a human clicking through in a
+      //     browser produces no pageview at the destination - the click
+      //     here is the only place that visit is ever recorded at all.
+      //
+      // This list is intentionally short and hand-maintained rather than a
+      // generic "any link off this domain" rule: it names the handful of
+      // destinations the landing page and the why page actually offer, so
+      // the event stays legible (see docs/analytics-proposal.md for the
+      // full reasoning behind keeping this small).
+      const TRACKED_LINKS = [
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons/blob/main/AGENTS.md"), label: "agents_md" },
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons/blob/main/docs/what-travels.md"), label: "doc_what_travels" },
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons/blob/main/docs/integrate.md"), label: "doc_integrate" },
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/aggregator-catalog.md"), label: "case_aggregator" },
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons/blob/main/docs/case-studies/provider-nursery.md"), label: "case_provider" },
+        // Checked after the more specific blob:// matches above, since this
+        // one alone would also match every link on the list.
+        { match: (href: string) => href.startsWith("https://github.com/credential-commons/credential-commons"), label: "repo" },
+        { match: (href: string) => href.startsWith("https://schema.edu.ee"), label: "schema_edu_ee" },
+        { match: (href: string) => href === "/ns/0.1/" || href.startsWith("/ns/0.1/"), label: "vocabulary" },
+        { match: (href: string) => href === "/llms.txt", label: "llms_txt" },
+        { match: (href: string) => href.startsWith("/profiles/") && href.endsWith(".jsonld"), label: "jsonld_context" },
+      ];
+
+      document.addEventListener("click", (event) => {
+        const target = event.target instanceof Element ? event.target.closest("a[href]") : null;
+        if (!target) return;
+        const href = target.getAttribute("href") || "";
+        const hit = TRACKED_LINKS.find((entry) => entry.match(href));
+        if (!hit) return;
+        const umami = (window as unknown as { umami?: { track?: (name: string, data?: Record<string, unknown>) => void } }).umami;
+        if (umami && typeof umami.track === "function") {
+          try {
+            umami.track("outbound_link_click", { target: hit.label, from_path: window.location.pathname });
+          } catch {
+            // Analytics must never break navigation.
+          }
+        }
+      });
+    })();
+  </script>
+)}
