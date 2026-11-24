@@ -27,7 +27,13 @@ the standard's growth precisely.
 - Renamed `FRAMEWORK.md` → `SCAFFOLD.md`.
 - Fixed the homepage CLI example (`npx credential-commons`, not `npx cc`).
 
+### Fixed
+- `diagnose` checks each programme's outcomes against its own declared courses.
+  Missing, unresolved and invalid `hasPart` entries are reported as starving.
+
 ### Migration
+- Supply each programme and its `hasPart` courses in the same JSON-LD default
+  graph. Run `validate --profile program` for catalogue summaries.
 - No breaking changes to the existing `micro-credential` or `curriculum` profiles.
   New profiles are additive; the `@context` gained new terms only.
 

@@ -15,6 +15,7 @@ const CC = "https://credentialcommons.org/ns/0.1/";
 const SCHEMA = "https://schema.org/";
 const SKOS = "http://www.w3.org/2004/02/skos/core#";
 const NAME = SCHEMA + "name";
+const LEARNING_OUTCOME = CC + "learningOutcome";
 
 const refs = (node, prop) => (node[prop] || []).filter((v) => v["@id"]).map((v) => v["@id"]);
 const isType = (node, t) => (node["@type"] || []).includes(t);
@@ -28,10 +29,10 @@ export async function diagnose(doc) {
   const flat = await jsonld.flatten(doc, null, { documentLoader });
   const nodes = Array.isArray(flat) ? flat : flat["@graph"] || [];
   const byId = new Map(nodes.filter((n) => n["@id"]).map((n) => [n["@id"], n]));
-  const label = (id) => {
-    const n = byId.get(id);
-    const name = n && n[NAME] && n[NAME][0] && n[NAME][0]["@value"];
-    return name ? `"${name}"` : `<${id}>`;
+  const label = (id, { includeId = false } = {}) => {
+    const name = byId.get(id)?.[NAME]?.[0]?.["@value"];
+    if (!name) return `<${id}>`;
+    return includeId ? `"${name}" <${id}>` : `"${name}"`;
   };
 
   const containers = nodes.filter((n) => isType(n, CC + "Program") || isType(n, CC + "Curriculum"));
@@ -42,23 +43,62 @@ export async function diagnose(doc) {
   const taught = new Set();
   for (const m of materials) for (const id of refs(m, SCHEMA + "teaches")) taught.add(id);
 
-  const containerOutcomes = new Set();
-  for (const c of containers) for (const id of refs(c, CC + "learningOutcome")) containerOutcomes.add(id);
-  const courseOutcomes = [];
-  for (const c of courses) for (const id of refs(c, CC + "learningOutcome")) courseOutcomes.push({ course: c["@id"], outcome: id });
+  const courseOutcomes = courses.flatMap((course) => refs(course, LEARNING_OUTCOME));
+  const reachedOutcomes = (ids) => new Set(
+    ids.flatMap((id) => [id, ...refs(byId.get(id) || {}, SKOS + "broader")])
+  );
 
   const findings = [];
+  const curriculumOutcomes = new Set();
 
-  // 1. Coverage — every programme outcome reached by >=1 course outcome
-  //    (a course shares its @id = cross-cutting, or a course outcome rolls up via broader).
-  if (courseOutcomes.length) {
-    for (const poId of containerOutcomes) {
-      const reached = courseOutcomes.some((r) =>
-        r.outcome === poId || refs(byId.get(r.outcome) || {}, SKOS + "broader").includes(poId)
-      );
-      if (!reached) {
-        findings.push({ severity: "starving", code: "uncovered-outcome", node: poId,
-          message: `Programme outcome ${label(poId)} is not reached by any course outcome — no course shares its @id and none rolls up (broader) into it.` });
+  // 1. Coverage — a programme's outcomes are reached by its declared courses.
+  for (const container of containers) {
+    const outcomeIds = refs(container, LEARNING_OUTCOME);
+    if (!isType(container, CC + "Program")) {
+      for (const id of outcomeIds) curriculumOutcomes.add(id);
+      continue;
+    }
+
+    const programmeId = container["@id"];
+    const programme = label(programmeId, { includeId: true });
+    const parts = container[SCHEMA + "hasPart"] || [];
+    if (parts.length === 0) {
+      findings.push({ severity: "starving", code: "missing-course-parts", node: programmeId,
+        message: `Programme ${programme} must declare at least one course in hasPart.` });
+    }
+
+    const memberOutcomes = [];
+    for (const part of parts) {
+      const partId = part["@id"];
+      const course = byId.get(partId);
+      if (!partId || (course && !isType(course, CC + "Course"))) {
+        const partLabel = partId ? label(partId, { includeId: true }) : "the value without a node reference";
+        findings.push({ severity: "starving", code: "invalid-course-part", node: programmeId,
+          message: `Programme ${programme} must refer to a Course in hasPart. Check ${partLabel}.` });
+      } else if (!course) {
+        findings.push({ severity: "starving", code: "unresolved-course-part", node: programmeId,
+          message: `Programme ${programme} has a course reference <${partId}>. Include that Course node in the graph.` });
+      } else {
+        for (const id of refs(course, LEARNING_OUTCOME)) memberOutcomes.push(id);
+      }
+    }
+
+    const reached = reachedOutcomes(memberOutcomes);
+    for (const id of new Set(outcomeIds)) {
+      if (!reached.has(id)) {
+        findings.push({ severity: "starving", code: "uncovered-outcome", node: id,
+          message: `Programme ${programme} has no declared course that covers outcome ${label(id)}. Use a shared outcome ID or a direct broader link.` });
+      }
+    }
+  }
+
+  // Standalone Curriculum records retain their existing graph-wide coverage check.
+  if (courseOutcomes.length && curriculumOutcomes.size) {
+    const reached = reachedOutcomes(courseOutcomes);
+    for (const id of curriculumOutcomes) {
+      if (!reached.has(id)) {
+        findings.push({ severity: "starving", code: "uncovered-outcome", node: id,
+          message: `Programme outcome ${label(id)} is not reached by any course outcome — no course shares its @id and none rolls up (broader) into it.` });
       }
     }
   }
@@ -66,7 +106,7 @@ export async function diagnose(doc) {
   // 2. Substance — every identified course outcome developed by >=1 material (only when materials are present).
   if (materials.length) {
     const seen = new Set();
-    for (const { outcome } of courseOutcomes) {
+    for (const outcome of courseOutcomes) {
       if (seen.has(outcome) || !byId.has(outcome)) continue;
       seen.add(outcome);
       if (!taught.has(outcome)) {
