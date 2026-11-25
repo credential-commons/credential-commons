@@ -18,13 +18,30 @@ materials) and asks whether the living chain is unbroken:
 programme outcome  ←(reached by)—  course outcome  ←(taught by)—  material
 ```
 
-- **starving — uncovered outcome:** a programme outcome that no course outcome
-  reaches (none shares its `@id` as a cross-cutting outcome, and none rolls up into
-  it via `broader`). A branch with nothing feeding it.
+Use the JSON-LD default graph for the programme, its courses, outcomes and
+materials. A single top-level `@graph` without a graph `@id` can group the nodes.
+Declare courses through `hasPart` as inline `Course` nodes or as `@id` references
+to courses in the default graph. The health check runs offline and skips nodes
+inside named graphs. Use `validate --profile program` to check catalogue summary
+structure.
+
+- **starving — missing course parts:** a programme declares no course through
+  `hasPart`. Add at least one course.
+- **starving — unresolved or invalid course part:** a part is absent from the
+  supplied graph or does not identify a `Course`. Include that course or fix the
+  link. Each part is checked even when the programme has another valid course.
+- **starving — uncovered outcome:** none of a programme's declared courses
+  reaches its identified outcome. Coverage requires a shared `@id` or a direct
+  `broader` link from a course outcome. The finding names the programme.
 - **starving — dangling roll-up:** a `broader` that points into an outcome not
   defined in the graph. A branch grafted to nothing.
 - **to tend — outcome without material:** a course outcome that no learning
   material teaches yet. Not fatal, but a leaf that should be growing.
+
+The `hasPart` coverage check applies to `Program` nodes, including nodes typed
+as both `Program` and `Curriculum`. Standalone `Curriculum` nodes use the legacy
+coverage check against all courses in the default graph. This check runs when
+at least one course declares an identified outcome.
 
 Exit code `0` when nothing is starving (warnings are fine), `1` when a branch is
 starving. Add `--json` for a machine-readable report.
